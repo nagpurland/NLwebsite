@@ -1,0 +1,835 @@
+# Replit Agent Prompt: Chennai Real Estate Platform - Chunk 4 (Lead Capture & Behavioral Intelligence System)
+
+## Project Overview
+Build a **comprehensive lead capture and behavioral intelligence system** for a Chennai real estate platform. This system tracks ALL user behavior (without forced login), captures leads through 6 different touchpoints, scores lead quality using intent algorithms, and provides market intelligence through an admin dashboard.
+
+**Core Philosophy**: 
+- No forced authentication - users browse freely
+- WhatsApp-first contact (95%+ open rate in India)
+- Capture data from every interaction
+- Multi-touch lead capture (6 different modals)
+- AI-ready data structure for future recommendations
+
+---
+
+## Technical Stack
+- **Frontend**: React 18+ with Tailwind CSS
+- **Backend**: Node.js with Express
+- **Database**: PostgreSQL (Supabase)
+- **Real-time**: Socket.io (optional for live dashboard updates)
+- **Charts**: Recharts or Chart.js
+- **Storage**: LocalStorage for session tracking
+- **API**: RESTful endpoints
+
+---
+
+## Database Schema (6 New Tables)
+
+### 1. `events` Table - Core Behavioral Tracking
+```sql
+CREATE TABLE events (
+  event_id SERIAL PRIMARY KEY,
+  session_id VARCHAR(100) NOT NULL,
+  user_id INTEGER REFERENCES leads_comprehensive(lead_id),
+  event_type VARCHAR(50) NOT NULL,
+  -- Event types: 'property_view', 'property_save', 'filter_applied', 
+  -- 'filter_changed', 'page_visit', 'cta_click', 'form_view', 
+  -- 'form_abandon', 'share_click', 'comparison_request'
+  
+  property_id INTEGER REFERENCES properties(id),
+  event_data JSONB,
+  -- Stores: {timeSpent: 45, scrollDepth: 72, fromPage: '/find-properties', 
+  -- filters: {area: 'Besant Nagar', priceMin: 4000000}, deviceType: 'mobile'}
+  
+  page_url VARCHAR(500),
+  referrer_url VARCHAR(500),
+  device_type VARCHAR(20),
+  timestamp TIMESTAMP DEFAULT NOW(),
+  
+  INDEX idx_session (session_id),
+  INDEX idx_event_type (event_type),
+  INDEX idx_timestamp (timestamp)
+);
+```
+
+### 2. `sessions` Table - User Session Management
+```sql
+CREATE TABLE sessions (
+  session_id VARCHAR(100) PRIMARY KEY,
+  user_id INTEGER REFERENCES leads_comprehensive(lead_id),
+  -- NULL until user subscribes, then retroactively linked
+  
+  started_at TIMESTAMP DEFAULT NOW(),
+  ended_at TIMESTAMP,
+  total_duration INTEGER, -- seconds
+  
+  device_id VARCHAR(200),
+  device_type VARCHAR(20), -- mobile, desktop, tablet
+  browser_type VARCHAR(50),
+  os_type VARCHAR(50),
+  
+  ip_address VARCHAR(50),
+  location_city VARCHAR(100),
+  
+  entry_page VARCHAR(500),
+  exit_page VARCHAR(500),
+  referrer_url VARCHAR(500),
+  
+  properties_viewed_count INTEGER DEFAULT 0,
+  properties_saved_count INTEGER DEFAULT 0,
+  filters_applied_count INTEGER DEFAULT 0,
+  
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### 3. `leads_comprehensive` Table - Rich Lead Profiles
+```sql
+CREATE TABLE leads_comprehensive (
+  lead_id SERIAL PRIMARY KEY,
+  session_id VARCHAR(100) REFERENCES sessions(session_id),
+  
+  -- IDENTIFICATION
+  name VARCHAR(100) NOT NULL,
+  whatsapp VARCHAR(15) NOT NULL,
+  email VARCHAR(255),
+  phone VARCHAR(15),
+  
+  -- ACQUISITION
+  source_type VARCHAR(50) NOT NULL,
+  -- Options: 'filter_search', 'casual_browser', 'content_reader', 
+  -- 'exit_intent', 'missing_property', 'comparison_request'
+  
+  source_page VARCHAR(500),
+  source_date DATE DEFAULT CURRENT_DATE,
+  referrer VARCHAR(200),
+  
+  -- BEHAVIOR PROFILE (Auto-captured before contact)
+  behavior_profile JSONB,
+  -- {
+  --   properties_viewed: [1, 5, 23],
+  --   properties_saved: [5, 23],
+  --   time_spent_total: 2700, // seconds
+  --   engagement_score: 8.5,
+  --   return_visits: 2,
+  --   scroll_depth_avg: 72,
+  --   filter_refinements: 7
+  -- }
+  
+  -- SEARCH FILTERS (Applied or implied)
+  search_filters JSONB,
+  -- {
+  --   areas: ['Besant Nagar', 'Adyar'],
+  --   price_min: 4000000,
+  --   price_max: 6000000,
+  --   property_types: ['Plot', 'Apartment'],
+  --   area_size_min: 1000,
+  --   area_size_max: 1500,
+  --   infrastructure_preferences: {
+  --     metro: true,
+  --     water_supply: true,
+  --     beach_proximity: false
+  --   },
+  --   legal_preferences: {
+  --     title_clear: true,
+  --     dtcp_approved: true
+  --   }
+  -- }
+  
+  -- INVESTMENT PROFILE
+  investment_profile JSONB,
+  -- {
+  --   investment_style: 'rental_income',
+  --   target_yield: 4.5,
+  --   holding_period: 'long_term',
+  --   custom_remarks: 'Need legal clear property with consistent rental income',
+  --   priority_factors: ['Legal clarity', 'Rental yield', 'Infrastructure']
+  -- }
+  
+  -- INTENT METRICS
+  intent_level VARCHAR(10), -- 'high', 'medium', 'low'
+  intent_score DECIMAL(3,1), -- 0-10 scale
+  conversion_probability DECIMAL(3,2), -- 0-1 scale
+  timeline VARCHAR(20), -- 'urgent', 'soon', 'exploring'
+  estimated_deal_value INTEGER,
+  
+  -- ENGAGEMENT HISTORY
+  form_completion_time INTEGER, -- seconds
+  form_abandon_count INTEGER DEFAULT 0,
+  
+  -- BUSINESS DATA
+  lead_status VARCHAR(20) DEFAULT 'new',
+  -- Options: 'new', 'contacted', 'interested', 'site_visit_scheduled', 
+  -- 'negotiating', 'converted', 'lost'
+  
+  assigned_agent_id INTEGER REFERENCES agents(id),
+  contact_attempts INTEGER DEFAULT 0,
+  last_contact_date TIMESTAMP,
+  follow_up_due DATE,
+  lead_quality_score DECIMAL(3,1), -- 0-10
+  estimated_commission INTEGER,
+  
+  -- TIMESTAMPS
+  created_at TIMESTAMP DEFAULT NOW(),
+  subscribed_at TIMESTAMP DEFAULT NOW(),
+  first_contact_at TIMESTAMP,
+  converted_at TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NOW(),
+  
+  INDEX idx_whatsapp (whatsapp),
+  INDEX idx_source (source_type),
+  INDEX idx_intent (intent_level),
+  INDEX idx_status (lead_status),
+  INDEX idx_created (created_at)
+);
+```
+
+### 4. `filter_combinations` Table - Market Intelligence
+```sql
+CREATE TABLE filter_combinations (
+  combination_id SERIAL PRIMARY KEY,
+  
+  -- Filter details
+  area VARCHAR(100),
+  price_min INTEGER,
+  price_max INTEGER,
+  property_type VARCHAR(50),
+  area_size_min INTEGER,
+  area_size_max INTEGER,
+  
+  combination_hash VARCHAR(64) UNIQUE,
+  -- MD5 hash of filter combination for uniqueness
+  
+  -- Analytics
+  search_count INTEGER DEFAULT 1,
+  search_to_view_rate DECIMAL(5,2), -- percentage
+  search_to_save_rate DECIMAL(5,2),
+  search_to_subscription_rate DECIMAL(5,2),
+  
+  avg_time_on_results INTEGER, -- seconds
+  matching_properties_count INTEGER,
+  
+  created_at TIMESTAMP DEFAULT NOW(),
+  last_searched_at TIMESTAMP DEFAULT NOW(),
+  
+  INDEX idx_area (area),
+  INDEX idx_hash (combination_hash)
+);
+```
+
+### 5. `engagement_metrics` Table - Daily Snapshots
+```sql
+CREATE TABLE engagement_metrics (
+  metric_id SERIAL PRIMARY KEY,
+  metric_date DATE UNIQUE DEFAULT CURRENT_DATE,
+  
+  -- Traffic
+  total_visitors INTEGER DEFAULT 0,
+  new_visitors INTEGER DEFAULT 0,
+  returning_visitors INTEGER DEFAULT 0,
+  
+  -- Engagement
+  engaged_users INTEGER DEFAULT 0, -- 2+ properties viewed
+  avg_session_duration INTEGER, -- seconds
+  avg_properties_viewed DECIMAL(4,1),
+  
+  -- Actions
+  property_views_count INTEGER DEFAULT 0,
+  property_saves_count INTEGER DEFAULT 0,
+  filter_applications_count INTEGER DEFAULT 0,
+  
+  -- Lead capture
+  subscription_count INTEGER DEFAULT 0,
+  save_rate DECIMAL(5,2), -- % of users who saved
+  subscription_rate DECIMAL(5,2), -- % of engaged users who subscribed
+  
+  -- Lead quality
+  new_leads_count INTEGER DEFAULT 0,
+  high_intent_leads_count INTEGER DEFAULT 0,
+  medium_intent_leads_count INTEGER DEFAULT 0,
+  low_intent_leads_count INTEGER DEFAULT 0,
+  
+  -- CRM
+  contacted_leads_count INTEGER DEFAULT 0,
+  converted_leads_count INTEGER DEFAULT 0,
+  
+  -- Device breakdown
+  mobile_users INTEGER DEFAULT 0,
+  desktop_users INTEGER DEFAULT 0,
+  tablet_users INTEGER DEFAULT 0,
+  
+  created_at TIMESTAMP DEFAULT NOW(),
+  
+  INDEX idx_date (metric_date)
+);
+```
+
+### 6. `lead_interactions` Table - CRM Integration
+```sql
+CREATE TABLE lead_interactions (
+  interaction_id SERIAL PRIMARY KEY,
+  lead_id INTEGER REFERENCES leads_comprehensive(lead_id),
+  agent_id INTEGER REFERENCES agents(id),
+  
+  interaction_type VARCHAR(30),
+  -- Options: 'call', 'whatsapp', 'email', 'site_visit', 'meeting', 'follow_up'
+  
+  interaction_date TIMESTAMP DEFAULT NOW(),
+  
+  notes TEXT,
+  outcome VARCHAR(30),
+  -- Options: 'interested', 'not_interested', 'follow_up', 'converted', 
+  -- 'not_reachable', 'wrong_number'
+  
+  next_follow_up_date DATE,
+  
+  created_at TIMESTAMP DEFAULT NOW(),
+  
+  INDEX idx_lead (lead_id),
+  INDEX idx_agent (agent_id),
+  INDEX idx_date (interaction_date)
+);
+```
+
+---
+
+## Feature Requirements
+
+### PART 1: Behavioral Event Tracking (Silent Background Tracking)
+
+#### 1.1 Frontend Event Tracking System
+
+Create `utils/tracking.js`:
+
+```javascript
+// Track every user action without disrupting UX
+const tracking = {
+  // Initialize session on page load
+  initSession() {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+  },
+
+  // Track property view
+  trackPropertyView(propertyId, timeSpent, scrollDepth) {
+    sendEvent({
+      event_type: 'property_view',
+      property_id: propertyId,
+      event_data: { timeSpent, scrollDepth }
+    });
+  },
+
+  // Track property save
+  trackPropertySave(propertyId, fromPage) {
+    sendEvent({
+      event_type: 'property_save',
+      property_id: propertyId,
+      event_data: { fromPage }
+    });
+  },
+
+  // Track filter application
+  trackFilterApplied(filters) {
+    sendEvent({
+      event_type: 'filter_applied',
+      event_data: { filters }
+    });
+  },
+
+  // Track page visit
+  trackPageVisit(pagePath, timeSpent) {
+    sendEvent({
+      event_type: 'page_visit',
+      event_data: { pagePath, timeSpent }
+    });
+  }
+};
+
+async function sendEvent(eventData) {
+  const sessionId = tracking.initSession();
+  await fetch('/api/events/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      session_id: sessionId,
+      ...eventData,
+      timestamp: new Date().toISOString()
+    })
+  });
+}
+```
+
+**Track these specific actions:**
+- Property card viewed (on Find Properties page)
+- Property detail page opened (track time spent)
+- Property saved/bookmarked
+- Property shared (WhatsApp/Email/Link)
+- Filter applied/changed
+- Search performed
+- Locality guide page visited
+- Scroll depth on property detail (how far they scrolled)
+- CTA clicks (Schedule Visit, Ask Expert, etc.)
+- Exit intent (mouse leaving viewport)
+
+---
+
+### PART 2: Multi-Touch Lead Capture System (6 Modal Types)
+
+#### 2.1 Filter-Based Subscription Modal (HIGH PRIORITY - 50-60% conversion)
+
+**Trigger**: User applies filters and views 3+ matching properties
+
+**Modal Design**:
+```
+┌───────────────────────────────────────────────────┐
+│  Stay Updated on Properties You Like ✨           │
+│                                                   │
+│  We'll notify you on WhatsApp when properties    │
+│  matching your preferences become available       │
+│                                                   │
+│  Your Preferences (Auto-filled):                  │
+│  ├─ Area: Besant Nagar ✓                         │
+│  ├─ Budget: ₹40-60 Lakhs ✓                       │
+│  ├─ Type: Plot ✓                                  │
+│  └─ Size: 1000-1500 sq.ft ✓                      │
+│                                                   │
+│  Name: [___________________] *                    │
+│  WhatsApp: [___________________] *                │
+│  Additional requirements (optional):              │
+│  [________________________________]               │
+│  [________________________________]               │
+│                                                   │
+│  [Get WhatsApp Updates] [Maybe Later]            │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `FilterBasedSubscriptionModal.jsx`
+- Show after user views 3 filtered properties
+- Pre-fill filter data from their search
+- Capture: Name + WhatsApp + Custom remarks
+- Store source_type: 'filter_search'
+- Expected conversion: 50-60%
+
+---
+
+#### 2.2 Casual Browser Conversion Modal (35-40% conversion)
+
+**Trigger**: User browsed 3+ properties WITHOUT filters OR spent 2+ minutes on platform
+
+**Modal Design**:
+```
+┌───────────────────────────────────────────────────┐
+│  Help Us Show Better Properties 🎯                │
+│                                                   │
+│  You viewed these properties:                     │
+│  ├─ 🏠 Property in Besant Nagar - ₹55L           │
+│  ├─ 🏠 Property in Adyar - ₹48L                  │
+│  └─ 🏠 Property in T.Nagar - ₹62L                │
+│                                                   │
+│  Which budget range interests you most?           │
+│  ○ ₹20-40 Lakhs                                   │
+│  ○ ₹40-60 Lakhs ← (Auto-select based on views)   │
+│  ○ ₹60-80 Lakhs                                   │
+│  ○ ₹80L-1Cr                                       │
+│  ○ Above ₹1 Crore                                 │
+│                                                   │
+│  Which areas interest you?                        │
+│  [Select from their viewed properties' areas]     │
+│                                                   │
+│  Name: [___________________]                      │
+│  WhatsApp: [___________________]                  │
+│                                                   │
+│  [Find My Properties] [Not Now]                  │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `CasualBrowserModal.jsx`
+- Show properties they viewed
+- Deduce budget from their views
+- Ask to confirm/adjust budget
+- Capture: Name + WhatsApp + Implicit preferences
+- Store source_type: 'casual_browser'
+- Expected conversion: 35-40%
+
+---
+
+#### 2.3 Content Reader Conversion Modal (30-40% conversion)
+
+**Trigger**: User reading locality guide (/understand-chennai/besant-nagar), spent 50%+ time on content
+
+**Modal Design** (appears mid-article):
+```
+┌───────────────────────────────────────────────────┐
+│  💡 Interested in Properties in Besant Nagar?     │
+│                                                   │
+│  Get alerts when new listings match your budget   │
+│                                                   │
+│  Name: [___________________]                      │
+│  WhatsApp: [___________________]                  │
+│                                                   │
+│  Budget (optional):                               │
+│  ○ ₹20-40L  ○ ₹40-60L  ○ ₹60-80L  ○ Above ₹80L   │
+│                                                   │
+│  [Subscribe to Besant Nagar Updates]             │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `ContentReaderModal.jsx`
+- Show after 50% scroll depth on locality guide
+- Auto-fill area from page URL
+- Simple 2-field form (Name + WhatsApp)
+- Optional budget selection
+- Store source_type: 'content_reader'
+- Expected conversion: 30-40%
+
+---
+
+#### 2.4 Exit Intent Modal (15-20% conversion)
+
+**Trigger**: Mouse leaves viewport OR back button OR tab close attempt
+
+**Modal Design**:
+```
+┌───────────────────────────────────────────────────┐
+│  ⚠️ Before You Go...                              │
+│                                                   │
+│  Tell us what you're looking for (30 seconds)     │
+│                                                   │
+│  Budget: [Slider: ₹20L___₹60L___₹100L+]          │
+│                                                   │
+│  Preferred Area:                                  │
+│  ○ North Chennai  ○ Central  ○ South  ○ Suburbs  │
+│                                                   │
+│  Property Type:                                   │
+│  ○ Plot  ○ Apartment  ○ Villa  ○ Any             │
+│                                                   │
+│  [Show Matching Properties]  [Exit]              │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `ExitIntentModal.jsx`
+- Detect: `mouseleave` event on document
+- Show ONLY ONCE per session
+- If they click "Show Matching Properties":
+  - Apply their selected filters
+  - Show filtered results
+  - Now show subscription modal with context
+- Store source_type: 'exit_intent'
+- Expected conversion: 15-20% of exit attempts
+
+---
+
+#### 2.5 Missing Property Report Modal (70%+ conversion - HIGHEST QUALITY)
+
+**Trigger**: User searches but gets 0 results OR clicks "Not finding what I want" button
+
+**Modal Design**:
+```
+┌───────────────────────────────────────────────────┐
+│  🔍 We'll Find Your Ideal Property                │
+│                                                   │
+│  Tell us exactly what you need:                   │
+│                                                   │
+│  Name: [___________________] *                    │
+│  WhatsApp: [___________________] *                │
+│                                                   │
+│  Location: [___________________]                  │
+│  Budget: [___________________]                    │
+│                                                   │
+│  Property Type:                                   │
+│  ○ Plot  ○ Apartment  ○ Villa  ○ Commercial      │
+│                                                   │
+│  Size: [_______] sq.ft                            │
+│                                                   │
+│  Additional Requirements:                         │
+│  [_________________________________]              │
+│  [_________________________________]              │
+│  (e.g., "Legal clear, Metro access, Loan         │
+│  approved project, 4% rental yield")              │
+│                                                   │
+│  [Find This Property For Me] [Cancel]            │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `MissingPropertyModal.jsx`
+- Show when 0 search results
+- OR add "Can't find what you need?" button on results page
+- Capture complete requirements
+- Store source_type: 'missing_property'
+- **Expected conversion: 70%+ (user is highly motivated)**
+- **Lead Quality: VERY HIGH**
+
+---
+
+#### 2.6 Property Comparison Request Modal (30-35% conversion)
+
+**Trigger**: User views 3+ similar properties OR uses comparison feature
+
+**Modal Design**:
+```
+┌───────────────────────────────────────────────────┐
+│  📊 Want Expert Comparison Analysis?              │
+│                                                   │
+│  You're comparing:                                │
+│  ├─ 🏠 Besant Nagar Plot - ₹55L                  │
+│  ├─ 🏠 Adyar Plot - ₹52L                         │
+│  └─ 🏠 Velachery Plot - ₹48L                     │
+│                                                   │
+│  What matters most in your decision?              │
+│  ☐ ROI/Yield                                     │
+│  ☐ Price Appreciation                            │
+│  ☐ Legal Clarity                                 │
+│  ☐ Infrastructure (Metro, Roads)                 │
+│  ☐ Rental Income Potential                       │
+│                                                   │
+│  Name: [___________________]                      │
+│  WhatsApp: [___________________]                  │
+│                                                   │
+│  [Get Detailed Comparison] [Do It Myself]        │
+└───────────────────────────────────────────────────┘
+```
+
+**Implementation**:
+- Component: `ComparisonModal.jsx`
+- Show after viewing 3+ similar properties
+- Capture investment priorities
+- Store source_type: 'comparison_request'
+- Expected conversion: 30-35%
+
+---
+
+### PART 3: Intent Scoring Algorithm
+
+Create `utils/intentScoring.js`:
+
+```javascript
+function calculateIntentScore(behaviorProfile, searchFilters, source) {
+  let score = 0;
+
+  // Time spent (max 3 points)
+  const timeSpentMinutes = behaviorProfile.time_spent_total / 60;
+  if (timeSpentMinutes > 10) score += 3;
+  else if (timeSpentMinutes > 5) score += 2;
+  else if (timeSpentMinutes > 2) score += 1;
+
+  // Properties saved (max 2 points)
+  const savedCount = behaviorProfile.properties_saved?.length || 0;
+  if (savedCount >= 5) score += 2;
+  else if (savedCount >= 3) score += 1.5;
+  else if (savedCount >= 1) score += 1;
+
+  // Filter refinements (max 2 points)
+  const refinements = behaviorProfile.filter_refinements || 0;
+  if (refinements >= 7) score += 2;
+  else if (refinements >= 4) score += 1.5;
+  else if (refinements >= 2) score += 1;
+
+  // Return visits (max 1.5 points)
+  const returnVisits = behaviorProfile.return_visits || 0;
+  if (returnVisits >= 3) score += 1.5;
+  else if (returnVisits >= 2) score += 1;
+  else if (returnVisits >= 1) score += 0.5;
+
+  // Custom remarks provided (max 1 point)
+  if (investmentProfile?.custom_remarks && investmentProfile.custom_remarks.length > 20) {
+    score += 1;
+  }
+
+  // Source quality (max 0.5 points)
+  if (source === 'missing_property') score += 0.5;
+  else if (source === 'filter_search') score += 0.3;
+  else if (source === 'comparison_request') score += 0.2;
+
+  // Normalize to 0-10 scale
+  return Math.min(score, 10).toFixed(1);
+}
+
+function classifyIntentLevel(intentScore) {
+  if (intentScore >= 7.5) return 'high';
+  if (intentScore >= 4.5) return 'medium';
+  return 'low';
+}
+
+function estimateConversionProbability(intentScore, source) {
+  let baseProbability = intentScore / 10;
+  
+  // Source multipliers
+  if (source === 'missing_property') baseProbability *= 1.2;
+  else if (source === 'filter_search') baseProbability *= 1.1;
+  else if (source === 'exit_intent') baseProbability *= 0.7;
+  
+  return Math.min(baseProbability, 0.95).toFixed(2);
+}
+```
+
+---
+
+### PART 4: Admin Dashboard - Behavioral Analytics
+
+Create `/admin/behavioral-analytics` page with these sections:
+
+#### 4.1 Lead Funnel Visualization
+
+```
+Visitors → Engaged → Saved → Subscribed → Contacted → Converted
+
+[Funnel Chart showing]:
+1000 Visitors (100%)
+  ↓ 65% engaged (viewed 2+ properties)
+650 Engaged Users
+  ↓ 43% saved property
+280 Property Savers
+  ↓ 64% subscribed
+180 Subscribers (LEADS CAPTURED)
+  ↓ 44% contacted by agents
+79 Contacted
+  ↓ 50% converted
+40 Conversions (4% overall conversion rate)
+```
+
+#### 4.2 Lead Quality Segmentation Cards
+
+```
+┌─────────────────────────────────┐
+│ High Intent Leads               │
+│ 45 leads (25%)                  │
+│                                 │
+│ Characteristics:                │
+│ • 5+ min on platform            │
+│ • 3+ properties saved           │
+│ • Custom remarks provided       │
+│                                 │
+│ Conversion Rate: 60-70%         │
+│ Est. Revenue: ₹1.35 Cr          │
+│                                 │
+│ [View Leads →]                  │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│ Medium Intent Leads             │
+│ 81 leads (45%)                  │
+│                                 │
+│ Characteristics:                │
+│ • 2-5 min on platform           │
+│ • 1-2 properties saved          │
+│ • Applied filters               │
+│                                 │
+│ Conversion Rate: 35-45%         │
+│ Est. Revenue: ₹1.26 Cr          │
+│                                 │
+│ [View Leads →]                  │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│ Low Intent Leads                │
+│ 54 leads (30%)                  │
+│                                 │
+│ Characteristics:                │
+│ • <2 min on platform            │
+│ • No saves                      │
+│ • Exit-intent capture           │
+│                                 │
+│ Conversion Rate: 10-15%         │
+│ Est. Revenue: ₹32 Lakhs         │
+│                                 │
+│ [View Leads →]                  │
+└─────────────────────────────────┘
+```
+
+#### 4.3 Market Insights from Behavioral Data
+
+**Area Demand Heatmap**:
+```
+Top Searched Areas (by lead count):
+
+1. Besant Nagar: 54 leads (30%) | Avg score: 8.2/10 | 🔥 HOT
+2. Adyar: 38 leads (21%) | Avg score: 7.5/10
+3. T.Nagar: 29 leads (16%) | Avg score: 6.8/10
+4. Velachery: 22 leads (12%) | Avg score: 7.2/10
+5. Anna Nagar: 18 leads (10%) | Avg score: 7.8/10
+
+💡 Insight: "Besant Nagar has highest demand - 30% of all buyer interest"
+```
+
+**Budget Distribution Chart**:
+```
+Lead Count by Budget Range:
+
+₹20-40L:   ████████████████ 29 leads (16%)
+₹40-60L:   ████████████████████████████ 54 leads (30%) ← PEAK
+₹60-80L:   ██████████████████████ 45 leads (25%)
+₹80L-1Cr:  ████████████ 29 leads (16%)
+>₹1Cr:     ██████ 9 leads (5%)
+
+💡 Insight: "55% of buyers cluster in ₹40-80L range"
+```
+
+**Infrastructure Preferences**:
+```
+What buyers want (from filter tracking):
+
+1. Metro Connectivity: 68 leads (38%) - Most important
+2. Water Supply: 52 leads (29%)
+3. Rental Potential: 45 leads (25%)
+4. Beach Proximity: 41 leads (23%)
+5. IT Park Access: 24 leads (13%)
+
+💡 Insight: "Metro access is #1 priority - highlight in listings"
+```
+
+**Legal Preferences** (from custom remarks):
+```
+Top concerns buyers mention:
+
+1. "Title clear": 102 mentions (57%)
+2. "DTCP approved": 83 mentions (46%)
+3. "No encumbrance": 48 mentions (27%)
+4. "Bank loan approved": 36 mentions (20%)
+
+💡 Insight: "Legal clarity is biggest concern - add verification badges"
+```
+
+#### 4.4 Lead Source Performance
+
+```
+Subscription Source Breakdown:
+
+Filter Search:       ████████████████████ 94 leads (52%) | Conv: 58%
+Casual Browser:      ██████████ 45 leads (25%) | Conv: 38%
+Content Reader:      ██████ 27 leads (15%) | Conv: 33%
+Exit Intent:         ███ 13 leads (7%) | Conv: 18%
+Missing Property:    █ 4 leads (2%) | Conv: 75%
+Comparison:          ██ 8 leads (4%) | Conv: 32%
+
+💡 Insight: "Filter search is your #1 lead source - optimize filter UX"
+```
+
+#### 4.5 Real-Time Lead Queue
+
+```
+High Priority Queue (Immediate Follow-up Required):
+
+[Table with columns]:
+Name | WhatsApp | Area | Budget | Intent | Source | Time | Action
+
+Amit Kumar | 98765xxxxx | Besant Nagar | ₹50-65L | 8.7 | Filter | 5 min ago | [Assign Agent ▼]
+Priya Sharma | 98234xxxxx | Adyar | ₹40-55L | 8.2 | Missing Property | 12 min ago | [Assign Agent ▼]
+Rajesh M | 99876xxxxx | T.Nagar | ₹60-80L | 7.9 | Filter | 23 min ago | [Assign Agent ▼]
+
+[Each row expandable to show]:
+├─ Properties Saved: 5 properties (view list)
+├─ Custom Remarks: "Need legal clear, metro access, 4% yield"
+├─ Investment Style: Rental Income
+├─ Timeline: Urgent
+├─ Conversion Probability: 72%
+├─ Recommende

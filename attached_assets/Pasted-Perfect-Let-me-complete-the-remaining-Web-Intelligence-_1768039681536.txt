@@ -1,0 +1,325 @@
+Perfect! Let me complete the remaining Web Intelligence prompt:
+
+***
+
+## **COMPLETE WEB INTELLIGENCE PROMPT (CONTINUED)**
+
+```
+TABLE 6 CONTINUED: MARKET_INTELLIGENCE (GENERATED DAILY)
+Example row (continued):
+{
+  id: "intel_2026_0110_mihan",
+  report_date: "2026-01-10",
+  locality: "MIHAN",
+  market_temperature: "HOT",
+  price_trend_30d: 8.5,
+  price_trend_90d: 18.2,
+  avg_price: 4500000,
+  avg_price_per_sqft: 3000,
+  new_listings_count: 95,
+  delisted_count: 60,
+  days_to_sell_avg: 20,
+  employment_jobs_count: 450,
+  employment_trend: "Increasing",
+  infrastructure_status: [
+    { project: "Metro Phase 2", status: 60, months: 6 },
+    { project: "IT Park Expansion", status: 40, months: 12 }
+  ],
+  news_sentiment_positive: 72,
+  news_sentiment_negative: 15,
+  news_sentiment_neutral: 13,
+  social_sentiment: "Bullish",
+  legal_disputes_count: 0,
+  buying_clarity_score: 9,
+  verdict: "HIGHLY RECOMMENDED - Metro in 6 months + 500 IT jobs = Strong appreciation potential",
+  processed: true,
+  created_at: "2026-01-10 06:00 AM IST"
+}
+
+
+TABLE 7: SENTIMENT_TRACKING (UPDATED DAILY)
+Columns:
+├─ id (unique)
+├─ date (date of tracking)
+├─ locality (area or "All Nagpur")
+├─ news_positive_count (# positive news articles)
+├─ news_negative_count (# negative news articles)
+├─ news_neutral_count (# neutral articles)
+├─ social_bullish_posts (# bullish posts/mentions)
+├─ social_bearish_posts (# bearish posts/mentions)
+├─ social_neutral_posts (# neutral posts/mentions)
+├─ overall_sentiment (Bullish / Bearish / Neutral)
+├─ sentiment_trend (Improving ↑ / Stable → / Declining ↓)
+├─ top_positive_topic (what buyers excited about)
+├─ top_negative_concern (what worries buyers)
+└─ created_at (timestamp)
+
+Example row:
+{
+  id: "sentiment_2026_0110",
+  date: "2026-01-10",
+  locality: "All Nagpur",
+  news_positive_count: 18,
+  news_negative_count: 5,
+  news_neutral_count: 4,
+  social_bullish_posts: 245,
+  social_bearish_posts: 42,
+  social_neutral_posts: 98,
+  overall_sentiment: "Bullish",
+  sentiment_trend: "Improving",
+  top_positive_topic: "Metro Phase 2 coming, job growth, investment potential",
+  top_negative_concern: "Affordability issues, market saturation",
+  created_at: "2026-01-10 07:00 AM IST"
+}
+
+
+=== PART 4: DAILY DATA COLLECTION WORKFLOW ===
+
+Your system should RUN AUTOMATICALLY EVERY DAY (no manual work needed):
+
+SCHEDULE:
+├─ 2:00 AM - 3:00 AM IST: NEWS SCRAPING
+│  └─ Fetch articles from TOI, Nagpur Today, HT, BS
+│     Store in NEWS_ARTICLES table
+│     Extract: title, content, source, date, sentiment, category, locality
+│
+├─ 3:00 AM - 4:00 AM IST: SOCIAL MEDIA SCRAPING
+│  └─ Fetch posts from Twitter, Reddit, Facebook, LinkedIn
+│     Store in SOCIAL_POSTS table
+│     Extract: content, engagement, sentiment, topic, locality
+│
+├─ 4:00 AM - 5:00 AM IST: JOB MARKET SCRAPING
+│  └─ Fetch job postings from LinkedIn, Naukri, company websites
+│     Store in JOB_MARKET table
+│     Extract: company, job type, openings, salary, location
+│
+├─ 5:00 AM - 6:00 AM IST: INFRASTRUCTURE & LEGAL SCRAPING
+│  └─ Fetch updates from MIHAN, Municipal Corp, Court records
+│     Store in INFRASTRUCTURE_PROJECTS & LEGAL_DISPUTES tables
+│     Extract: project status, dispute status, impact
+│
+├─ 6:00 AM - 7:00 AM IST: ANALYSIS & INSIGHT GENERATION
+│  └─ Process all collected data:
+│     • Calculate market temperature per locality
+│     • Generate sentiment scores
+│     • Create market intelligence reports
+│     • Update buying clarity scores
+│     Store results in MARKET_INTELLIGENCE & SENTIMENT_TRACKING tables
+│
+└─ 7:00 AM - 8:00 AM IST: FRONTEND UPDATE
+   └─ Sync generated insights to frontend database
+      Make insights available on "Understand Nagpur" page
+
+
+=== PART 5: ADMIN PANEL VIEWS & ACTIONS ===
+
+What the admin panel should show and allow:
+
+1) WEB INTELLIGENCE DASHBOARD (Main View):
+   ├─ Real-time metrics card:
+   │  • Data sources active: 10
+   │  • Last sync: 2 hours ago
+   │  • Next sync: 22:00 IST
+   │  • Articles scraped today: 47
+   │  • Social posts analyzed: 1,234
+   │  • Jobs found: 890
+   │  • Infrastructure updates: 12
+   │
+   ├─ Market temperature by locality (with trend arrows):
+   │  🔴 MIHAN: HOT (↑18% | 450 jobs | Metro 6m away)
+   │  🟡 Besa: WARM (↑12% | 80 jobs | No major projects)
+   │  🟡 Wardha Road: WARM (↑8% | 50 jobs | Flyover opening)
+   │  🔵 Hingna: COOLING (↑2% | 40 jobs | Manufacturing stable)
+   │  🔵 South Nagpur: VERY COOL (↓2% | 10 jobs | No growth)
+   │
+   ├─ News sentiment pulse:
+   │  Positive (bullish): 72%
+   │  Negative (bearish): 15%
+   │  Neutral: 13%
+   │  Trend: ↑ Improving (more positive news coming)
+   │
+   ├─ Employment growth tracker:
+   │  IT: +40% YoY (450 openings, trending ↑↑↑)
+   │  Manufacturing: +15% YoY (120 openings, trending ↑)
+   │  Services: +5% YoY (80 openings, trending →)
+   │
+   ├─ Infrastructure project status:
+   │  Metro Phase 2: 60% complete, launches Dec 2026
+   │  Wardha Road Flyover: 80% complete, opens Mar 2026
+   │  MIHAN IT Park: 40% expansion, complete Jun 2026
+   │
+   └─ Legal alerts summary:
+      MIHAN: ✅ Safe (0 disputes)
+      Besa: ⚠️ 1 pending case
+      Wardha Road: ✅ Safe (0 disputes)
+      Hingna: ✅ Safe (0 disputes)
+      South Nagpur: ❌ 5 pending cases
+
+
+2) NEWS FEED VIEW:
+   └─ Shows all articles scraped today
+      ├─ Title: "Metro Phase 2 Groundbreaking Scheduled March 2026"
+      ├─ Source: Times of India
+      ├─ Category: Infrastructure
+      ├─ Locality: MIHAN
+      ├─ Sentiment: Positive ✅
+      ├─ Impact: High
+      ├─ Published: 2 hours ago
+      ├─ Summary: "Metro expansion will boost MIHAN connectivity and job growth"
+      ├─ [VIEW ARTICLE] [MARK AS READ] [DELETE]
+      │
+      ├─ Title: "Court Dismisses Encroachment Case in South Nagpur"
+      ├─ Source: District Court News
+      ├─ Category: Legal
+      ├─ Locality: South Nagpur
+      ├─ Sentiment: Negative ❌
+      ├─ Impact: High
+      ├─ Published: 4 hours ago
+      ├─ Summary: "Dispute resolution improves area's legal safety status"
+      └─ [VIEW ARTICLE] [MARK AS READ] [DELETE]
+
+
+3) SENTIMENT TRACKER VIEW:
+   └─ Shows social media sentiment analysis
+      ├─ Platform: Twitter
+      ├─ Keyword: #Nagpur
+      ├─ Period: Last 7 days
+      ├─ Total posts found: 1,245
+      ├─ Bullish posts (positive sentiment): 890 (71%)
+      ├─ Bearish posts (negative sentiment): 198 (16%)
+      ├─ Neutral posts: 157 (13%)
+      │
+      ├─ Most retweeted bullish post:
+      │  "@buyer_nagpur: Just invested in MIHAN! Metro in 6 months 
+      │   will make this the best decision ever. #MIHANMetro #Investment"
+      │  • Retweets: 245
+      │  • Likes: 890
+      │  • Replies: 34
+      │
+      ├─ Most shared negative post:
+      │  "@concerned_buyer: Nagpur property prices overblown. Better 
+      │   options in Pune. Should I wait for correction?"
+      │  • Retweets: 45
+      │  • Likes: 120
+      │  • Replies: 28
+
+
+4) MARKET INTELLIGENCE REPORTS VIEW:
+   └─ Shows generated reports by locality
+      
+      ┌─ MIHAN MARKET INTELLIGENCE REPORT ───────┐
+      │ Generated: 2026-01-10 06:30 AM            │
+      │                                           │
+      │ BUYING CLARITY SCORE: 9/10 ⭐⭐⭐⭐⭐ │
+      │                                           │
+      │ WHY YOU SHOULD BUY:                       │
+      │ • Metro arrives Dec 2026 (6 months away) │
+      │ • 500 IT jobs announced by Infosys       │
+      │ • Prices ↑18% in 90 days (market hot)    │
+      │ • No legal disputes (safe titles)        │
+      │ • 80% of buyers bullish (social sentiment│
+      │ • Selling in 20 days avg (hot market)    │
+      │                                           │
+      │ VERDICT: HIGHLY RECOMMENDED               │
+      │ "Buy now before metro announcement       │
+      │  drives prices up further. Expect        │
+      │  15-20% appreciation in next 12 months"  │
+      │                                           │
+      │ [PRINT REPORT] [SHARE TO FRONTEND]       │
+      └───────────────────────────────────────────┘
+
+
+5) DATA SOURCES CONFIGURATION VIEW:
+   └─ Manage what to scrape and schedule
+      
+      ├─ [+ ADD NEW SOURCE]
+      │
+      ├─ NEWS SOURCE: Times of India Nagpur
+      │  • URL: toi.com/city/nagpur
+      │  • Scrape frequency: Daily
+      │  • Status: ✅ Active
+      │  • Last scraped: 2 hours ago
+      │  • Articles found: 12
+      │  • [EDIT] [PAUSE] [DELETE]
+      │
+      ├─ SOCIAL SOURCE: Twitter #Nagpur
+      │  • Keywords: #Nagpur #NagpurRealEstate #MIHANMetro
+      │  • Scrape frequency: Hourly
+      │  • Status: ✅ Active
+      │  • Last scraped: 15 minutes ago
+      │  • Posts found: 247
+      │  • [EDIT] [PAUSE] [DELETE]
+      │
+      ├─ JOB SOURCE: LinkedIn Nagpur Jobs
+      │  • Search term: "Nagpur" + job categories
+      │  • Scrape frequency: Daily
+      │  • Status: ✅ Active
+      │  • Last scraped: 3 hours ago
+      │  • Jobs found: 890
+      │  • [EDIT] [PAUSE] [DELETE]
+      │
+      └─ OFFICIAL SOURCE: MIHAN Authority
+         • URL: mihan.org/updates
+         • Scrape frequency: Weekly
+         • Status: ✅ Active
+         • Last scraped: 1 day ago
+         • Updates found: 3
+         • [EDIT] [PAUSE] [DELETE]
+
+
+6) LIVE LOGS VIEW:
+   └─ Shows real-time scraping activity
+      
+      14:30 IST: ✅ NEWS SCRAPING COMPLETED
+      └─ Times of India: 12 articles scraped
+      └─ Nagpur Today: 8 articles scraped
+      └─ Business Standard: 5 articles scraped
+      └─ Total: 25 articles | Avg parse time: 2.3 sec
+      
+      14:45 IST: ✅ SOCIAL MEDIA SCRAPING COMPLETED
+      └─ Twitter: 247 posts analyzed
+      └─ Reddit: 45 posts analyzed
+      └─ Facebook: 34 posts analyzed
+      └─ Total: 326 posts | Bullish: 234 | Bearish: 67 | Neutral: 25
+      
+      15:00 IST: ✅ JOB MARKET SCRAPING COMPLETED
+      └─ LinkedIn: 450 jobs found
+      └─ Naukri: 320 jobs found
+      └─ Company websites: 120 jobs found
+      └─ Total: 890 jobs | ↑ 40% vs last week
+      
+      15:15 IST: ✅ INFRASTRUCTURE SCRAPING COMPLETED
+      └─ MIHAN Authority: 3 updates
+      └─ Municipal Corp: 2 updates
+      └─ Metro Authority: 1 update
+      └─ Status: All projects on track
+      
+      15:30 IST: ⏳ ANALYSIS IN PROGRESS...
+      └─ Processing 25 news articles...
+      └─ Processing 326 social posts...
+      └─ Generating sentiment scores...
+      └─ Calculating market temperature per locality...
+      
+      15:45 IST: ✅ ANALYSIS COMPLETED
+      └─ Market Intelligence Reports: 6 localities
+      └─ Sentiment Update: Complete
+      └─ Buying Clarity Scores: Updated
+      └─ Next sync: 22:00 IST
+
+
+=== PART 6: FRONTEND INTEGRATION ===
+
+How Web Intelligence data appears on BUYER-FACING PAGES:
+
+PAGE 1: "UNDERSTAND NAGPUR" (Market Context)
+├─ Section 1: NAGPUR AT A GLANCE
+│  ├─ Market Temperature (visual heat map):
+│  │  🔴 MIHAN: HOT
+│  │  🟡 Besa: WARM
+│  │  🟡 Wardha Road: WARM
+│  │  🔵 Hingna: COOLING
+│  │  🔵 South Nagpur: VERY COOL
+│  │
+│  └─ Metric cards:
+│     ├─ Avg Price: ₹42L (↑ 12% YoY)
+│     ├─ Avg Price/sqft: ₹2,800 (↑

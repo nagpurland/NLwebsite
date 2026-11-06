@@ -1,0 +1,379 @@
+You are building a full-stack “Nagpur Real Estate Operating System” for a solo founder in India.
+This one app must act as: research team, analyst, content engine, CRM, campaign manager, and social/WhatsApp assistant.
+Everything must run on Replit (backend, frontend, automations).
+
+0. Tech & Architecture
+Backend: Python + Flask (or FastAPI if you prefer).
+
+Frontend: Simple HTML/JS or lightweight React, served by the backend.
+
+Database: SQLite with SQLAlchemy, designed so it can later migrate to Postgres (NO Replit DB).
+
+Scheduling: Replit Agents & Automations / cron-like jobs for periodic tasks (daily).
+
+Secrets: ALL external API keys and tokens must be read from environment variables.
+
+Stub external APIs where needed, but design code so real endpoints can be plugged in later.
+
+1. Nagpur Property Data Engine (Research & Analytics)
+1.1 Core tables (SQLAlchemy models)
+properties
+
+id (PK)
+
+source (string), source_url (string)
+
+city (string), locality (string), micro_location (string)
+
+property_type (string: plot, flat, villa, commercial, warehouse)
+
+project_name (string), builder_name (string)
+
+bhk (int, nullable), super_area (float), carpet_area (float), area_unit (string)
+
+price_total (float), price_psf (float, nullable), rent (float, nullable)
+
+status (string: active, booked, sold, expired, unknown)
+
+first_seen_at (datetime), last_seen_at (datetime)
+
+amenities (text), remarks (text)
+
+infra_events
+
+id, title, description, locality, event_type (metro, road, MIHAN, govt_scheme, etc.), date, source_url
+
+rules_and_regulations
+
+id, title, body_summary, category (NIT rule, NMC rule, NA, FSI, etc.), effective_date, source_url
+
+scraped_articles
+
+id, title, site_name, locality_tag, topic_tag, summary, source_url, publish_date, scraped_at
+
+raw_html (optional, can be in this table or in a separate raw_html_snapshots linked by FK)
+
+social_articles (for Reddit/X/LinkedIn style public posts, via official APIs later)
+
+id, platform (reddit, x, linkedin, etc.), post_id, text_excerpt, topic_tag, locality_tag, url, created_at, sentiment (nullable)
+
+1.2 Scraping & ingestion (structure)
+Implement placeholder scraping functions (safe sample sites) but design them to match this pattern:
+
+run_all_scrapers() calls multiple scrapers.
+
+Each scraper normalizes data into properties, infra_events, rules_and_regulations, scraped_articles.
+
+Respect robots.txt: add comments and structure so that in real deployment we only scrape sites that allow it.
+
+For properties:
+
+On first encounter, insert with first_seen_at = now.
+
+On subsequent encounters, update fields and last_seen_at = now.
+
+If a property is missing from sources for N successive runs (configurable), mark status = "booked" or "sold" instead of deleting.
+
+1.3 Analytics & undervalued detection
+Implement functions and endpoints to compute, by locality and property_type:
+
+average and median price_psf
+
+number of active properties
+
+rental yield estimate where rent is available (annual rent / price_total)
+
+For undervalued properties:
+
+For each locality + property_type, compute average price_psf.
+
+Mark properties at least 15–20% below this average as is_undervalued = True (add a boolean column).
+
+1.4 Analytics dashboard
+/dashboard/analytics – show tables of locality-level metrics and simple charts (can be plain HTML tables).
+
+/dashboard/undervalued – list undervalued properties with filters (locality, type, budget range).
+
+1.5 Daily automation
+A daily scheduled job that:
+
+Runs run_all_scrapers().
+
+Updates analytics and undervalued flags.
+
+Triggers reporting + notifications (see section 3).
+
+2. Web Intelligence – Blogs, News, Social (Nagpur-focused)
+Extend ingestion to cover Nagpur land/property info across the public web:
+
+Periodically search and ingest public pages about:
+
+“Nagpur real estate”, “Nagpur land”, “Nagpur plots”, “Nagpur MIHAN property”, “Nagpur ring road”, “Nagpur Metro property”, etc.
+
+For each page, store in scraped_articles:
+
+title, site_name, locality_tag (if detectable), topic_tag (infra, legal, pricing, investment, etc.), summary (AI-generated), source_url, publish_date, scraped_at.
+
+For social-type data (Reddit/X, etc.):
+
+Assume official APIs will be used later; design social_articles table as above.
+
+Do not implement illegal scraping; just stub API ingestion functions and clearly separate them.
+
+Analysis job (daily):
+
+Run over new scraped_articles and social_articles to:
+
+Tag topics (MIHAN, Wardha Road, Hingna, NA/FSI/legal, infra projects, disputes, etc.).
+
+Count mentions per locality and topic.
+
+Compute simple sentiment for social posts if available.
+
+Produce a summary of: top positive themes, top concerns, most-mentioned localities.
+
+Save these into daily_reports.key_stats_json and summary_text (see section 3).
+
+Web intelligence dashboard
+Page /dashboard/web-intel showing:
+
+Latest 20 scraped_articles with title, summary, tags, and a “View original” link (source_url).
+
+Basic topic/locality frequency tables for last 7 days.
+
+3. Daily Reports, Notifications & Blog Generator (Analyst + Content)
+3.1 Daily reports table
+Create daily_reports:
+
+id, date, generated_at
+
+key_stats_json (JSON) – include price metrics, undervalued counts, top topics/localities, notable infra events
+
+summary_text – short human-readable summary (3–6 sentences)
+
+After analytics and web-intel jobs:
+
+Create or update that day’s daily_reports row.
+
+3.2 Notifications (email, Telegram, Slack)
+Implement send_daily_notifications(report_id):
+
+Email: send summary_text + top stats to a configured address using SMTP settings from env.
+
+Telegram: use BOT_TOKEN and CHAT_ID to send a short summary message.
+
+Slack: use webhook URL to post summary into a chosen channel.
+
+Wire this into the daily automation so it runs once per day after the report is built.
+
+3.3 Content ideas & blog generation
+Create content_ideas:
+
+id, date_created, source_type (data_change, faq, social_comment, manual), locality, topic, priority, status (idea, drafting, published), notes
+
+Daily:
+
+From daily_reports.key_stats_json and new scraped_articles, auto-create a few content_ideas (even with stub logic).
+
+Blog generator:
+
+blog_posts table:
+
+id, report_id (FK, nullable), title, body, status (draft, published), slug, created_at, updated_at
+
+Page /dashboard/reports:
+
+List last 30 daily_reports with date and summary_text.
+
+Each row has a button “Generate blog from this report”.
+
+Endpoint /reports/<id>/generate-blog:
+
+Fetch report.
+
+Call an LLM API (e.g., OpenAI via key in env) with a prompt to generate an 800–1200 word blog for Nagpur investors/homebuyers based only on the report data.
+
+Save as a new blog_posts draft.
+
+Page /dashboard/blogs/<id>:
+
+Show blog in a textarea editor.
+
+Buttons to “Save changes” and “Mark as published”.
+
+Endpoint /blogs/published returning published blogs as JSON (for future public site).
+
+4. CRM & Solo Sales OS (Leads, Deals, Follow-ups)
+4.1 CRM tables
+contacts
+
+id, name, phone, email, whatsapp_opt_in (bool)
+
+source (web, whatsapp, instagram, call, other)
+
+preferred_locality, budget_min, budget_max, bhk_preference, purpose (end_use, investment, other)
+
+leads
+
+id, contact_id (FK), created_at
+
+status (new, engaged, visiting, offer, closed_won, closed_lost)
+
+priority (hot, warm, cold)
+
+interactions
+
+id, contact_id (FK), lead_id (FK, nullable)
+
+type (call, whatsapp, email, visit, note, campaign)
+
+channel (string), content (text), created_at
+
+next_action_date (datetime, nullable)
+
+deals
+
+id, lead_id (FK), property_id (FK, nullable)
+
+stage (enquiry, site_visit, negotiation, closed_won, closed_lost)
+
+value (float, nullable), notes
+
+4.2 Lead intake & dashboards
+Public form(s) on the site to capture: name, phone, email, locality, budget, BHK, purpose.
+
+On submit, create/update contacts and a leads row, and log an interactions entry.
+
+CRM dashboards:
+
+/dashboard/leads – list leads with filters (locality, budget range, status, priority).
+
+/dashboard/leads/<id> – show full timeline (interactions, properties shared, visits, notes) and allow status/priority updates and new interactions.
+
+/dashboard/today – show follow-ups due today (next_action_date) and any site visits scheduled (visits can be a type of interaction).
+
+5. Campaigns & Nudges (Email/WhatsApp)
+Tables:
+
+campaigns
+
+id, name, channel (email, whatsapp), description, created_at
+
+campaign_messages
+
+id, campaign_id (FK), contact_id (FK)
+
+status (pending, sent, failed), sent_at, response_text (nullable)
+
+Features:
+
+Backend function to build simple segments (hard-code some for now): e.g.,
+
+“Investors: purpose=investment, budget 40–80L, localities: MIHAN, Wardha Road”
+
+“End-users: purpose=end_use, 2–3 BHK, budget 60–90L in South Nagpur”
+
+Endpoint /campaigns/create-and-send:
+
+Accepts: segment id, message template (with placeholders like {{name}}, {{locality}}).
+
+Creates campaign and campaign_messages.
+
+Sends messages via email or a stub WhatsApp sender, and logs each send as an interactions row.
+
+From /dashboard/undervalued, provide a one-click action “Notify matching leads” for a property:
+
+Find contacts whose preferences match locality + budget.
+
+Create and send a mini-campaign with details/link of that property.
+
+6. WhatsApp Integration (Assistant & Sharing)
+Assume use of WhatsApp Cloud API later; for now, structure the backend:
+
+Endpoint /whatsapp/webhook to receive inbound messages (use a sample JSON schema).
+
+Parse text for locality/budget/type keywords.
+
+Search properties for active matching listings.
+
+Prepare a reply text (even if just printed/logged as a stub) containing 2–3 best matches with links.
+
+Log each message as an interactions row, and create/update contacts + leads based on phone number.
+
+Outbound sending: create a helper function send_whatsapp_message(phone, text) that is currently a stub but clearly separated, so real WhatsApp API calls can be inserted later.
+
+On public listing and blog pages, add “Share via WhatsApp” button using standard WhatsApp share URL with prefilled message + link.
+
+7. Social Media Hub (Connect & Post)
+Tables:
+
+social_accounts
+
+id, platform (x, facebook, instagram, linkedin, youtube), handle, access_token, refresh_token, token_expires_at, metadata_json
+
+social_posts
+
+id, platform, content_text, media_url, created_at, posted_at, status, error_message
+
+Routes:
+
+/auth/<platform> and /auth/<platform>/callback – OAuth skeletons for X, Facebook/Instagram (Meta), LinkedIn, YouTube (use env vars for client IDs/secrets).
+
+/post/<platform> – post a message + optional media using stored token (can be stubbed).
+
+/post/all – send the same content to all connected platforms, adapting to platform limits.
+
+UI:
+
+/dashboard/social page:
+
+Show which platforms are connected (even if stubbed).
+
+Simple form to compose a post and choose target platforms, calling backend posting routes.
+
+8. Behaviour Tracking & Heatmaps
+Add a “Settings” mechanism where I can paste a JS snippet (e.g., Hotjar/Clarity).
+
+Inject this snippet into the main HTML layout for public pages.
+
+events table:
+
+id, session_id, event_type (page_view, form_submit, click_cta, etc.), metadata_json, created_at
+
+Provide a small JS snippet that posts events to /events/track, which stores rows in events.
+
+9. SEO-Friendly Public Structure
+Use clean URLs for public guidance pages, e.g.:
+
+/locality/wardha-road
+
+/locality/mihan-investment
+
+/guide/nagpur-plot-buying-rules
+
+Pages should use semantic HTML (H1/H2), meta title/description, and list their sources clearly with outbound links (for scraped content).
+
+Do not copy long text verbatim; show short summaries and link to the original.
+
+10. Auth & Admin
+Single admin user login (username/password, hashed) for all /dashboard/* routes and manual triggers.
+
+Public site (property search, info pages) remains open; dashboards and settings require login.
+
+11. Deliverables
+Backend code (Flask/FastAPI routes, models, services).
+
+Frontend templates/pages (HTML/JS or React).
+
+requirements.txt with dependencies.
+
+A short README explaining:
+
+How to run on Replit.
+
+Which environment variables to set (DB connection if Postgres later, SMTP, Telegram, Slack, LLM, WhatsApp, social platforms).
+
+How to configure and schedule the daily automation/job on Replit.
+
+Prioritise clean structure and clear separation of concerns. Where you stub external APIs, add TODO comments so real API calls can be dropped in without changing overall architecture.
+

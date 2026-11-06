@@ -1,0 +1,42 @@
+You are enhancing the NagpurLand property detail page (/property/[id]) with 4 new strategic features.
+
+Do NOT change existing layout, buttons, or structure. Only ADD new sections in these exact locations:
+
+FEATURE 1: "Doctor's Property Audit" 
+Location: After "Legal Status" section, before "Upcoming Infrastructure"
+Components:
+- Card with 3 rows: Risk Flag (green/yellow/red text), Opportunity Flag (green tag), Best For (tag: "End User"/"Investor"/"NRI"/"Rental Investor")
+- Generate flags using logic: Risk = check TP Scheme status; Opportunity = IF price < area avg -20% THEN "Undervalued" ELSE IF yield > avg THEN "High Rental" ELSE "Standard"; Best For = from user's buyer type or default "Investor"
+- CTA Button: "Get Full Audit (Paid)" → /insights/property-audit?id=[propertyId]
+
+FEATURE 2: "Compare Similar Properties"
+Location: Right sidebar below "Ask an Expert" button
+Content: 
+- Title: "See Similar Properties"
+- Text: "See how this [Type] in [Locality] stacks against others in your budget."
+- Button: "Compare" → /find-properties?type=Plot&locality=Besa&budget=45L&compare=[propertyId]
+
+FEATURE 3: "Weekly Nagpur Insights Newsletter"
+Location: Below "Upcoming Infrastructure" section, before footer
+Content:
+- Title: "Weekly Nagpur Insights + Deals"
+- Subtext: "Get locality trends, deal alerts, and strategy tips."
+- Email input field + Locality dropdown (default to current locality)
+- Button: "Subscribe Free"
+- On submit: POST to /api/newsletter-subscribe with { email, locality, propertyId }
+
+FEATURE 4: "Your Shortlist Insights"
+Location: Right sidebar above "Schedule Site Visit" button
+Content:
+- Text: "You've shortlisted [count] properties. See patterns?"
+- Button: "View My Insights" → /dashboard/shortlist-insights
+- Show only if count > 1
+
+Implementation Rules:
+- Create utility: generatePropertyAudit(property) returning { riskFlag, opportunityFlag, bestFor }
+- Use existing property data only; no new API calls
+- Match current Tailwind styling (dark sidebar, blue/green buttons, white cards)
+- Keep all existing buttons and sections unchanged
+- Output updated component code for /pages/property/[id].js with new card components
+
+Do not talk about yourself as an AI. Only output the component code.

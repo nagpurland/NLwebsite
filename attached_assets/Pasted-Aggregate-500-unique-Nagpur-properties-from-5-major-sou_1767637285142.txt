@@ -1,0 +1,457 @@
+Aggregate 500+ unique Nagpur properties from 5 major sources (99acres, MagicBricks, Housing.com, IndiaProperty.com, Local Builders) + build seller intelligence database (250+ sellers across 3 tiers).
+
+Why Chunk 4 First: Property inventory is your platform's basic currency. With 500+ aggregated properties, you have proof-of-concept to approach sellers in Chunk 7 with: "We have 500+ properties and 1000+ buyer leads—list with us to reach them all."
+
+Strategic Timeline: 6-8 weeks to complete
+
+Expected Outcome:
+
+✅ 500+ unique properties on platform
+
+✅ 250+ sellers identified and profiled
+
+✅ 50 Tier 1 sellers (high-volume) identified for Chunk 7 outreach
+
+✅ Admin dashboard tracking all metrics
+
+✅ Daily automated scraping jobs running
+
+✅ Properties seamlessly integrated into Find Properties page
+
+PART 1: DATABASE SCHEMA - CREATE THESE 3 TABLES
+TABLE 1: properties_aggregated
+Purpose: Store all scraped properties with complete data
+
+Schema:
+
+text
+property_id (UUID, PRIMARY KEY)
+title (VARCHAR 255) - "Godrej Orchard Estate, Besa"
+description (TEXT) - Full property details from portal
+location_latitude (DECIMAL 10,8)
+location_longitude (DECIMAL 10,8)
+area_name (VARCHAR 100) - "Besa", "MIHAN", "Wardha Road", etc.
+price (BIGINT) - ₹45,000,000 (in rupees)
+price_per_sqft (INTEGER) - ₹3,000
+area_size (INTEGER) - in sq.ft
+property_type (VARCHAR 50) - "Plot", "Apartment", "Villa", "Commercial"
+facing_direction (VARCHAR 20) - "North", "South", "East", "West"
+
+legal_status (JSON) - {
+  "na_verified": true/false,
+  "title_clear": true/false,
+  "tp_scheme": "verified/check/unclear",
+  "possession": "immediate/3months/6months"
+}
+
+amenities (JSON ARRAY) - ["water", "electricity", "road_access", "gym", "parking"]
+contact_seller_name (VARCHAR 100)
+contact_seller_phone (VARCHAR 20)
+contact_seller_email (VARCHAR 100)
+contact_seller_whatsapp (VARCHAR 20)
+seller_company (VARCHAR 150)
+seller_id (UUID, FK to seller_profiles table)
+
+source_portals (JSON ARRAY) - ["99acres", "MagicBricks", "Housing.com"]
+original_urls (JSON ARRAY) - [
+  "https://99acres.com/property/...",
+  "https://magicbricks.com/property/..."
+]
+image_urls (JSON ARRAY) - ["https://cdn.../image1.jpg", ...]
+quality_score (INTEGER 0-10)
+is_verified (BOOLEAN) - Seller confirmed?
+last_updated (TIMESTAMP)
+created_at (TIMESTAMP)
+notes (TEXT)
+TABLE 2: seller_profiles
+Purpose: Track identified sellers, builders, agents for Chunk 7 outreach
+
+Schema:
+
+text
+seller_id (UUID, PRIMARY KEY)
+name (VARCHAR 150) - Seller/builder/agent name
+company_name (VARCHAR 150)
+phone (VARCHAR 20) - Primary contact
+email (VARCHAR 100)
+whatsapp (VARCHAR 20)
+
+num_listings_total (INTEGER) - Total properties across all platforms
+num_listings_99acres (INTEGER)
+num_listings_magicbricks (INTEGER)
+num_listings_housing (INTEGER)
+num_listings_others (INTEGER)
+
+price_range_min (BIGINT)
+price_range_max (BIGINT)
+price_range_avg (BIGINT)
+
+property_type_preference (JSON ARRAY) - ["Plot", "Apartment", "Villa"]
+area_preference (JSON ARRAY) - ["Besa", "MIHAN", "South Nagpur"]
+average_property_size (INTEGER)
+
+last_listing_date (DATE)
+first_listing_date (DATE)
+listing_frequency (STRING) - "daily", "weekly", "monthly", "sporadic"
+
+seller_tier (VARCHAR 20) - "Tier 1" (20+ props), "Tier 2" (5-20), "Tier 3" (1-4)
+contact_status (VARCHAR 50) - "not_contacted", "contacted", "interested", "signed_up", "declined"
+next_outreach_date (DATE)
+
+notes (TEXT) - Manual observations
+social_media_links (JSON) - {facebook: "url", instagram: "url"}
+
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+TABLE 3: scraping_logs
+Purpose: Monitor daily scraping health and performance
+
+Schema:
+
+text
+log_id (UUID, PRIMARY KEY)
+portal_name (VARCHAR 50) - "99acres", "MagicBricks", "Housing.com", etc.
+scrape_start_time (TIMESTAMP)
+scrape_end_time (TIMESTAMP)
+properties_found (INTEGER) - Total on portal
+properties_new (INTEGER) - Added to our database
+properties_updated (INTEGER) - Price/status changes
+properties_removed (INTEGER) - Delisted
+properties_duplicates (INTEGER) - Merged duplicates
+
+error_count (INTEGER)
+error_messages (TEXT)
+success_status (VARCHAR 50) - "success", "partial_success", "failed"
+
+execution_time_minutes (INTEGER)
+created_at (TIMESTAMP)
+PART 2: DATA SOURCES - 5 PORTALS + EXTRACTION POINTS
+SOURCE 1: 99acres.com (~2000 Nagpur properties)
+URL to scrape:
+
+text
+https://www.99acres.com/search/property/buy/nagpur
+Data extraction points:
+
+Property title (from listing card)
+
+Price (₹ in rupees)
+
+Area size (sq.ft)
+
+Price per sqft (if shown, else calculate)
+
+Locality/area name
+
+Property type (Plot, Apartment, etc.)
+
+Contact name (seller/agent)
+
+Contact phone (may be masked, extract when visible)
+
+Description (full text)
+
+Images (all photos available)
+
+URL (original 99acres listing link)
+
+Legal status indicators (if shown)
+
+Amenities (from listing details)
+
+SOURCE 2: MagicBricks.com (~1500 Nagpur properties)
+URL to scrape:
+
+text
+https://www.magicbricks.com/property-for-sale/nagpur
+Data extraction: Same as 99acres (30% unique properties, 70% overlap)
+
+SOURCE 3: Housing.com (~800 Nagpur properties)
+URL to scrape:
+
+text
+https://housing.com/buy/property-in-nagpur
+Data extraction: Same as 99acres (50% unique, mostly developer listings)
+
+SOURCE 4: IndiaProperty.com (~200 government properties)
+URL to scrape:
+
+text
+https://www.indiaproperty.com/nagpur
+Special focus: Government plots, CIDCO properties, auction properties
+
+SOURCE 5: Local Builders (Manual - 20-30 builders)
+Top Nagpur Builders (examples):
+
+Godrej Properties (www.godrej.com)
+
+Purvanchal Group (www.purvanchal.com)
+
+Ajmera Group (www.ajmerarealty.com)
+
+Sukhwani Developers (www.sukhwani.com)
+
+Brigade Group (www.brigade.in)
+
+[Add more as research progresses]
+
+Manual extraction: Quarterly review of builder projects + direct seller contact
+
+PART 3: 25+ DATA POINTS TO EXTRACT PER PROPERTY
+Core Information (Always):
+
+Property title
+
+Full description
+
+Property type
+
+Area size (sq.ft)
+
+Price (₹)
+
+Price per sq.ft (calculate if needed)
+
+Location (Always):
+7. Locality/area name
+8. Sector/ward (if available)
+9. Near landmark (e.g., "2km from airport")
+10. Latitude, Longitude (area-based if exact unavailable)
+
+Legal & Status (When available):
+11. Title clear (Yes/No/Verified)
+12. NA verified (Yes/No)
+13. TP scheme status
+14. Possession status (Immediate/3 months/6 months)
+15. Facing direction
+
+Amenities & Features (When available):
+16. Water supply
+17. Electricity connection
+18. Road access
+19. Gym
+20. Parking
+21. Security
+22. Garden/open space
+23. Swimming pool
+24. Clubhouse
+
+Contact Information (Critical for Chunk 7):
+25. Seller/agent name
+26. Phone number (primary contact)
+27. Email address
+28. WhatsApp number
+29. Company name
+30. Social media links
+
+Source & Attribution:
+31. Portal (99acres/MagicBricks/Housing.com)
+32. Original listing URL
+33. Listed date
+34. Last updated date
+
+Media:
+35. Image URLs (array of 5+ photos)
+36. Image count
+37. Virtual tour link (if available)
+
+PART 4: SCRAPING IMPLEMENTATION - 3 METHODS
+METHOD A: API-BASED (Preferred if available)
+Why: Legal, structured data, no server overload concerns
+
+Steps:
+
+Contact 99acres, Housing.com, MagicBricks for API/data feed access
+
+Apply as data partner or affiliate
+
+Request API documentation
+
+Integrate API calls into your backend
+
+Get structured JSON response, parse and store
+
+Advantage: Clean, reliable, approved by portal
+
+METHOD B: ETHICAL WEB SCRAPING (If API unavailable)
+Technology Stack:
+
+Language: Python 3.8+
+
+Libraries:
+
+BeautifulSoup4 (HTML parsing)
+
+Selenium (for JavaScript-heavy sites)
+
+Requests (HTTP requests)
+
+APScheduler or Celery (scheduling daily jobs)
+
+Scraping Rules (MUST FOLLOW):
+
+text
+✅ DO THIS:
+- Respect robots.txt rules
+- Add 2-3 second delay between requests
+- Identify yourself in User-Agent header
+- Scrape during off-peak hours (2-4 AM)
+- Cache data (never re-scrape same page)
+- Implement error handling & retry logic
+- Log all scraping attempts
+- Stop if portal owner requests
+
+❌ DON'T DO THIS:
+- Scrape during peak hours
+- Rapid-fire requests (DDoS-like)
+- Use rotating proxies to hide identity
+- Bypass robots.txt
+- Scrape personal data (PII)
+- Overload their servers
+Implementation Steps:
+
+Analyze each portal's HTML structure (use browser DevTools)
+
+Identify CSS selectors for:
+
+Property cards
+
+Property titles
+
+Prices
+
+Contact info
+
+Images
+
+Write parser for each portal (separate function)
+
+Implement retry logic (if page fails, retry after delay)
+
+Schedule daily job (2-4 AM using APScheduler/Cron)
+
+Log results to scraping_logs table
+
+Error handling (skip failed pages, log errors)
+
+Expected Timeline:
+
+Per-portal scraper development: 2-3 days each
+
+Testing & optimization: 1 week
+
+Production deployment: 1 day
+
+METHOD C: MANUAL CURATION (High-Value Properties)
+Focus: Top 20-30 Nagpur builders
+
+Process:
+
+Identify major builders in Nagpur
+
+Visit their websites quarterly
+
+Extract project details manually
+
+Document direct seller/project contact
+
+Mark as "Direct Builder Listing" (premium)
+
+Take screenshots for quality assurance
+
+Time Investment: 2-3 hours/week
+Value: Direct access to high-volume sellers (Tier 1 targets for Chunk 7)
+
+PART 5: DEDUPLICATION & DATA CLEANING
+The Problem: Same Property, Multiple Portals
+Example:
+
+text
+Portal 1 (99acres): "Godrej Orchard Estate, Plot 1500sqft, Besa, ₹45L"
+Portal 2 (MagicBricks): "Godrej Orchard Estate, 1500sqft Plot, Besa, ₹45L"
+Portal 3 (Housing.com): "Godrej Orchard Estate Besa ₹45L Plot"
+All 3 = SAME PROPERTY, but data variations
+
+The Solution: Deduplication Algorithm
+Match Criteria:
+
+text
+IF (area_name == same) AND 
+   (price within ±10% tolerance) AND
+   (area_size within ±10% tolerance):
+   
+   → GROUP AS SAME PROPERTY
+Merge Logic:
+
+text
+1. Keep lowest asking price (best deal for buyer)
+2. Combine all images from all sources (3 sources = 15+ photos)
+3. Track all sources in "source_portals" array
+4. Store original URLs for each source
+5. Create 1 unified property record
+6. Link to all 3 original listings
+Expected Results:
+
+Raw scraped: ~2500 listings
+
+After deduplication: ~500 unique properties
+
+Average per property: 3-4 source listings
+
+PART 6: QUALITY SCORING (0-10 Scale)
+Scoring rubric:
+
+10/10 - Premium Quality:
+
+✅ Complete data (all fields filled)
+
+✅ 5+ high-quality photos
+
+✅ Verified price (confirmed by seller)
+
+✅ Legal status verified
+
+✅ Recent listing (<7 days old)
+
+7-9/10 - Good Quality:
+
+✅ Complete data
+
+✅ 3-4 photos
+
+✅ Price unverified but reasonable
+
+✅ Some legal status info
+
+✅ Recent (< 30 days)
+
+5-6/10 - Moderate Quality:
+
+✅ Partial data (some fields missing)
+
+✅ 2-3 photos
+
+✅ Price estimate only
+
+✅ Minimal legal info
+
+✅ Older listing (30-90 days)
+
+<5/10 - Low Quality (Flag for Verification):
+
+❌ Incomplete data
+
+❌ 0-1 photos
+
+❌ Estimated price only
+
+❌ No legal info
+
+❌ Very old (>90 days)
+
+Usage on Platform:
+
+text
+For Buyers:
+- Display high-quality properties first (sort by quality_score DESC)
+- Flag low-quality listings with "Verify details" warning

@@ -1,0 +1,193 @@
+Add Missing Features to My Real Estate Web App (No Rewrites)
+ROLE
+
+You are an expert full-stack web auditor + CRO specialist.
+
+You are working on my existing Nagpur (India) real estate web application.
+
+Your job is to ADD ONLY THE REMAINING / MISSING FEATURES.
+⚠️ Do NOT rewrite, refactor, or replace anything that already works.
+
+NON-NEGOTIABLE RULES
+
+❌ Do NOT rewrite existing components
+
+❌ Do NOT remove working features
+
+❌ Do NOT generate full code blocks
+
+❌ Do NOT redesign UI that already exists
+
+✅ ONLY add missing or weak features
+
+✅ Make incremental additions only
+
+✅ Follow mobile-first approach
+
+✅ Maintain Nagpur-specific context
+
+✅ Focus on conversion optimization (2.2%+)
+
+STEP 1: ANALYZE BEFORE DOING ANYTHING
+
+Scan the entire project and list:
+
+A. What already exists (✅)
+B. What exists but is weak (⚠️)
+C. What is missing (❌)
+
+Do NOT suggest improvements yet.
+Only analysis.
+
+STEP 2: ADD ONLY MISSING / WEAK FEATURES FROM BELOW
+🔒 TRUST & LEGAL (HIGH PRIORITY)
+
+Add only if missing:
+
+Legal verification badge (Verified / In Review / Issue)
+
+RERA registration number with verification mark
+
+Document verification progress indicator
+
+“Why This Property Is Safe” expandable section
+
+Downloadable legal checklist/report
+
+📈 CONVERSION OPTIMIZATION
+
+Add only if missing:
+
+Reduce lead forms to 3 fields initially
+
+WhatsApp floating button
+
+Click-to-call on mobile
+
+Multi-step inquiry form
+
+Exit-intent popup with value offer
+
+Social proof near CTAs
+
+Real urgency indicators (local & genuine)
+
+📊 DATA VISUALIZATION
+
+Add only if missing:
+
+Locality price trend charts
+
+Property comparison (2–3 properties)
+
+Amenities score visualization
+
+Investment potential indicator
+
+EMI calculator on property page
+
+📱 MOBILE-FIRST UX (MANDATORY)
+
+Add only if missing:
+
+Sticky bottom action bar (Call / WhatsApp / Enquire)
+
+Thumb-zone CTA placement
+
+Touch targets ≥ 48x48 px
+
+Lazy-loaded mobile images
+
+Mobile-only WhatsApp FAB
+
+📍 NAGPUR LOCALIZATION
+
+Add only if missing:
+
+Hindi / Marathi language toggle
+
+Area guides (Dharampeth, Sadar, Sitabuldi)
+
+Metro connectivity indicators
+
+Nearby schools, hospitals, markets
+
+Expressway & infrastructure impact info
+
+🔎 SEARCH & DISCOVERY
+
+Add only if missing:
+
+Natural language search
+
+Recently viewed properties
+
+Wishlist / saved properties
+
+Filters: Legal status, Possession date, Vaastu
+
+Auto-suggest search
+
+⚡ PERFORMANCE & UX
+
+Add only if missing:
+
+Lazy loading images
+
+Skeleton loaders
+
+Basic loading indicators
+
+Error handling messages
+
+STEP 3: IMPLEMENTATION FORMAT (MANDATORY)
+
+For each missing feature, respond in this format ONLY:
+
+Feature Name:
+
+Current Status:
+
+Why This Matters:
+
+What to Add (no code):
+
+Where to Add (exact page/component):
+
+Expected Impact:
+
+Integration Hint (file or component reference only):
+
+STEP 4: FINAL OUTPUT STRUCTURE
+1. Summary
+
+Current app readiness score (X/10)
+
+Missing critical features count
+
+Estimated current conversion rate
+
+Expected conversion after additions
+
+2. Quick Wins (Top 5 easiest additions)
+3. Week-wise Implementation Plan
+
+Week 1 (Critical):
+
+ Feature 1
+
+ Feature 2
+
+Week 2–3 (High Priority):
+
+ Feature 3–7
+
+Month 1 (Medium):
+
+ Feature 8–15
+
+FINAL WARNING
+
+If a feature already exists, DO NOT TOUCH IT.
+Only add what is missing or clearly weak.
+No full code. No rewrites. No assumptions.

@@ -1,0 +1,207 @@
+import React, { useState } from 'react';
+import TestingDashboard from './testing/TestingDashboard';
+import AnalyticsDashboard from './analytics/AnalyticsDashboard';
+import MetricsDashboard from './metrics/MetricsDashboard';
+import RoadmapDashboard from './roadmap/RoadmapDashboard';
+
+const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    <div style={styles.mainContainer}>
+      <header style={styles.header}>
+        <h1>🚀 4-Step System - Implementation Hub</h1>
+        <p>Testing • Analytics • Metrics • Roadmap</p>
+      </header>
+
+      <nav style={styles.nav}>
+        {[
+          { id: 'overview', label: '📋 Overview' },
+          { id: 'testing', label: '🧪 Testing' },
+          { id: 'analytics', label: '📊 Analytics' },
+          { id: 'metrics', label: '🎯 Metrics' },
+          { id: 'roadmap', label: '📅 Roadmap' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            style={{
+              ...styles.navButton,
+              backgroundColor: activeTab === tab.id ? '#2180a8' : 'transparent',
+              color: activeTab === tab.id ? 'white' : 'black'
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+
+      <main style={styles.content}>
+        {activeTab === 'overview' && <OverviewTab />}
+        {activeTab === 'testing' && <TestingDashboard />}
+        {activeTab === 'analytics' && <AnalyticsDashboard />}
+        {activeTab === 'metrics' && <MetricsDashboard />}
+        {activeTab === 'roadmap' && <RoadmapDashboard />}
+      </main>
+    </div>
+  );
+};
+
+// Overview Tab
+const OverviewTab = () => (
+  <div style={styles.overviewContent}>
+    <section style={styles.overviewSection}>
+      <h2>🎯 What This Dashboard Does</h2>
+      <div style={styles.gridContent}>
+        <div style={styles.featureCard}>
+          <h3>🧪 Testing</h3>
+          <p>Run user testing sessions with different scenarios. Track user behavior, navigation patterns, and answer key questions about usability.</p>
+          <ul>
+            <li>3 pre-built test scenarios</li>
+            <li>Event tracking</li>
+            <li>Session reports</li>
+          </ul>
+        </div>
+
+        <div style={styles.featureCard}>
+          <h3>📊 Analytics</h3>
+          <p>Monitor user behavior in real-time. Track page views, conversion funnels, click patterns, and identify drop-off points.</p>
+          <ul>
+            <li>Page view tracking</li>
+            <li>Conversion funnel analysis</li>
+            <li>Click analysis</li>
+            <li>Drop-off identification</li>
+          </ul>
+        </div>
+
+        <div style={styles.featureCard}>
+          <h3>🎯 Success Metrics</h3>
+          <p>Compare actual performance against targets. Track 5 key success metrics with baseline, current, and target values.</p>
+          <ul>
+            <li>User progression tracking</li>
+            <li>Engagement measurement</li>
+            <li>Navigation clarity scoring</li>
+            <li>CTA performance analysis</li>
+            <li>Drop-off reduction tracking</li>
+          </ul>
+        </div>
+
+        <div style={styles.featureCard}>
+          <h3>📅 Roadmap</h3>
+          <p>4-week implementation plan with task tracking, time estimates, and team assignments.</p>
+          <ul>
+            <li>Phase-based organization</li>
+            <li>Task status tracking</li>
+            <li>Hour tracking</li>
+            <li>Blocker identification</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section style={styles.overviewSection}>
+      <h2>📊 Quick Start Guide</h2>
+      <ol style={styles.guideList}>
+        <li><strong>Set Up Testing (Week 1):</strong> Go to Testing tab, select a scenario, and run your first user test</li>
+        <li><strong>Start Analytics (Week 1):</strong> Integrate tracking code into your site, then generate first report</li>
+        <li><strong>Track Metrics (Week 2):</strong> Input baseline data, then update weekly with actual numbers</li>
+        <li><strong>Follow Roadmap (Week 1-4):</strong> Use roadmap to track implementation progress</li>
+        <li><strong>Iterate (Ongoing):</strong> Use insights from testing and analytics to improve UX</li>
+      </ol>
+    </section>
+
+    <section style={styles.overviewSection}>
+      <h2>🔄 Weekly Review Cycle</h2>
+      <div style={styles.cycleBox}>
+        <div style={styles.cycleStep}>
+          <h4>Monday</h4>
+          <p>Review last week's metrics</p>
+        </div>
+        <div style={styles.cycleStep}>
+          <h4>Tuesday-Thursday</h4>
+          <p>Run testing sessions & collect feedback</p>
+        </div>
+        <div style={styles.cycleStep}>
+          <h4>Friday</h4>
+          <p>Analyze data, update metrics, plan next week</p>
+        </div>
+      </div>
+    </section>
+  </div>
+);
+
+const styles = {
+  mainContainer: {
+    minHeight: '100vh',
+    backgroundColor: '#f5f5f5',
+    fontFamily: 'Arial, sans-serif'
+  },
+  header: {
+    backgroundColor: '#2180a8',
+    color: 'white',
+    padding: '30px 20px',
+    textAlign: 'center'
+  },
+  nav: {
+    display: 'flex',
+    gap: '10px',
+    padding: '20px',
+    backgroundColor: 'white',
+    borderBottom: '1px solid #ddd',
+    flexWrap: 'wrap'
+  },
+  navButton: {
+    padding: '10px 15px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    transition: 'all 0.2s'
+  },
+  content: {
+    padding: '20px',
+    maxWidth: '1400px',
+    margin: '0 auto'
+  },
+  overviewContent: {
+    backgroundColor: 'white',
+    borderRadius: '8px',
+    padding: '30px'
+  },
+  overviewSection: {
+    marginBottom: '40px'
+  },
+  gridContent: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '20px',
+    marginTop: '20px'
+  },
+  featureCard: {
+    backgroundColor: '#f9f9f9',
+    padding: '20px',
+    borderRadius: '8px',
+    border: '1px solid #ddd'
+  },
+  guideList: {
+    backgroundColor: '#f9f9f9',
+    padding: '20px 40px',
+    borderRadius: '8px',
+    lineHeight: '2'
+  },
+  cycleBox: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '15px',
+    marginTop: '15px'
+  },
+  cycleStep: {
+    backgroundColor: '#e8f4f8',
+    padding: '15px',
+    borderRadius: '6px',
+    textAlign: 'center',
+    borderLeft: '4px solid #2180a8'
+  }
+};
+
+export default Dashboard;

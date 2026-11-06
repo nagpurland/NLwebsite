@@ -1,0 +1,414 @@
+# 🎯 FINAL COMPREHENSIVE PROMPT: PREMIUM VERIFICATION SERVICE PAGE
+
+***
+
+## **PAGE OVERVIEW**
+
+**Page Name:** Premium Verification Service  
+**URL:** `/premium-verification`  
+**Purpose:** Show users exactly what they get when they choose professional verification, how the process works, pricing, and how to book  
+**CTA Entry Point:** From Step 3 Safety Check page button: "Get Premium Verification Service"
+
+***
+
+## **COMPLETE PAGE CONTENT STRUCTURE**
+
+***
+
+### **SECTION 1: HERO**
+
+```
+HEADING (H1):
+"Professional Plot Verification Service"
+
+SUBHEADING (H2):
+"Let Our Legal Team Do the Deep Verification. You Stay in Control."
+
+DESCRIPTION (Body text):
+"Already ran the 12-point check yourself?
+Found some yellow flags?
+Or just want professional legal verification before committing?
+
+We'll handle the detailed verification work for you.
+You get a written legal opinion + complete risk assessment.
+Delivered within 7-10 business days.
+₹5,000-8,000 depending on plot complexity.
+
+Still prefer to verify yourself? [← Back to 12-Point Check]"
+
+BUTTON: [GET VERIFICATION QUOTE] → Link to booking form (Section 8)
+```
+
+***
+
+### **SECTION 2: WHAT YOU GET (Detailed Breakdown)**
+
+```
+HEADING (H2):
+"Here's Exactly What You'll Get"
+
+SUBHEADING:
+"8 Complete Verifications + Professional Legal Opinion"
+
+[ITEM 1] COMPLETE TITLE AUDIT
+├─ Scope: 30-year ownership history verification
+├─ Our Method: Physical search at revenue office + online registry
+├─ Deliverable: Chronological document showing all owners & transfers
+├─ What It Shows: Who owned the plot, when, any inheritance/gifts/sales
+├─ Time: 2-3 business days
+├─ Status in Dashboard: "Title Audit [████████░░] 80%"
+
+[ITEM 2] LITIGATION FULL SCAN
+├─ Scope: All courts (district + high court + supreme court)
+├─ Our Method: Online database + physical court records check
+├─ Deliverable: Report listing all cases (if any exist)
+├─ What It Shows: If anyone is suing about this plot
+├─ Time: 2-3 business days (court records are manual)
+├─ Status in Dashboard: "Litigation Check [██████░░░░] 60%"
+
+[ITEM 3] NA/TP STATUS VERIFICATION
+├─ Scope: Non-Agricultural certificate + Town Planning scheme check
+├─ Our Method: Revenue department verification + official records
+├─ Deliverable: Certificate copy or official status letter
+├─ What It Shows: Plot is legally approved for residential/commercial use
+├─ Time: 1-2 business days
+├─ Status in Dashboard: "Legal Status [████████████] 100%"
+
+[ITEM 4] ENCUMBRANCE CHECK
+├─ Scope: Mortgage, bank lien, or any claims on the plot
+├─ Our Method: Bank records search + official registry check
+├─ Deliverable: Clear encumbrance certificate
+├─ What It Shows: No one else has rights/claims to your plot
+├─ Time: 2 business days
+├─ Status in Dashboard: "Encumbrance [████████████] 100%"
+
+[ITEM 5] POSSESSION VERIFICATION
+├─ Scope: Can the seller actually give you possession?
+├─ Our Method: Site visit + document verification + seller meeting
+├─ Deliverable: Physical inspection report + possession status confirmation
+├─ What It Shows: Seller can legally hand over the plot to you
+├─ Time: 1-2 business days (includes site visit)
+├─ Status in Dashboard: "Physical Verification [█░░░░░░░░░] 10%"
+
+[ITEM 6] MARKET PRICE VALIDATION
+├─ Scope: Is the ₹X price fair compared to market rates?
+├─ Our Method: Compare against 50+ recent sales in the same area
+├─ Deliverable: Price benchmark report with fair market range
+├─ What It Shows: Are you overpaying? Getting a good deal? Fair price?
+├─ Time: 2 business days
+├─ Status in Dashboard: "Price Analysis [░░░░░░░░░░] 0%"
+
+[ITEM 7] RISK ASSESSMENT & LEGAL OPINION
+├─ Scope: Professional legal analysis of all findings
+├─ Our Method: Our lawyer reviews all documents + identifies risks
+├─ Deliverable: Written legal opinion (1-2 pages)
+├─ What It Shows: Final verdict - SAFE / CAUTION / DON'T BUY
+├─ Time: 1 business day
+├─ Status in Dashboard: "Legal Review [░░░░░░░░░░] 0%"
+
+[ITEM 8] FINAL VERIFICATION REPORT
+├─ Format: PDF report (10-15 pages)
+├─ Delivered: Via email + downloadable from dashboard
+├─ Contents:
+│  ├─ Executive Summary (RED/YELLOW/GREEN flag)
+│  ├─ Title Audit Findings
+│  ├─ Litigation Search Results
+│  ├─ NA/TP Verification Status
+│  ├─ Encumbrance Certificate
+│  ├─ Possession Status
+│  ├─ Market Price Validation
+│  ├─ Legal Opinion by Our Lawyer
+│  ├─ Recommendations (Proceed / Caution / Don't Buy)
+│  └─ Next Steps (What to do now)
+├─ Use: Share with your personal lawyer, bank, or keep for records
+└─ Time: Ready on Day 7-10
+```
+
+***
+
+### **SECTION 3: OUR VERIFICATION PROCESS (Step-by-Step)**
+
+```
+HEADING (H2):
+"Our Verification Process: Complete Transparency"
+
+SUBHEADING:
+"8 Steps Over 7-10 Business Days - Real-time tracking included"
+
+───────────────────────────────────────────
+
+[STEP 1] YOU SUBMIT PLOT DETAILS → DAY 0-1
+
+What You Do:
+├─ Fill online form with:
+│  ├─ Full plot address (with landmarks)
+│  ├─ Plot size (area in sqft)
+│  ├─ Survey number or property ID
+│  ├─ Seller name + contact
+│  └─ Price offered to you
+├─ Time required: 5 minutes
+
+What Happens Next:
+├─ You get email confirmation
+├─ You receive unique tracking link + dashboard access
+├─ Our team reviews details & prepares work plan
+└─ Status update: You see "Verification Started" in dashboard
+
+───────────────────────────────────────────
+
+[STEP 2] RECORDS OFFICE VERIFICATION → DAY 2-3
+
+What We Do:
+├─ Our team visits Maharashtra Land Records office physically
+├─ Pull complete 30-year title history
+├─ Verify ownership changes (sales, gifts, inheritance)
+├─ Check for any government claims or encroachments
+├─ Photograph all original documents
+└─ Compile into title audit document
+
+Result You Get:
+├─ Title audit document
+├─ Copies of ownership chain
+└─ Identification of any title gaps
+
+Status in Dashboard:
+└─ "Title Audit [████████░░] 80%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 3] COURT RECORDS SEARCH → DAY 2-4
+
+What We Do:
+├─ Search district court (land disputes, boundary cases)
+├─ Search high court (inheritance, succession disputes)
+├─ Check property ID in all online databases
+├─ Contact court staff for manual record checks (if needed)
+└─ Compile complete litigation report
+
+Result You Get:
+├─ List of all court cases (if any)
+├─ Case details, status, verdict
+└─ Assessment of impact on your plot
+
+Status in Dashboard:
+└─ "Litigation Check [██████░░░░] 60%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 4] REVENUE DEPARTMENT CONFIRMATION → DAY 2-3
+
+What We Do:
+├─ Verify NA (Non-Agricultural) certificate status
+├─ Check TP (Town Planning) scheme compliance
+├─ Confirm plot zone (residential/commercial/industrial)
+├─ Verify FSI (Floor Space Index) limits
+└─ Get official confirmation letter from revenue office
+
+Result You Get:
+├─ NA certificate copy
+├─ Zone verification
+├─ FSI capacity details
+└─ Official confirmation letter
+
+Status in Dashboard:
+└─ "Legal Status [████████████] 100%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 5] BANK & MORTGAGE CHECK → DAY 3-4
+
+What We Do:
+├─ Search national mortgage registry (all banks)
+├─ Check if plot is pledged as collateral
+├─ Verify no liens or legal claims exist
+├─ Request encumbrance certificate from bank
+└─ Cross-verify with financial institutions
+
+Result You Get:
+├─ Clear encumbrance certificate
+├─ Confirmation of no mortgages
+└─ List of any claims (if they exist)
+
+Status in Dashboard:
+└─ "Encumbrance [████████████] 100%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 6] PHYSICAL SITE VERIFICATION → DAY 4-5
+
+What We Do:
+├─ Our team visits the plot physically
+├─ Verify plot exists & matches documents exactly
+├─ Check approach road condition & width
+├─ Verify utilities (water, electricity, sewage access)
+├─ Photograph plot from multiple angles
+├─ Meet seller & verify possession status
+├─ Speak with neighbors & verify no disputes
+└─ Document findings with photos + video (optional)
+
+Result You Get:
+├─ Physical inspection report
+├─ Site photographs
+├─ Neighbor verification notes
+└─ Possession status confirmation
+
+Status in Dashboard:
+└─ "Physical Verification [██████████░░] 85%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 7] MARKET PRICE ANALYSIS → DAY 5-6
+
+What We Do:
+├─ Collect data from 50+ recent sales in the same area
+├─ Compare your plot price against similar plots
+├─ Calculate fair market rate per sqft
+├─ Identify if you're overpaying/underpaying
+├─ Analyze seasonal trends in area
+└─ Compile price benchmark report
+
+Result You Get:
+├─ Fair market price range
+├─ Your plot vs market comparison
+├─ Price validation verdict
+└─ ROI projection (if applicable)
+
+Status in Dashboard:
+└─ "Price Analysis [███████████░] 90%" + Email notification
+
+───────────────────────────────────────────
+
+[STEP 8] LEGAL REVIEW & FINAL REPORT → DAY 6-8
+
+What We Do:
+├─ Our lawyer reviews ALL 7 verification findings
+├─ Identifies any legal risks or red flags
+├─ Assigns final risk rating (RED/YELLOW/GREEN)
+├─ Prepares written legal opinion
+├─ Compiles complete PDF report
+└─ Writes recommendations & next steps
+
+Result You Get:
+├─ Complete PDF report (10-15 pages)
+├─ Written legal opinion by our lawyer
+├─ Clear recommendation: PROCEED / CAUTION / DON'T BUY
+├─ Detailed next steps
+└─ Document ready to share with your lawyer/bank
+
+Status in Dashboard:
+└─ "Report Ready [████████████] 100%" + Download link + Email
+
+───────────────────────────────────────────
+
+TOTAL TIMELINE: 7-10 Business Days
+(Faster than traditional lawyers: 3-4 weeks)
+```
+
+***
+
+### **SECTION 4: PROCESS VISUALIZATION (Timeline)**
+
+```
+HEADING (H2):
+"Your Verification Journey: Visual Timeline"
+
+[VISUAL TIMELINE]
+
+DAY 1                   DAY 3                   DAY 5                   DAY 10
+│                       │                       │                       │
+├─ You Submit        ├─ Records Check      ├─ Site Visit          ├─ Report Ready
+│  Plot Details       │  Starts              │  Scheduled            │  for Download
+│                     │                      │                       │
+│  ✓ Confirmation  ├─ Court Search       ├─ Price Analysis      ├─ Email
+│    Email Sent      │  Initiated            │  Begins               │  Notification
+│                    │                      │                       │
+│  ✓ Dashboard    ├─ Revenue Dept       ├─ Seller Meeting      ├─ Dashboard
+│    Access          │  Verification        │                       │  Shows 100%
+│                    │                      ├─ Neighbor Checks     │
+│                    ├─ Email Update       │                       │
+│                    │  (Progress: 40%)    ├─ Photos Taken        │
+│                    │                      │                       │
+│                    │                      ├─ Email Update        │
+│                    │                      │  (Progress: 90%)      │
+
+[REAL-TIME TRACKING DASHBOARD]
+
+Status Breakdown:
+✓ Title Audit                [████████░░] 80% — COMPLETE
+✓ Litigation Check           [██████░░░░] 60% — IN PROGRESS
+✓ Legal Status Verification  [████████████] 100% — COMPLETE
+✓ Encumbrance Check          [████████████] 100% — COMPLETE
+⏳ Physical Verification      [█░░░░░░░░░] 10% — SCHEDULED
+⏳ Price Analysis             [░░░░░░░░░░] 0% — QUEUED
+⏳ Legal Review               [░░░░░░░░░░] 0% — QUEUED
+⏳ Report Generation          [░░░░░░░░░░] 0% — QUEUED
+
+Last Update: Today at 2:30 PM
+Next Update: Tomorrow by 6:00 PM
+```
+
+***
+
+### **SECTION 5: PRICING & PACKAGES**
+
+```
+HEADING (H2):
+"Transparent Pricing"
+
+───────────────────────────────────────────
+
+STANDARD VERIFICATION PACKAGE
+Price: ₹5,000
+
+Best For:
+├─ Clear, straightforward plots
+├─ Single owner
+├─ Recent transactions
+└─ Most buyers
+
+What's Included:
+✓ Title Audit (30-year history)
+✓ Litigation Search (all courts)
+✓ NA/TP Verification
+✓ Encumbrance Check
+✓ Physical Site Inspection
+✓ Price Validation (50+ comparisons)
+✓ Written Legal Opinion
+✓ Final PDF Report (10-15 pages)
+✓ Email Support (24-hour response)
+
+Timeline: 7-10 Business Days
+
+───────────────────────────────────────────
+
+COMPLEX VERIFICATION PACKAGE
+Price: ₹8,000
+
+Best For:
+├─ Multiple owners/co-owners
+├─ Recent inheritance/succession
+├─ Old or disputed title deeds
+├─ Pending court cases
+├─ Non-standard plots
+└─ Peace of mind
+
+What's Included (Everything in Standard +):
+✓ Extended Title Research (50+ year history)
+✓ Inheritance & Succession Verification
+✓ Detailed Court Case Analysis
+✓ Multiple Site Visits (2-3 visits)
+✓ Genealogy Verification (family tree)
+✓ Extended Legal Opinion
+✓ Lawyer Consultation (1 hour phone call)
+✓ Final PDF Report (15-20 pages)
+✓ Email Support (24-hour response)
+
+Timeline: 10-12 Business Days
+
+───────────────────────────────────────────
+
+PRICING FAQ:
+
+Q: Why ₹5,000-8,000? Traditional lawyers charge ₹15,000-25,000
+A: We're specialized in Nagpur land. We've optimized the process.
+   You pay for speed + expertise, not

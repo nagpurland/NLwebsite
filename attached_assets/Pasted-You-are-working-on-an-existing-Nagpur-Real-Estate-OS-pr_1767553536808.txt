@@ -1,0 +1,222 @@
+You are working on an existing Nagpur Real Estate OS project in Replit.
+
+Objective: Replace the current locality card metrics (Transit %, Social %, Green %) with empowerment-focused metrics (price trend + rental yield + legal flags + infra timeline).
+
+Current problem: The locality cards on /understand-nagpur and /public/localities show abstract stats that don't help buyers. Buyers need to see: "Can I make money here? Is it safe? What's coming?"
+
+WHAT NEEDS TO CHANGE
+Current locality card structure (to REMOVE):
+Transit %
+
+Social %
+
+Green %
+
+New locality card structure (to ADD/UPDATE):
+1. Locality name + positioning line
+
+Example: "MIHAN — Investor corridor with upcoming Metro Phase 2"
+
+Currently: Just shows "MIHAN"
+
+Action: Add a one-line positioning statement explaining why this area matters
+
+2. Price range (PSF) + trend explanation (IMPROVE)
+
+Current: "₹3,500 - ₹5,500 PSF" + "+15.2% YoY" (shown separately)
+
+New: Combine together with context explanation
+
+Example: "₹3,500–5,500 psf | +15.2% in 12 months (Metro Phase 2 news drove demand)"
+
+Make font larger, prominent
+
+3. Rental yield % (CRITICAL — currently MISSING on detail cards)
+
+Example: "📊 Rental yield: 4.2% annually"
+
+This is what investors use to compare localities
+
+Make it as prominent as price PSF (similar font size)
+
+Data: Calculate average annual rent ÷ average property price per locality
+
+4. Legal risk status badge (CRITICAL — currently MISSING)
+
+Green check (safe): "✅ No major legal flags found"
+
+Yellow warning (verify): "⚠️ Manual verification needed: [reason]"
+
+Examples: "⚠️ 3 recent NA disputes in area" OR "⚠️ Some plots under TP scheme review"
+
+Visual: Use color coding (green safe, yellow caution) + icon
+
+Data: Pull from rules_and_regulations table or dispute history; mark yellow if issues exist
+
+5. Infra timeline (IMPROVE current)
+
+Current: "Metro Phase 2" (too vague, no timeline)
+
+New: "🚧 Metro Phase 2: Expected 2027 (25% complete)"
+
+Or: "🚧 Ring Road connection: Under construction, 60% complete"
+
+Data: Pull from infra_events table; include event name + expected completion date + progress % if available
+
+6. Active property count (OPTIONAL but useful)
+
+Example: "📍 12 active plots available"
+
+Data: Count properties where status = "active" and locality = [locality_name]
+
+7. Explore button
+
+"EXPLORE [Locality]" button — KEEP as-is
+
+Function: Links to /find-properties?locality=[locality] (pre-filtered search)
+
+DESIRED CARD LAYOUT & VISUAL HIERARCHY
+text
+┌─────────────────────────────────────────┐
+│ MIHAN — Investor corridor, Metro P2     │  ← Locality name + positioning
+│                                          │
+│ ₹3,500–5,500 psf | +15.2% in 12 months  │  ← Price + trend (LARGE FONT)
+│ (Metro Phase 2 news drove demand)       │  ← Explanation line (smaller)
+│                                          │
+│ 📊 Rental yield: 4.2% annually          │  ← Rental yield (PROMINENT)
+│                                          │
+│ ✅ No major legal flags found           │  ← Legal status (GREEN or YELLOW)
+│                                          │
+│ 🚧 Metro Phase 2: Expected 2027 (25%)   │  ← Infra timeline
+│                                          │
+│ 📍 12 active plots available            │  ← Property count
+│                                          │
+│        [ EXPLORE MIHAN →  ]             │  ← Button
+└─────────────────────────────────────────┘
+Styling notes:
+
+Use icons (📊, ✅, ⚠️, 🚧, 📍) for quick visual scanning
+
+Legal status color: Green = safe, Yellow = verify (avoid red, which creates fear)
+
+Price + trend should be the largest text (most eye-catching)
+
+Rental yield should be second-largest (what investors care about)
+
+Card should have hover effect (subtle shadow or highlight)
+
+Ensure mobile responsive (stack vertically on small screens)
+
+DATA SOURCES & CALCULATIONS
+Pull data from your existing tables:
+
+Info	Source	Calculation
+Locality name	properties.locality	Group by locality
+Price PSF	properties.price_psf	Avg/median per locality
+Price trend %	properties.price_psf + properties.last_seen_at	Compare avg psf over last 12 months
+Trend explanation	daily_reports.key_stats_json or manual mapping	"Why did prices move?" (e.g., "Metro news", "Infra completion")
+Rental yield %	properties.rent ÷ properties.price_total	Annual rent ÷ avg price per locality
+Legal status	rules_and_regulations tags + dispute logs	Green if no issues; yellow if disputes exist
+Legal flag reason	Dispute details	Specific reason (e.g., "3 recent NA disputes")
+Infra updates	infra_events.title where locality_tag = [locality]	Most recent or upcoming event
+Infra completion %	infra_events.completion_percentage	From table or estimated
+Expected completion	infra_events.expected_completion_date	Year or date
+Active property count	COUNT(properties) where status = "active" and locality = [locality]	Simple count
+WHERE TO UPDATE
+Update the locality card component/display on these pages:
+
+Homepage / section "Understand the Market"
+
+The locality cards shown in the first section
+
+Currently shows 3 cards (MIHAN, Besa, Wardha Road)
+
+Update to show new metrics instead of Transit/Social/Green %
+
+/understand-nagpur page (Locality Explorer hub)
+
+Shows all major localities
+
+Same card format as homepage
+
+Update the same component so changes apply everywhere
+
+/public/localities page
+
+Currently labeled "NAGPUR LOCALITY INSIGHTS"
+
+Shows locality cards with district labels
+
+Update to use new card layout
+
+Note: Ensure all three places use the same reusable card component so you only update code once.
+
+TESTING CHECKLIST (after making changes)
+ Homepage: Navigate to / (root), scroll to "Understand the Market" section
+
+Verify each locality card shows: name + positioning, price + trend + explanation, rental yield, legal status, infra update, property count
+
+Verify NO Transit %, Social %, Green % (remove entirely)
+
+ Understand Nagpur page: Navigate to /understand-nagpur
+
+Verify Locality Explorer cards have same format
+
+Check consistency across all displayed localities
+
+ Localities detail page: Navigate to /public/localities
+
+Verify cards show updated metrics
+
+Verify styling and layout match other pages
+
+ Button functionality: Click "EXPLORE [Locality]" on any card
+
+Should navigate to /find-properties?locality=[locality_name]
+
+Should pre-filter properties by that locality
+
+ Data accuracy: Pick one locality (e.g., MIHAN) and manually verify:
+
+Rental yield % matches actual rent data from properties table
+
+Price trend % is correct (compare psf over 12 months)
+
+Legal status (green/yellow) matches known disputes
+
+Infra event matches most recent update
+
+Property count matches active properties in DB
+
+ Responsive design: Check mobile view (phone/tablet)
+
+Cards should stack vertically on small screens
+
+Text should be readable
+
+Icons and badges should display correctly
+
+ Visual polish: Check general appearance
+
+Cards have clear visual hierarchy (price + trend biggest, then yield, then legal, etc.)
+
+Colors are correct (green for safe, yellow for caution)
+
+Icons display properly
+
+Card has subtle hover effect
+
+SUCCESS CRITERIA
+✅ When done, a buyer looking at a locality card should instantly know:
+
+Can I make money? → See rental yield %
+
+Is it safe? → See legal status badge (green or yellow)
+
+Why is it moving? → See price trend + explanation
+
+What's coming? → See infra timeline
+
+How many options? → See active property count
+
+Result: Locality cards become a genuine decision-making tool, not just pretty graphics.

@@ -1,0 +1,240 @@
+Action: "Call today - high intent buyer"
+└─ [View Full Profile] [Assign to Agent] [Add Note]
+```
+
+---
+
+### PART 5: API Endpoints
+
+#### Event Tracking Endpoints
+
+```javascript
+// POST /api/events/track
+// Track any user event
+{
+  session_id: "session_abc123",
+  event_type: "property_view",
+  property_id: 123,
+  event_data: {
+    timeSpent: 45,
+    scrollDepth: 72,
+    fromPage: "/find-properties"
+  }
+}
+
+// POST /api/sessions/create
+// Create new session on page load
+{
+  device_id: "device_xyz",
+  device_type: "mobile",
+  referrer_url: "https://google.com"
+}
+
+// PATCH /api/sessions/:sessionId/update
+// Update session data (properties viewed count, etc.)
+```
+
+#### Lead Capture Endpoints
+
+```javascript
+// POST /api/leads/subscribe
+// Capture lead from any modal
+{
+  session_id: "session_abc123",
+  name: "Amit Kumar",
+  whatsapp: "9876543210",
+  email: "amit@email.com", // optional
+  source_type: "filter_search",
+  source_page: "/find-properties",
+  search_filters: {
+    areas: ["Besant Nagar"],
+    price_min: 4000000,
+    price_max: 6000000,
+    property_types: ["Plot"]
+  },
+  investment_profile: {
+    custom_remarks: "Need legal clear property with metro access"
+  }
+}
+
+// Response includes:
+{
+  lead_id: 123,
+  intent_score: 8.5,
+  intent_level: "high",
+  conversion_probability: 0.72,
+  message: "Lead captured successfully"
+}
+```
+
+#### Analytics Endpoints
+
+```javascript
+// GET /api/admin/analytics/funnel
+// Returns funnel metrics
+{
+  visitors: 1000,
+  engaged_users: 650,
+  property_savers: 280,
+  subscribers: 180,
+  contacted: 79,
+  converted: 40,
+  conversion_rate: 0.04
+}
+
+// GET /api/admin/analytics/lead-segmentation
+// Returns lead quality breakdown
+{
+  high_intent: { count: 45, percentage: 25, avg_score: 8.5 },
+  medium_intent: { count: 81, percentage: 45, avg_score: 6.2 },
+  low_intent: { count: 54, percentage: 30, avg_score: 3.1 }
+}
+
+// GET /api/admin/analytics/area-demand
+// Returns area-wise demand heatmap data
+[
+  { area: "Besant Nagar", lead_count: 54, avg_intent: 8.2 },
+  { area: "Adyar", lead_count: 38, avg_intent: 7.5 },
+  ...
+]
+
+// GET /api/admin/analytics/budget-distribution
+// Returns budget range breakdown
+[
+  { range: "20-40L", count: 29, percentage: 16 },
+  { range: "40-60L", count: 54, percentage: 30 },
+  ...
+]
+
+// GET /api/admin/analytics/infrastructure-preferences
+// Returns what buyers want most
+[
+  { preference: "Metro Connectivity", count: 68, percentage: 38 },
+  { preference: "Water Supply", count: 52, percentage: 29 },
+  ...
+]
+
+// GET /api/admin/leads?intent=high&status=new
+// Get filtered lead list for assignment queue
+```
+
+---
+
+## Implementation Priority Order
+
+### Phase 1: Core Tracking (DAYS 1-2)
+1. Create all 6 database tables
+2. Build `tracking.js` utility
+3. Implement event tracking on:
+   - Property views
+   - Property saves
+   - Filter applications
+   - Page visits
+4. Create sessions table and session management
+5. Test: Verify events are being stored correctly
+
+### Phase 2: Lead Capture (DAYS 3-4)
+6. Build all 6 modal components:
+   - FilterBasedSubscriptionModal.jsx ← START HERE (highest conversion)
+   - MissingPropertyModal.jsx ← Second (highest quality)
+   - CasualBrowserModal.jsx
+   - ContentReaderModal.jsx
+   - ExitIntentModal.jsx
+   - ComparisonModal.jsx
+7. Implement modal trigger logic
+8. Create lead capture API endpoint
+9. Link session data to leads (retroactive behavior assignment)
+10. Test: Fill forms and verify data in leads_comprehensive table
+
+### Phase 3: Intent Scoring (DAY 5)
+11. Implement intent scoring algorithm
+12. Calculate scores on lead creation
+13. Classify leads (high/medium/low intent)
+14. Test: Verify score calculations are accurate
+
+### Phase 4: Admin Dashboard (DAYS 6-7)
+15. Create /admin/behavioral-analytics page
+16. Build funnel visualization chart
+17. Build lead segmentation cards
+18. Build area demand heatmap
+19. Build budget distribution chart
+20. Build infrastructure preferences chart
+21. Build real-time lead queue table
+22. Test: Verify all analytics display correctly
+
+### Phase 5: Polish & Integration (DAY 8)
+23. Add WhatsApp confirmation message after subscription
+24. Add loading states and error handling
+25. Optimize mobile responsiveness
+26. Performance optimization (batch event sending)
+27. Final testing across all flows
+
+---
+
+## Key Success Metrics
+
+After implementation, track these KPIs:
+
+**Lead Capture Metrics**:
+- Overall subscription rate: Target 45-50% of engaged users
+- Filter-search modal conversion: Target 50-60%
+- Missing property modal conversion: Target 70%+
+- Exit-intent modal conversion: Target 15-20%
+
+**Lead Quality Metrics**:
+- High-intent leads: 25% of total leads
+- Average intent score: 6.5+/10
+- Conversion probability accuracy: Track predicted vs actual
+
+**Business Metrics**:
+- Total leads captured per month: Target 200+
+- High-intent leads per month: Target 50+
+- Lead-to-conversion rate: Target 15-20%
+- Time to first contact: Target <24 hours for high-intent
+
+---
+
+## Important Notes
+
+1. **No Forced Login**: Users browse anonymously, subscribe when ready
+2. **WhatsApp-First**: Email optional, WhatsApp required (95% open rate in India)
+3. **Retroactive Linking**: When user subscribes, link ALL their previous behavior to their contact
+4. **Privacy**: Follow GDPR principles - users can request data deletion
+5. **Performance**: Batch event tracking (send every 10 events or 30 seconds)
+6. **Mobile-First**: 66% of traffic is mobile - optimize for mobile UX
+7. **Real-Time Dashboard**: Use Socket.io for live lead notifications to admin
+
+---
+
+## Revenue Model Integration (Future)
+
+This chunk creates the foundation for 5 revenue streams:
+
+1. **Lead Sales**: ₹500-8000 per lead (quality-based pricing)
+2. **Premium Insights**: ₹5000-10,000/month subscription for agents
+3. **Featured Listings**: ₹2000-5000/month (demand-based pricing)
+4. **Data Licensing**: ₹30,000-50,000 for market research datasets
+5. **Transaction Commission**: 0.5-1% on successful deals (future)
+
+**Build the data infrastructure now, monetize later.**
+
+---
+
+## FINAL DELIVERABLES CHECKLIST
+
+- [ ] All 6 database tables created and indexed
+- [ ] Event tracking system working across all pages
+- [ ] Session management and persistence working
+- [ ] All 6 subscription modals built and triggering correctly
+- [ ] Lead capture endpoint storing rich lead data
+- [ ] Intent scoring algorithm implemented
+- [ ] Admin dashboard with 6 analytics sections
+- [ ] Real-time lead queue for agent assignment
+- [ ] WhatsApp confirmation messages sending
+- [ ] Mobile-responsive design for all modals
+- [ ] Performance optimized (batch event tracking)
+- [ ] Error handling and loading states added
+
+---
+
+**Build a comprehensive lead intelligence system that captures EVERY interested user, understands their intent, and provides actionable market insights. This is the foundation for sustainable revenue and platform growth.**

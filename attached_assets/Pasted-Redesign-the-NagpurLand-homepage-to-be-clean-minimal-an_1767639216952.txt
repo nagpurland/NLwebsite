@@ -1,0 +1,429 @@
+Redesign the NagpurLand homepage to be clean, minimal, and funnel-based. Current homepage has too much information (6 locality cards with detailed data). New homepage should guide buyers through a clear decision funnel with ONE action per section.
+
+Current Homepage Issues:
+
+Overwhelming text content (long paragraph explanation)
+
+All 6 locality cards visible at once with detailed data (rental yields, legal status, infrastructure)
+
+Multiple competing CTAs (Explore MIHAN, Explore Besa, Explore Wardha Road, etc.)
+
+No clear next action for visitor
+
+Causes decision paralysis
+
+New Homepage Goal:
+
+Clean hero section (ONE headline, ONE subheading, ONE button)
+
+Search/filter section (3 filters only: Budget, Area, Type)
+
+Trust signals (3 simple cards showing metrics)
+
+Optional: 1-2 featured properties
+
+Bottom CTA button
+
+Remove all 6 locality cards from homepage
+
+Move detailed locality info to "Understand Nagpur" page
+
+DETAILED CHANGES
+1. HERO SECTION CHANGES
+Current Code Location: /pages/index.js or /components/Hero.jsx
+
+What to Change:
+
+Replace headline text from "Know the Real Ground Truth Before You Commit ₹1" to "Find Your Perfect Property in Nagpur"
+
+Remove the long paragraph description (delete the text about "Most buyers in Nagpur make ₹50L+ decisions...")
+
+Change the CTA button from current text to "Find Properties" (or "Start Exploring")
+
+Change button color to green (#10B981 or similar)
+
+Make button larger (padding: 14px 40px, font-size: 16px, bold)
+
+Add background styling (clean light background, or gradient blue)
+
+Add lots of whitespace/padding (80px top/bottom minimum)
+
+New Hero Structure:
+
+text
+Hero Container
+├─ Headline: "Find Your Perfect Property in Nagpur"
+├─ Subheading: "Data-driven insights. Legal clarity. Smart pricing."
+├─ Large CTA Button: "Find Properties" (green, 60px height, 200px width)
+└─ Background: Light gradient or solid color
+Style Notes:
+
+Headline: 48px, bold (font-weight: 700)
+
+Subheading: 18px, gray (500 weight)
+
+Padding: 80px vertical, 40px horizontal
+
+Center-aligned text
+
+Remove shadow or make minimal
+
+2. ADD SEARCH/FILTER SECTION (New Section)
+Insert After Hero, Before Locality Cards
+
+New Section to Create:
+
+Component: QuickSearch.jsx or add to homepage
+
+Location: Between hero and current locality cards section
+
+Filters to Include:
+
+text
+A. BUDGET SLIDER
+   - Min: ₹10 Lakhs
+   - Max: ₹1 Crore
+   - Display selected range as: "₹[min] - ₹[max]"
+   - Label: "What's your budget?"
+   
+B. AREA DROPDOWN
+   - Label: "Which area interests you?"
+   - Options:
+     • All Areas (default)
+     • Besa
+     • MIHAN
+     • Wardha Road
+     • South Nagpur
+     • (Others in submenu)
+   
+C. PROPERTY TYPE SELECTOR
+   - Label: "What type of property?"
+   - Radio buttons:
+     ○ Plot
+     ○ Apartment
+     ○ Villa
+     ○ Any (default)
+CTA Button in This Section:
+
+Text: "Find Properties"
+
+Color: Blue (#1D4ED8 or similar)
+
+Size: 200px wide, 50px tall
+
+Links to: /find-properties with query params (budget, area, type)
+
+Styling:
+
+Background color: Light gray (#F3F4F6)
+
+Padding: 60px
+
+3 columns on desktop, stack on mobile
+
+Spacing between elements: 30px
+
+Border-radius: 8px
+
+3. ADD TRUST SIGNALS SECTION (New Section)
+Insert After Filters, Before Locality Cards
+
+New Section to Create:
+
+Component: TrustSignals.jsx or inline
+
+3 Cards in a horizontal row
+
+Card 1: Properties Count
+
+text
+Icon: House/Building icon
+Number: "500+"
+Label: "Verified Properties"
+Card 2: Buyers Count
+
+text
+Icon: People/Users icon
+Number: "1000+"
+Label: "Happy Buyers"
+Card 3: Legal Clarity
+
+text
+Icon: Shield/Lock icon
+Number: "100%"
+Label: "Legal Clarity"
+Styling per Card:
+
+White background
+
+Padding: 40px
+
+Border-radius: 8px
+
+Shadow: Subtle (0 1px 3px rgba(0,0,0,0.1))
+
+Icon size: 60px
+
+Number font-size: 36px, bold
+
+Label font-size: 16px, gray
+
+Container Styling:
+
+3 columns on desktop (flex with gap: 30px)
+
+Stack vertically on mobile
+
+Padding: 40px vertical, 20px horizontal
+
+4. HIDE/REMOVE LOCALITY CARDS FROM HOMEPAGE
+Current Code: Look for the 6 locality cards section (MIHAN, Besa, Wardha Road, Civil Lines, Hingna, Manish Nagar)
+
+What to Do:
+
+Comment out or DELETE the entire locality cards section from homepage
+
+OR: Add conditional rendering if (false) to hide them
+
+Keep the section and data, just hide from homepage display
+
+Note: Keep these cards on the "Understand Nagpur" page (do NOT delete from that page)
+
+5. ADD FEATURED PROPERTIES SECTION (Optional)
+After Trust Signals, Before Bottom CTA
+
+If you want to show featured properties on homepage:
+
+Section Structure:
+
+Show 1-2 "Featured Deals" or "Best Matches"
+
+Card layout: Image + Title + Price + Area + Location
+
+Button: "View Details →"
+
+Alternative: Skip this section entirely (not necessary if filters work well)
+
+If Including:
+
+text
+Featured Properties Container
+├─ Heading: "Featured Deals" (optional)
+├─ Card 1: [Image] Title | Price | Area | Location
+│  └─ [View Details Button]
+└─ Card 2: [Image] Title | Price | Area | Location
+   └─ [View Details Button]
+6. ADD BOTTOM CTA SECTION
+After Featured Properties (or Trust Signals if skipping featured), Before Footer
+
+Simple Section:
+
+text
+Container (centered)
+├─ Button: "Browse All Properties"
+└─ Style: Large, prominent, brand color (green or blue)
+Styling:
+
+Padding: 40px top/bottom
+
+Text-align: center
+
+Button: 200px wide, 50px tall, 16px font, bold
+
+Color: Brand green (#10B981) or blue (#1D4ED8)
+
+Links to: /find-properties
+
+7. NAVIGATION MENU UPDATES
+Current Navigation:
+
+text
+- Home
+- Understand Nagpur
+- Find Properties
+- Invest Safely
+- WhatsApp Us
+New Navigation (Optional):
+
+text
+- Home
+- Find Properties
+- Understand Nagpur
+- Invest Safely
+- Tools (New - contains: Calculators, Heatmap, FAQ)
+- WhatsApp Us
+Or keep current nav, just add "Tools" link if needed
+
+IMPLEMENTATION STEPS FOR BUILD AGENT
+Step 1: Update Hero Section
+
+Find and update headline text
+
+Remove description paragraph
+
+Update CTA button text and styling
+
+Add background styling
+
+Step 2: Create QuickSearch Component
+
+Create components/QuickSearch.jsx (or add to homepage)
+
+Implement budget slider (min: ₹10L, max: ₹1Cr)
+
+Implement area dropdown (6 options)
+
+Implement property type selector (4 options)
+
+Add "Find Properties" CTA button
+
+Make responsive (flex layout, stack on mobile)
+
+Step 3: Create TrustSignals Component
+
+Create components/TrustSignals.jsx
+
+Add 3 cards with icons
+
+Add metrics: 500+, 1000+, 100%
+
+Style with white background, padding, shadow
+
+Make responsive (3 cols desktop, stack mobile)
+
+Step 4: Hide Locality Cards
+
+Find locality cards section in homepage
+
+Hide or remove from display
+
+Keep the component/code but don't render
+
+Step 5: (Optional) Add Featured Properties
+
+Create featured properties section
+
+Show 1-2 best properties
+
+Or skip this section
+
+Step 6: Add Bottom CTA
+
+Add simple "Browse All Properties" button section
+
+Style as prominent CTA
+
+Link to /find-properties
+
+Step 7: Testing
+
+Test hero section on mobile/desktop
+
+Test filters work and link to Find Properties
+
+Test all CTAs link correctly
+
+Test responsive layout
+
+Check page load time
+
+CODE STRUCTURE EXPECTED
+Homepage File: /pages/index.js or /pages/home.jsx
+
+New Components to Create:
+
+components/QuickSearch.jsx - Filter section
+
+components/TrustSignals.jsx - 3 trust cards
+
+components/FeaturedProperties.jsx (optional)
+
+components/BottomCTA.jsx (or inline)
+
+Homepage should import:
+
+text
+import Hero from 'components/Hero'
+import QuickSearch from 'components/QuickSearch'
+import TrustSignals from 'components/TrustSignals'
+// import FeaturedProperties from 'components/FeaturedProperties' (optional)
+import BottomCTA from 'components/BottomCTA'
+import Footer from 'components/Footer'
+
+// Remove or comment out:
+// import LocalityCards from 'components/LocalityCards'
+DESIGN SPECIFICATIONS
+Colors:
+
+Primary: Blue (#1D4ED8 or #0066FF)
+
+Accent: Green (#10B981 or #00B34A)
+
+Background: White (#FFFFFF) or light gray (#F9FAFB)
+
+Text: Dark gray (#1F2937)
+
+Light text: Medium gray (#6B7280)
+
+Fonts:
+
+Headlines: Bold, 48px
+
+Subheadings: 18px, gray
+
+Body: 16px, regular
+
+Labels: 14px, medium weight
+
+Spacing:
+
+Hero padding: 80px vertical
+
+Section padding: 60px
+
+Component gap: 30px
+
+Button padding: 14px 40px
+
+Responsive:
+
+Desktop: 3 columns
+
+Tablet: 2 columns
+
+Mobile: 1 column (stack)
+
+EXPECTED RESULT
+Homepage will now:
+
+✅ Show clean hero with ONE action
+
+✅ Capture buyer's search criteria via filters
+
+✅ Build trust with 3 simple metrics
+
+✅ (Optional) Show 1-2 featured properties
+
+✅ Guide to Find Properties page with CTA
+
+✅ No overwhelming information
+
+✅ Clear funnel: Awareness → Consideration → Action
+
+User Journey:
+
+text
+Land on homepage
+   ↓ (See clean hero)
+Read headline + CTA
+   ↓ (Click "Find Properties" or apply filters)
+Apply budget, area, type filters
+   ↓ (Scroll down, see trust signals)
+Build confidence ("500+ properties, 1000+ buyers")
+   ↓ (Scroll down, see featured deal or bottom CTA)
+Click "Browse All Properties"
+   ↓ (Go to Find Properties page with pre-filled filters)
+Search results page
+BUILD AGENT: PROCEED WITH IMPLEMENTATION
+You now have all specifications. Start building:
+

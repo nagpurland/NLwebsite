@@ -1,0 +1,148 @@
+You are working on my existing Nagpur (India) real estate web application.
+
+🚨 ABSOLUTE RULES (NON-NEGOTIABLE)
+
+❌ DO NOT modify existing files, components, or logic
+
+❌ DO NOT refactor or rewrite any existing code
+
+❌ DO NOT remove or replace anything
+
+❌ DO NOT optimize or redesign existing UI
+
+✅ ONLY ADD NEW FEATURES as new components, new files, or new optional sections
+
+✅ If something already exists → SKIP IT COMPLETELY
+
+✅ All additions must be plug-and-play and non-breaking
+
+If a feature requires editing an existing component → DO NOT DO IT.
+Only create new components and integrations that can be mounted without touching current logic.
+
+STEP 1: SCAN & CONFIRM
+
+Scan the entire project and list:
+
+✅ Features already present
+
+❌ Features completely missing
+
+Do not comment on weak implementations.
+Do not suggest edits.
+
+STEP 2: ADD ONLY THESE FEATURES IF MISSING
+🔒 TRUST & LEGAL (ADD-ONLY)
+
+Create new components ONLY:
+
+LegalVerificationBadge
+
+ReraRegistrationBadge
+
+DocumentVerificationProgress
+
+LegalClarityScoreMeter
+
+WhyPropertyIsSafeSection
+
+DownloadableLegalReport
+
+These must be new standalone components that can be mounted without editing existing components.
+
+📈 CONVERSION (ADD-ONLY)
+
+Add as independent features:
+
+Floating WhatsApp Button
+
+Mobile Floating Call Button
+
+Exit-Intent Popup Component
+
+Social Proof Counter Component
+
+Urgency Indicator Widget
+
+No changes to existing forms.
+
+📊 DATA & TOOLS (ADD-ONLY)
+
+Add as optional widgets:
+
+Locality Price Trend Chart
+
+Property Comparison Widget
+
+Amenities Score Widget
+
+EMI Calculator Widget
+
+Investment ROI Widget
+
+📱 MOBILE UX (ADD-ONLY)
+
+Add only overlay or floating components:
+
+Sticky Bottom Action Bar (Call / WhatsApp / Enquire)
+
+Mobile-only WhatsApp Floating Button
+
+Do not touch existing layouts.
+
+📍 NAGPUR LOCALIZATION (ADD-ONLY)
+
+Add new pages or widgets:
+
+Area Guide Pages (Dharampeth, Sadar, Sitabuldi)
+
+Metro Connectivity Badge
+
+Nearby Schools / Hospitals Widget
+
+🔍 SEARCH ENHANCEMENTS (ADD-ONLY)
+
+Add optional components:
+
+Recently Viewed Properties
+
+Wishlist / Saved Properties
+
+Voice Search Button (standalone)
+
+STEP 3: IMPLEMENTATION FORMAT (MANDATORY)
+
+For each added feature, respond ONLY in this format:
+
+Feature Name:
+
+What it does:
+
+New file/component name:
+
+Where it can be mounted (without editing existing logic):
+
+Data required (optional):
+
+Why it improves conversion or trust:
+
+🚫 Do NOT include code.
+
+STEP 4: FINAL OUTPUT
+SUMMARY
+
+Total new features added
+
+Zero existing files modified (confirm this explicitly)
+
+Expected conversion impact
+
+FINAL CHECK
+
+Before responding, confirm:
+✔ No existing code edited
+✔ Only new components created
+✔ No breaking changes
+
+FINAL INSTRUCTION
+
+ADD FEATURES ONLY. DO NOT EDIT ANY EXISTING FILES OR COMPONENTS.

@@ -1,0 +1,264 @@
+=== PART 6 CONTINUED: FRONTEND INTEGRATION ===
+
+PAGE 1: "UNDERSTAND NAGPUR" (Market Context)
+
+├─ Section 1: NAGPUR AT A GLANCE
+│  ├─ Market Temperature (visual heat map):
+│  │  🔴 MIHAN: HOT (+18% appreciation, 450 jobs, Metro 6m)
+│  │  🟡 Besa: WARM (+12% appreciation, 80 jobs, Stable)
+│  │  🟡 Wardha Road: WARM (+8% appreciation, 50 jobs, Flyover coming)
+│  │  🔵 Hingna: COOLING (+2% appreciation, 40 jobs, Manufacturing)
+│  │  🔵 South Nagpur: VERY COOL (-2% appreciation, 10 jobs, No growth)
+│  │
+│  └─ Key Metrics Cards:
+│     ├─ Average Price: ₹42L (↑ 12% YoY)
+│     ├─ Average Price/sqft: ₹2,800 (↑ 8% YoY)
+│     ├─ Market Hot Factor: 85/100 (buying activity high)
+│     ├─ Days to Sell Avg: 28 days (moderate pace)
+│     └─ Buyer Sentiment: 72% Bullish (from news & social)
+│
+├─ Section 2: WHY NAGPUR IS GROWING (Infrastructure)
+│  ├─ 📊 Major Projects Coming:
+│  │  ├─ Metro Phase 2: 60% complete, launches Dec 2026 (6 months!)
+│  │  │  └─ Impact: +5,000 jobs, +15-20% property appreciation in MIHAN
+│  │  ├─ Wardha Road Flyover: 80% complete, opens Mar 2026 (3 months!)
+│  │  │  └─ Impact: Better connectivity, +8-10% appreciation on Wardha Road
+│  │  └─ MIHAN IT Park Expansion: 40% complete, 12 months
+│  │     └─ Impact: +500 Infosys jobs, sustained demand
+│  │
+│  └─ 🏢 Employment Boom:
+│     ├─ IT Sector: 450 active jobs (↑40% YoY) 🚀 VERY BULLISH
+│     ├─ Top Hiring: Infosys (50), TCS (35), HCL (28)
+│     ├─ Manufacturing: 120 jobs (↑15% YoY) BULLISH
+│     └─ Services: 80 jobs (↑5% YoY) STABLE
+│
+├─ Section 3: MARKET SENTIMENT & NEWS
+│  ├─ 📰 What News Says:
+│  │  ├─ Positive: 72% (metro excitement, job growth, investment potential)
+│  │  ├─ Negative: 15% (affordability concerns, market saturation warning)
+│  │  └─ Neutral: 13%
+│  │
+│  ├─ 💬 What Buyers Say (Social Media):
+│  │  ├─ Bullish posts: 234 mentions (excited about metro, jobs, growth)
+│  │  ├─ Bearish posts: 67 mentions (concerned about prices, timing)
+│  │  └─ Most discussed topic: "Metro impact on MIHAN area"
+│  │
+│  └─ 💰 Market Heat:
+│     ├─ Price momentum: ↑ 18% in 90 days (strong appreciation)
+│     ├─ New listings: 95 this week (hot market)
+│     ├─ De-listings: 60 this week (properties selling fast)
+│     └─ Trend: MARKET IS HEATING UP 📈
+│
+├─ Section 4: LEGAL & SAFETY (From Web Intelligence)
+│  ├─ MIHAN Area:
+│  │  ├─ Disputes: 0 active ✅ SAFE
+│  │  ├─ Title clarity: 100% clear
+│  │  └─ Risk level: LOW
+│  │
+│  ├─ Besa Area:
+│  │  ├─ Disputes: 1 pending case ⚠️ MONITOR
+│  │  ├─ Title clarity: 95% clear
+│  │  └─ Risk level: LOW
+│  │
+│  ├─ Wardha Road:
+│  │  ├─ Disputes: 0 active ✅ SAFE
+│  │  ├─ Title clarity: 100% clear
+│  │  └─ Risk level: LOW
+│  │
+│  └─ South Nagpur:
+│     ├─ Disputes: 5 active cases ❌ HIGH RISK
+│     ├─ Title clarity: 80% clear
+│     └─ Risk level: HIGH - AVOID FOR NOW
+│
+└─ Section 5: BUYER VERDICT BY AREA
+   ├─ MIHAN: 9/10 ⭐⭐⭐⭐⭐
+   │  └─ "HIGHLY RECOMMENDED - Metro + Jobs = Best opportunity"
+   ├─ Besa: 7/10 ⭐⭐⭐⭐
+   │  └─ "GOOD - Stable area, monitor pending dispute"
+   ├─ Wardha Road: 6/10 ⭐⭐⭐
+   │  └─ "SAFE BUT SLOW - Good for stability, not appreciation"
+   ├─ Hingna: 5/10 ⭐⭐
+   │  └─ "AVERAGE - Manufacturing stable, limited growth"
+   └─ South Nagpur: 3/10 ⭐
+      └─ "RISKY - Multiple disputes, cooling market. AVOID."
+
+
+PAGE 2: "FIND PROPERTIES" (Enhanced with Web Intelligence)
+
+When buyer clicks on a property, show:
+
+┌─ MIHAN TECH-CORRIDOR PLOT (₹45L, 1500 SQFT) ─────────┐
+│                                                       │
+│ BASIC PROPERTY INFO:                                 │
+│ • Price: ₹45L | Price/sqft: ₹3,000 | Status: Verified
+│ • Location: MIHAN South | Built: N/A | Config: Plot
+│ • Seller: Broker | Contact: +91-XXXXX | Posted: 5 days ago
+│                                                       │
+│ PROPERTY METRICS (From Scraper Engine):             │
+│ • Yield: 4.2% (above Nagpur avg 3.5%) ✅           │
+│ • Growth: +15.2% (high appreciation zone) ✅        │
+│ • Risk: LOW (no disputes, clear title) ✅           │
+│ • Legal: Title verified on-ground ✅                │
+│                                                       │
+│ WEB INTELLIGENCE INSIGHTS (Why This Area Is Hot):   │
+│ 📍 Location Advantage:                               │
+│    ├─ Metro Phase 2: 2km away, launches Dec 2026   │
+│    ├─ MIHAN IT park: Walking distance              │
+│    └─ Impact: +15-20% appreciation when metro opens│
+│                                                       │
+│ 💼 Employment Growth:                                │
+│    ├─ Active IT jobs in MIHAN: 450 (↑40% YoY)      │
+│    ├─ Top employers: Infosys, TCS, HCL             │
+│    └─ Impact: High tenant demand = Good rental yield
+│                                                       │
+│ 📈 Market Momentum:                                  │
+│    ├─ MIHAN market: HOT (↑18% in 90 days)          │
+│    ├─ Market heat: 85/100 (very bullish)           │
+│    ├─ Days to sell: 20 days avg (fast)             │
+│    └─ Impact: Sellers confident, properties move fast
+│                                                       │
+│ 📰 What News Says:                                   │
+│    ├─ Positive news: 72% (metro, jobs, growth)     │
+│    ├─ Recent headlines: "Metro groundbreaking", "Infosys expands"
+│    └─ Sentiment: VERY BULLISH 🚀                   │
+│                                                       │
+│ 💬 What Buyers Say:                                  │
+│    ├─ Bullish mentions: 234 (excited about potential)
+│    ├─ Top comment: "Metro in 6 months will double prices"
+│    └─ Buyer confidence: VERY HIGH                    │
+│                                                       │
+│ ⚖️ LEGAL STATUS:                                     │
+│    ├─ Disputes in MIHAN: 0 active cases ✅         │
+│    ├─ Title clarity: 100% verified ✅              │
+│    └─ Legal risk: LOW (safe investment) ✅         │
+│                                                       │
+│ 💰 COMPARABLE ANALYSIS:                              │
+│    ├─ Similar plots in MIHAN: ₹42L - ₹48L         │
+│    ├─ This price (₹45L): Fair value ✓             │
+│    ├─ Appreciation potential: +15-20% next 12m     │
+│    └─ Investment verdict: GOOD VALUE 💚            │
+│                                                       │
+│ ✅ BUYING CLARITY VERDICT: 9/10 ⭐⭐⭐⭐⭐          │
+│                                                       │
+│ "This is an EXCELLENT property investment opportunity.│
+│  Metro arrival in 6 months will transform the area.  │
+│  Strong job growth supports rental demand. Buy now   │
+│  before metro news drives prices up 20%+. Expected   │
+│  appreciation: ₹45L → ₹52L+ in 12 months."          │
+│                                                       │
+│ [GET PROPERTY OPINION] [SCHEDULE SITE VISIT]        │
+│ [COMPARE WITH SIMILAR] [SHARE WITH FRIENDS]         │
+└───────────────────────────────────────────────────────┘
+
+
+PAGE 3: "INVEST SAFELY" (Legal + Web Intelligence)
+
+├─ Section 1: LEGAL CLARITY BY AREA
+│  ├─ MIHAN:
+│  │  ├─ Title Status: ✅ CLEAR (100% verified)
+│  │  ├─ Active Disputes: 0
+│  │  ├─ Recent Violations: None
+│  │  ├─ Legal Risk: LOW
+│  │  └─ Verdict: Safe to invest
+│  │
+│  ├─ Besa:
+│  │  ├─ Title Status: ✅ MOSTLY CLEAR (95% verified)
+│  │  ├─ Active Disputes: 1 case pending
+│  │  ├─ Recent Violations: 1 minor encroachment case
+│  │  ├─ Legal Risk: LOW-MEDIUM
+│  │  └─ Verdict: Generally safe, monitor pending case
+│  │
+│  ├─ Wardha Road:
+│  │  ├─ Title Status: ✅ CLEAR (100% verified)
+│  │  ├─ Active Disputes: 0
+│  │  ├─ Recent Violations: None
+│  │  ├─ Legal Risk: LOW
+│  │  └─ Verdict: Safe to invest
+│  │
+│  └─ South Nagpur:
+│     ├─ Title Status: ⚠️ DISPUTED (80% verified)
+│     ├─ Active Disputes: 5 cases pending
+│     ├─ Recent Violations: 2 encroachment, 1 environmental
+│     ├─ Legal Risk: HIGH
+│     └─ Verdict: AVOID - High legal risk
+│
+└─ Section 2: RECENT LEGAL ALERTS (From Web Intelligence)
+   ├─ ✅ "Court Dismisses Encroachment Case in MIHAN" (Yesterday)
+   │  └─ Impact: Increases area's legal safety
+   │
+   ├─ ⚠️ "Pending Title Dispute in Besa" (1 week ago)
+   │  └─ Impact: Monitor case progress
+   │
+   └─ ❌ "5 Encroachment Cases Filed in South Nagpur" (2 weeks ago)
+      └─ Impact: High risk area - avoid investment
+
+
+=== PART 7: DATA FRESHNESS & UPDATE SCHEDULE ===
+
+Web Intelligence data is always FRESH and AUTOMATED:
+
+DAILY UPDATES (Automatic, no manual work):
+├─ 2:00 AM: News scraped & analyzed
+├─ 3:00 AM: Social sentiment updated
+├─ 4:00 AM: Job market data refreshed
+├─ 5:00 AM: Infrastructure status checked
+├─ 6:00 AM: Market intelligence generated
+├─ 7:00 AM: Frontend data synced & live
+└─ Result: Buyers see TODAY'S insights, not week-old data
+
+WEEKLY UPDATES (Every Sunday):
+├─ Comprehensive sentiment analysis
+├─ Market trend reports
+├─ Infrastructure project status reviews
+└─ Buying clarity scores updated
+
+MONTHLY UPDATES (1st of month):
+├─ Legal dispute status check
+├─ Market forecast for next month
+├─ Competitive analysis update
+└─ New data source integration (if any)
+
+
+=== PART 8: HOW TO USE THIS PROMPT IN REPLIT ===
+
+STEP 1: Copy this ENTIRE prompt (everything from start to finish)
+
+STEP 2: Go to Claude.ai or ChatGPT and paste it
+
+STEP 3: Ask Claude/ChatGPT to:
+├─ "Create the database schema for Web Intelligence module in MongoDB"
+├─ "Generate React components for the Web Intelligence admin dashboard"
+├─ "Write the API endpoints for storing/retrieving Web Intelligence data"
+├─ "Create the scraping functions for each data source"
+├─ "Build the frontend components to display insights on Understand Nagpur page"
+├─ "Generate the sentiment analysis algorithm"
+├─ "Create the daily scheduler that runs all scraping jobs automatically"
+└─ Or any specific component you want first
+
+STEP 4: Implement piece by piece in Replit
+
+STEP 5: Test & deploy
+
+
+=== PART 9: SUCCESS METRICS FOR WEB INTELLIGENCE ===
+
+How to know Web Intelligence is working:
+
+ADMIN PANEL METRICS:
+├─ Data freshness: 100% data updated daily ✓
+├─ Scraping success rate: >95% ✓
+├─ Data quality: <1% parsing errors ✓
+├─ Report generation: 6+ locality reports daily ✓
+└─ System uptime: 99.9% ✓
+
+BUSINESS IMPACT METRICS:
+├─ Buyer clarity: Buyers can answer "Why MIHAN?" ✓
+├─ Decision time: Reduced from 3 months to 4-6 weeks ✓
+├─ Lead conversion: Informed buyers = higher closing rate ✓
+├─ Customer satisfaction: Buyers confident in their choice ✓
+└─ Competitive advantage: Only you have this intel ✓
+
+USAGE METRICS:
+├─ "Understand Nagpur" page visits: ↑ 300% (from insights)
+├─ Time on page: Average 5+ minutes (engaging content)
+├─ Click-through to "Find Properties": ↑ 200% (clarity → action

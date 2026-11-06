@@ -1,0 +1,204 @@
+NEW HERO SECTION (Simplified & Clear)
+Layout: From Text Wall → Visual Story
+Replace current abstract tagline with 3-Step Visual Journey:
+
+text
+═══════════════════════════════════════════════════════════
+
+UNDERSTAND
+NAGPUR
+
+═══════════════════════════════════════════════════════════
+
+            🏗️                    💼                    📈
+        WHAT'S                 WHAT'S                 WHAT'S
+       HAPPENING              COMING                 YOUR
+        IN NAGPUR            NEXT (2024-27)         OPPORTUNITY
+
+         ↓                      ↓                      ↓
+
+      Metro Phase 2      IT Companies Will      Property Values
+      Approved & Building    Arrive Here        Will Rise 15-50%
+
+         ↓                      ↓                      ↓
+
+      ₹10,000 Cr          Thousands of New      Buy NOW Before
+      Investment in       Jobs Created          Prices Spike
+      Infrastructure
+
+
+═══════════════════════════════════════════════════════════
+
+SIMPLE STORY:
+"Nagpur is getting Metro + IT jobs + Infrastructure.
+Smart investors buy BEFORE this happens.
+Prices rise AFTER jobs arrive."
+
+═══════════════════════════════════════════════════════════
+
+        [What's YOUR Strategy?] ← Direct to requirement discovery
+
+DETAILED BREAKDOWN OF EACH COLUMN
+Column 1: 🏗️ "WHAT'S HAPPENING IN NAGPUR"
+Simple fact (not jargon):
+
+text
+Metro Phase 2 Under Construction
+₹10,000 Cr govt investment
+Opening 2027
+
+Why it matters:
+✓ New train lines = faster commute
+✓ More areas become valuable
+✓ Companies move closer to metro
+✓ Properties near metro = premium pricing
+Column 2: 💼 "WHAT'S COMING NEXT (2024-2027)"
+Cause & Effect sequence:
+
+text
+TIMELINE OF CHANGE:
+
+2024:  IT Park announced
+       ↓ Companies start acquiring land
+       
+2025:  First IT companies open offices
+       ↓ Professionals relocate to Nagpur
+       
+2026:  Thousands of jobs created
+       ↓ Sudden demand for housing
+       
+2027:  Metro opens + IT hub established
+       ↓ City transforms
+Column 3: 📈 "YOUR OPPORTUNITY (Why You're Here)"
+Direct benefit to buyer:
+
+text
+BEFORE (2023):
+Property: ₹2.2-3.5L per sqft (cheap, no reason)
+
+AFTER (2027):
+Property: ₹3.5-5.2L per sqft (premium, high demand)
+
+YOUR PROFIT:
+Buy in 2024 at ₹2.6L/sqft
+Sell in 2027 at ₹4L/sqft
+Profit: ₹1.4L per sqft = 50%+ return
+
+BOTTOM LINE: Buy before jobs arrive.
+Prices rise after.
+BELOW HERO: "NAGPUR AT A GLANCE" (Keep but Simplify)
+Instead of 3 cards, make it EVEN SIMPLER - just 3 key numbers:
+
+text
+═══════════════════════════════════════════════════════════
+
+THE NUMBERS THAT MATTER:
+
+    15%              ₹2.2-3.5L           3 YEARS
+   Expected        Entry Price         Timeline for
+  Appreciation     (Cheapest in        Transformation
+  Per Year         India's Top 10)
+One line each:
+
+15% yearly growth = "While Mumbai grows 3-5%, Nagpur grows 15%"
+
+₹2.2-3.5L entry = "10x cheaper than Bangalore, same growth potential"
+
+3-year timeline = "Metro opens 2027. Profit window: 2024-2027 (now)"
+
+NEW SECTION: "HOW IT WORKS" (Make Understanding Crystal Clear)
+Add a simple explainer section BETWEEN hero and "Nagpur At A Glance":
+
+text
+═══════════════════════════════════════════════════════════
+
+HOW NAGPUR TRANSFORMATION WORKS
+
+This is NOT complicated. Here's the simple sequence:
+
+STEP 1: Government builds Metro + IT Park
+        (Infrastructure investment)
+        
+STEP 2: Companies come, jobs created
+        (Employment boom)
+        
+STEP 3: Professionals move to city
+        (Population influx)
+        
+STEP 4: Everyone needs homes + shops
+        (Housing shortage)
+        
+STEP 5: Property prices shoot up
+        (Supply < Demand)
+
+═══════════════════════════════════════════════════════════
+
+YOU ARE HERE ↓ (2024)
+Buy properties at today's prices
+while they're still cheap
+
+Property prices will naturally rise
+when the transformation completes
+
+THAT'S YOUR PROFIT ✓
+
+═══════════════════════════════════════════════════════════
+CLARITY IMPROVEMENTS
+Current	Problem	New Version
+"Inflection point"	Jargon, unclear	"Metro + IT = Jobs coming"
+"Windows of opportunity"	Abstract	"Buy before prices rise"
+"Urban transformation creating..."	Vague	"Prices will jump 15-50%"
+3 abstract cards	Doesn't show sequence	3-column story (What/What's Coming/Your Profit)
+No guidance	Visitor confused	Clear CTA: "What's YOUR Strategy?"
+FEEL DIFFERENCE
+Current Hero Feel: "Something is happening, it's complicated, I don't get it"
+
+New Hero Feel: "Oh, I see. Jobs are coming. That means houses needed. That means prices up. That means I buy now. Got it."
+
+FULL NEW HERO FLOW
+text
+┌─────────────────────────────────────────────────┐
+│ "NAGPUR REAL ESTATE 2026" (small label)         │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│        UNDERSTAND NAGPUR                        │
+│     (Simple, clear title)                      │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  🏗️ HAPPENING      💼 COMING        📈 YOUR    │
+│  Metro Phase 2     Jobs in 2024-27   Opportunity│
+│  IT Park           Population Boom    Prices Up │
+│  ₹10K Cr invest    3000+ Jobs/yr      Buy NOW  │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│ "Nagpur is getting infrastructure + jobs.     │
+│  Prices will rise. Smart investors buy first." │
+│                                                 │
+│          [FIND YOUR STRATEGY] ← CTA           │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  HOW IT WORKS (Simple sequence):               │
+│  Government invests → Companies come →          │
+│  Jobs created → People relocate →               │
+│  Houses needed → Prices rise ↑                 │
+│                                                 │
+│  You: Buy at today's price → Sell after       │
+│       transformation → Profit ✓                │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  THE NUMBERS:                                  │
+│  15% yearly growth | ₹2.2-3.5L entry | 2027   │
+│                                                 │
+└─────────────────────────────────────────────────┘
+KEY CHANGES NEEDED
+✅ Replace jargon ("inflection point") with clear facts
+✅ Add 3-column visual showing What/What's Coming/Your Profit
+✅ Add "HOW IT WORKS" sequence (5 simple steps)
+✅ Show actual profit example (₹2.6L → ₹4L = ₹1.4L gain)
+✅ Clear CTA that guides to next step
+✅ Make hero feel like: "I GET IT. I understand Nagpur."
+

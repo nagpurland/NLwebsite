@@ -1,0 +1,276 @@
+ou are working on an existing Nagpur Real Estate OS project in Replit.
+
+Objective: Create individual property detail pages at the route /property/<id> that show full property context, micro-market data, legal status, and empowerment messaging so buyers can make informed decisions.
+
+Current problem: When users browse properties in the /find-properties search, they see property cards with minimal information. Clicking a property should show a detailed page with market context, legal flags, and a clear explanation of "why this property matters for you."
+
+WHAT EACH PROPERTY DETAIL PAGE SHOULD SHOW
+1. Property Header Section
+Property image (or placeholder if none available)
+
+Locality and micro-location (e.g., "MIHAN, Nagpur")
+
+Property type (Plot / Flat / Villa / Commercial)
+
+Area/size (e.g., "1200 sqft carpet area")
+
+Price: total price AND price per sqft
+
+Date listed and last updated
+
+2. "Why We Flagged This" Section (CRITICAL)
+This is the EMPOWERMENT section—explain WHY this property was shown to the user.
+
+Examples:
+
+"✅ Undervalued by 18% vs area average (₹3,500 psf vs ₹4,200 average)"
+
+"✅ Matches your 5% yield target: ₹50,000 annual rent on ₹10L investment"
+
+"✅ Safe locality, no legal disputes found in last 5 years"
+
+"✅ High growth area: prices up 15% YoY, Metro project incoming"
+
+"✅ Near upcoming MIHAN expansion, strong demand pressure"
+
+Show 2–3 key reasons why this property is good based on how it matches the user's profile or market conditions.
+
+3. Micro-Market Context Section
+Show how this property compares to the area:
+
+"Area average psf: ₹4,200 | This property: ₹3,500 psf (17% below avg)"
+
+"Average rental yield in this locality: 4.2% | This property: 5.1% (strong)"
+
+"Recent price trend: +15.2% in 12 months (investor interest)"
+
+"Active properties in area: 12 plots, 8 flats, 3 villas"
+
+"Days on market: 23 days (average for area: 45 days — this is hot)"
+
+This helps buyers see if this is a good deal relative to surroundings.
+
+4. Legal Status Widget (CRITICAL)
+Show legal safety clearly:
+
+Option A (Safe):
+
+text
+✅ LEGAL STATUS: No major legal flags found
+- NA (Non-Agricultural) status: ✅ Verified
+- Recent disputes: ✅ None found
+- TP scheme: ✅ Clear
+- Title history: ✅ Clean (5+ years)
+Option B (Needs Verification):
+
+text
+⚠️ LEGAL STATUS: Manual verification recommended
+- NA status: ⚠️ Check with local NMC
+- Recent disputes: ⚠️ 1 case (resolved 2023)
+- TP scheme: ⚠️ Part of scheme, land acquisition phase
+- Title history: ✅ Clean
+Include a small note: "We flag obvious risks based on public records. Always verify independently or consult a lawyer."
+
+5. Infra & Development Timeline
+Show what's coming to the area:
+
+Example:
+
+text
+🚧 UPCOMING INFRA (Reasons for appreciation)
+- Metro Phase 2: Expected 2027 (2 km away, 25% complete)
+- Ring Road connection: Under construction (1.5 km, 60% complete)
+- New IT Park: Announced for 2025 (3 km away)
+- School expansion: 2026 (1 km away)
+This helps buyers understand why prices may rise.
+
+6. Rental Market Data (If applicable)
+For investors:
+
+text
+💰 RENTAL POTENTIAL
+- Average monthly rent for similar 1BHK: ₹15,000–18,000
+- Annual gross yield: 5.1% (₹50k rent ÷ ₹10L price)
+- Tenant demand: High (IT professionals, expats)
+- Occupancy rate in area: 92% (strong)
+7. Source & Transparency
+Be clear about where the data comes from:
+
+text
+📍 SOURCE & VERIFICATION
+- Listed on: [Portal Name]
+- Date listed: March 15, 2025
+- Last updated: Today
+- View original listing: [LINK to source URL]
+
+All price and property data verified from public sources.
+Availability and terms subject to change — verify with seller/agent.
+8. CTAs (Calls to Action)
+"Schedule a Site Visit" → form to book a time
+
+"Ask an Expert" → WhatsApp pre-filled with property details
+
+"Save for Later" → add to shortlist (if user logged in)
+
+"Share on WhatsApp" → pre-filled message with property details + link
+
+"Ask Legal Question" → deep-dive legal review option
+
+ROUTE & DATA FLOW
+Route: /property/<id>
+
+Example: /property/mihan-plot-2024-001
+
+Get property data from properties table using the ID
+
+Fetch related data from:
+
+properties → main property details
+
+daily_reports → locality pricing trends
+
+infra_events → upcoming projects (filtered by locality + distance)
+
+rules_and_regulations → legal flags for this locality
+
+Dispute records (if exist) → legal history for this specific property/area
+
+Property rental history (if exists) → rental yield data
+
+SAMPLE PAGE LAYOUT
+text
+[NAVBAR: Understand Nagpur | Find Properties | Invest Safely | WhatsApp]
+
+┌─────────────────────────────────────────────┐
+│ PROPERTY IMAGE / PLACEHOLDER                │
+│ (1200 sqft | Plot | MIHAN, Nagpur)          │
+│ ₹45,00,000 (₹3,750 psf)                     │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ ✅ WHY THIS PROPERTY FITS YOU               │
+│ -  Undervalued by 18% vs area (₹3,750 vs    │
+│   ₹4,200 avg)                              │
+│ -  Metro Phase 2 incoming (25% complete)    │
+│ -  High demand area (12 properties, sold in │
+│   avg 23 days)                             │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ AREA COMPARISON                             │
+│ Price: ₹3,750 psf vs ₹4,200 (17% cheaper) │
+│ Yield: 4.8% vs 4.2% (better returns)      │
+│ Trend: +15.2% YoY (strong growth)          │
+│ Supply: 12 active (healthy market)         │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ ✅ LEGAL STATUS: No major flags             │
+│ NA: ✅ Verified | Disputes: ✅ None        │
+│ TP: ✅ Clear | Title: ✅ Clean             │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ 🚧 UPCOMING INFRA (Why prices may rise)    │
+│ Metro Phase 2: 2027 (25% done)             │
+│ Ring Road: Under construction (60% done)   │
+│ IT Park: Announced 2025                     │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ 💰 RENTAL POTENTIAL                        │
+│ Monthly rent: ₹15k–18k                     │
+│ Annual yield: 5.1%                         │
+│ Demand: High (IT/expats)                   │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ SOURCE: Listed on [Portal], March 15, 2025 │
+│ [View original listing] | Updated today    │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ [Schedule Site Visit] [Ask Expert]         │
+│ [Share on WhatsApp]  [Save for Later]      │
+└─────────────────────────────────────────────┘
+TESTING CHECKLIST
+ Navigate to /find-properties, click on a property card
+
+ Verify the URL is /property/<id>
+
+ Page loads with all sections:
+
+✅ Property header (image, type, price, size)
+
+✅ "Why this property fits you" section
+
+✅ Micro-market context (price/yield/trend comparison)
+
+✅ Legal status (green or yellow badge)
+
+✅ Infra timeline
+
+✅ Rental potential (if applicable)
+
+✅ Source & transparency
+
+✅ CTAs (site visit, expert, share, save)
+
+ Data accuracy:
+
+Property details match properties table
+
+Price comparisons are correct
+
+Legal flags match rules_and_regulations
+
+Infra events match actual data
+
+ Links work:
+
+"Schedule site visit" opens form
+
+"Ask expert" opens WhatsApp with pre-filled message
+
+"Share on WhatsApp" pre-fills property details
+
+"View original listing" links to source_url
+
+ Mobile responsive:
+
+Page looks good on phone/tablet
+
+Images scale properly
+
+Text is readable
+
+CTAs are clickable
+
+ Navigation:
+
+Navbar (Understand Nagpur, Find Properties, Invest Safely) appears
+
+Active nav link highlighting works
+
+WhatsApp button works
+
+SUCCESS CRITERIA
+✅ Each property detail page tells a complete story:
+
+"Here's the property" (images, basics)
+
+"Here's why we think it's good for you" (empowerment)
+
+"Here's how it compares" (context)
+
+"Here's the legal status" (safety)
+
+"Here's what's coming" (future upside)
+
+"Here's rental potential" (returns)
+
+"Here's where this came from" (transparency)
+
+"Here's how to act" (CTAs)
+
+A buyer who lands on this page should feel: "I have all the info I need to make a confident decision.

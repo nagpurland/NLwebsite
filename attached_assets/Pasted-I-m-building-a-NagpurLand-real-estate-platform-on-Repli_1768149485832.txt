@@ -1,0 +1,124 @@
+I'm building a NagpurLand real estate platform on Replit. 
+I need you to add a complete "Data Refresh" feature that allows users to:
+
+1. Copy a pre-written prompt for scraping Nagpur land data
+2. Click a button to open Comet AI in a new tab
+3. Upload a CSV file with the scraped data
+4. Process the CSV and generate price index metrics
+5. Automatically expose the data via REST API
+
+REQUIREMENTS:
+
+FRONTEND (React Component):
+- Create a new page called "Data Refresh" at /data-refresh
+- Show 3 steps with numbered circles (1, 2, 3)
+- Step 1: Display the scraping prompt + "Copy Prompt" button + "Open Comet" button
+- Step 2: File upload area for CSV (drag & drop + click to upload)
+- Step 3: "Process CSV" button that calls backend + displays metrics in a table
+- Use Tailwind CSS with dark theme (slate-900 background)
+- Show the pre-written COMET_PROMPT text (see below)
+- When "Copy Prompt" is clicked, copy the prompt to clipboard
+- When "Open Comet" is clicked, open https://comet.com in new tab
+- When file is uploaded, show confirmation message
+- When "Process CSV" is clicked, POST to /api/process-csv with file
+- Display success/error messages and metrics in a table
+
+BACKEND (Node.js/Express):
+- Create POST endpoint /api/process-csv that accepts CSV file upload using multer
+- Parse CSV with headers: Locality,Price,PlotSize,PricePerSqft,Title,Link,PostedDate,Source
+- Group listings by locality
+- Calculate for each locality:
+  * avg_price_per_sqft (rounded to nearest integer)
+  * median_price_per_sqft
+  * count (number of listings)
+  * min and max price
+  * list of sample listings (top 3)
+- Save processed metrics to data/processed.json
+- Return JSON response with metrics
+- Create GET endpoint /api/price-index that returns all metrics
+- Create GET endpoint /api/price-index/:locality that returns specific locality metrics
+
+COMET_PROMPT (embed this in the React component):
+COMET_PROMPT = "I need you to scrape Nagpur land listings from multiple real estate websites and provide me with a downloadable CSV file.
+
+WEBSITES TO SCRAPE:
+
+99acres.com - https://www.99acres.com/nagpur-search-results.html
+Extract: Locality, Price, Plot Size, Title, Link, Posted Date
+
+Magicbricks.com - https://www.magicbricks.com/property-for-sale/residential-land-nagpur
+Extract: Locality, Price, Plot Size, Title, Link
+
+Housing.com - https://housing.com/buy/land-for-sale-in-nagpur
+Extract: Locality, Price, Plot Size, Title, Link
+
+LOCALITIES TO FOCUS ON:
+
+MIHAN, Besa, Civil Lines, Wardha Road, Hingna, Kamptee, Dharampeth, Koradi
+
+DATA FIELDS FOR EACH LISTING:
+
+Locality (area name)
+
+Price (in rupees - actual numbers)
+
+Plot Size (in sqft)
+
+Price per sqft (calculated)
+
+Title/Description
+
+Website Link
+
+Posted Date
+
+Source (99acres/magicbricks/housing)
+
+OUTPUT FORMAT:
+Provide as downloadable CSV with headers:
+Locality,Price,PlotSize,PricePerSqft,Title,Link,PostedDate,Source
+
+Requirements:
+
+Scrape at least 100-200 listings total
+
+Sort by Locality, then Price
+
+Remove duplicates
+
+Include timestamp
+
+Please provide the CSV file I can save to my computer and upload to my app."
+
+text
+
+DEPENDENCIES TO INSTALL:
+npm install multer
+npm install cors
+
+FILE STRUCTURE:
+- src/pages/DataRefresh.jsx (React component)
+- routes/api/process-csv.js (backend endpoint)
+- server.js (update with new routes)
+- data/processed.json (output file, auto-created)
+
+STYLING:
+Use Tailwind CSS with dark theme
+- bg-slate-800, bg-slate-900 for backgrounds
+- text-white for text
+- blue-500, green-500, purple-500 for accent colors
+- Add hover effects and smooth transitions
+- Make buttons responsive and accessible
+
+FUNCTIONALITY:
+1. Users click "Copy Prompt" → copies to clipboard
+2. Users click "Open Comet" → opens comet.com in new tab
+3. Users paste prompt in Comet → Comet scrapes and provides CSV
+4. Users download CSV from Comet
+5. Users click "Choose File" → upload CSV
+6. Users click "Process CSV" → backend processes and calculates metrics
+7. Frontend displays metrics in a table
+8. API endpoints become live (/api/price-index)
+
+Make sure the UI is clean, user-friendly, and has clear instructions at each step.
+Use loading states and success/error messages.

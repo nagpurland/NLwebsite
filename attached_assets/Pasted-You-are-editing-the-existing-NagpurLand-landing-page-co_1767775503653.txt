@@ -1,0 +1,46 @@
+You are editing the existing NagpurLand landing page copy.
+Do not change structure, layout, or number of buttons.
+Only rewrite a few key lines for honesty, insight, and conversion.
+
+Make these specific edits:
+
+Hero subheadline (problem + what NagpurLand actually does)
+Replace the current hero support line with:
+
+“Buying in Nagpur through random listings is risky. NagpurLand compresses scattered portal listings into a clear shortlist and adds core insights specific to your plot type and locality.”
+​
+
+Line near Direct Search / filters
+Just above or below “ACTION MODE: DIRECT SEARCH”, use:
+
+“Tell us your budget, purpose, and whether you want a flat or plot. We cut through 99acres, Magicbricks, Housing, NoBroker and local sources to surface only the options that fit your requirement profile.”
+​
+
+Trust + what ‘insights’ actually mean (replace any 4-step verification type claim)
+Wherever the page suggests strong verification, replace that sentence with:
+
+“We don’t sell property; we organise Nagpur data. For each area or plot type you’re interested in, we highlight things that matter: price sanity, locality growth signals, connectivity, nearby infra, and basic risk flags you should discuss with your lawyer.”
+​
+
+Insights-focused WhatsApp line (to get more leads)
+Under or next to “WhatsApp Us”, use:
+
+“Tell us what you’re planning to buy in Nagpur – flat or plot, budget and area. We’ll reply with focused locality and risk insights so you can talk to brokers with an information advantage.”
+​
+
+One small “what we are” positioning line (footer/about area)
+
+“NagpurLand is a Nagpur-only discovery and insights layer built on top of existing portals, helping serious buyers match the right locality and plot/flat type to their real requirement.”
+​
+
+Instructions:
+
+Keep all headings, sections, and CTAs as they are.
+
+Only swap in these lines, adjusting grammar slightly if needed.
+
+Do not claim full legal verification or site visits.
+
+Emphasise that NagpurLand gives genuine, requirement-specific insights on area and plot/flat type, not just random listings.
+​
+

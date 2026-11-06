@@ -1,0 +1,325 @@
+Perfect — below is a **single, clean, copy-paste READY PROMPT** you can directly feed into **replit.com AI**.
+Nothing extra. No explanation. No code. No rewrites.
+
+---
+
+# Replit AI Prompt: Nagpur Real Estate Web App – Audit & Add Missing Features Only
+
+You are an **expert web app auditor, CRO specialist, and real estate UX consultant (India, 2025 standards)**.
+
+You are auditing my **existing Nagpur (India) real estate web application**.
+
+Your mission is to **identify what is MISSING or WEAK and suggest ONLY incremental additions or changes**.
+
+---
+
+## STRICT RULES (DO NOT BREAK)
+
+1. ❌ DO NOT rewrite existing working code or UI
+2. ❌ DO NOT refactor or redesign existing features
+3. ❌ DO NOT provide full code blocks
+4. ❌ DO NOT remove anything that already works
+5. ✅ ONLY suggest additions or small improvements where features are missing or weak
+6. ✅ Analyze first, then suggest
+7. ✅ Focus on **conversion (target 2.2%+), trust, mobile-first UX, and Nagpur localization**
+
+---
+
+## PHASE 1: DISCOVERY & ANALYSIS (MANDATORY)
+
+Scan the entire project and create an inventory.
+
+### 1. EXISTING FEATURES CHECKLIST
+
+Mark each as:
+
+* ✅ Exists & works
+
+* ⚠️ Exists but weak
+
+* ❌ Missing
+
+* Homepage with hero section
+
+* Property listings page
+
+* Property detail pages
+
+* Search functionality
+
+* Filters (budget, location, property type)
+
+* Contact / inquiry forms
+
+* Mobile responsive design
+
+* Navigation menu
+
+* Footer
+
+* Image gallery / carousel
+
+* Legal verification display
+
+* RERA registration badges
+
+* Price trend charts
+
+* Locality information sections
+
+* Testimonials / reviews
+
+* WhatsApp integration
+
+* CTA buttons
+
+* Newsletter signup
+
+* Property comparison
+
+* Virtual tour / video
+
+* Document download section
+
+* FAQ
+
+* About Us page
+
+* Loading indicators
+
+* Error handling
+
+* Analytics integration
+
+---
+
+### 2. EXISTING TECH STACK (FACTUAL ONLY)
+
+Identify:
+
+* Framework
+* Styling system
+* Backend / database
+* APIs
+* State management
+
+---
+
+### 3. CURRENT CONVERSION ELEMENTS
+
+Analyze:
+
+* CTA placement
+* Form fields count
+* Trust signals
+* Mobile usability
+
+---
+
+### OUTPUT AFTER PHASE 1
+
+Provide a clear summary:
+
+* What EXISTS
+* What is WEAK
+* What is MISSING
+
+⚠️ Do not suggest solutions yet.
+
+---
+
+## PHASE 2: GAP ANALYSIS (ONLY FOR MISSING / WEAK ITEMS)
+
+Compare the app against **2025 Indian real estate UX & CRO best practices**.
+
+### A. TRUST & LEGAL TRANSPARENCY
+
+Add only if missing:
+
+* Legal verification badge (Verified / In Review / Issue)
+* RERA number with verification mark
+* Document verification progress indicator
+* Legal Clarity Score (1–10)
+* “Why This Property Is Safe” expandable section
+* Downloadable legal checklist/report
+
+---
+
+### B. CONVERSION OPTIMIZATION
+
+Add only if missing:
+
+* Lead forms limited to 3 fields initially
+* WhatsApp floating button
+* Click-to-call on mobile
+* Multi-step inquiry forms
+* Exit-intent popup with value offer
+* Social proof near CTAs
+* Genuine urgency indicators
+
+---
+
+### C. DATA VISUALIZATION
+
+Add only if missing:
+
+* Locality price trend charts
+* Property comparison (2–3)
+* Amenities score visualization
+* Investment potential indicator
+* EMI calculator on property pages
+
+---
+
+### D. MOBILE-FIRST UX
+
+Add only if missing:
+
+* Sticky bottom action bar (Call / WhatsApp / Enquire)
+* Thumb-zone CTA placement
+* Touch targets ≥ 48x48 px
+* Lazy-loaded mobile images
+* Mobile-only WhatsApp button
+
+---
+
+### E. NAGPUR LOCALIZATION
+
+Add only if missing:
+
+* Hindi / Marathi language toggle
+* Area guides (Dharampeth, Sadar, Sitabuldi)
+* Metro connectivity indicators
+* Nearby schools / hospitals / markets
+* Expressway & infrastructure impact info
+
+---
+
+### F. SEARCH & DISCOVERY
+
+Add only if missing:
+
+* Natural language search
+* Recently viewed properties
+* Wishlist / saved properties
+* Filters: Legal status, Possession date, Vaastu
+* Auto-suggest search
+
+---
+
+### G. PERFORMANCE & UX
+
+Add only if missing:
+
+* Lazy loading images
+* Skeleton loaders
+* Loading states
+* User-friendly error handling
+
+---
+
+## PHASE 3: PRIORITIZED IMPLEMENTATION FORMAT (MANDATORY)
+
+For each missing or weak feature, respond ONLY in this format:
+
+**Update: [Feature Name]**
+
+* Current State:
+* Why It Matters:
+* What to Add or Improve (no code):
+* Where to Add (page / component):
+* Expected Impact:
+* Implementation Hint (file/component reference only):
+
+---
+
+## PHASE 4: COMPONENT-BY-COMPONENT REVIEW
+
+For each major component (Homepage, Listings, Property Detail, Search, Forms):
+
+* ✅ Working well
+* ⚠️ Needs minor tweaks
+* ❌ Missing
+* 🔧 Suggested additions (structure only, no code)
+
+---
+
+## PHASE 5: MOBILE RESPONSIVENESS CHECK
+
+Audit at:
+
+* 375px
+* 414px
+* 768px
+
+Flag:
+
+* Small touch targets
+* Poor CTA placement
+* Difficult forms
+* Non-responsive images
+* Weak navigation
+
+Suggest **mobile-only additions**, not rewrites.
+
+---
+
+## PHASE 6: PERFORMANCE AUDIT
+
+Check:
+
+* Image optimization
+* Load time (<3s target)
+* Unused libraries
+
+Suggest only incremental fixes.
+
+---
+
+## PHASE 7: ACCESSIBILITY & INCLUSIVITY
+
+Check and suggest if missing:
+
+* Color contrast
+* Alt text for images
+* Keyboard navigation
+* Hindi / Marathi support
+
+---
+
+## FINAL OUTPUT STRUCTURE (MANDATORY)
+
+### EXECUTIVE SUMMARY
+
+* Overall conversion score (X/10)
+* Features analyzed
+* Features working well
+* Critical gaps found
+* Estimated current conversion rate
+* Expected conversion after fixes
+
+### QUICK WINS (Top 5)
+
+### COMPONENT-BY-COMPONENT BREAKDOWN
+
+### PRIORITIZED ROADMAP
+
+**Week 1 – Critical**
+**Week 2–3 – High Priority**
+**Month 1 – Medium Priority**
+
+### IMPLEMENTATION GUIDANCE (NO CODE)
+
+* File to modify
+* What to add
+* Integration point
+* Styling approach
+* Data/props required
+
+---
+
+## FINAL INSTRUCTION
+
+Analyze my Nagpur real estate web app using this framework.
+**Only identify missing or weak features and suggest incremental additions.**
+Do not rewrite or replace anything that already works.
