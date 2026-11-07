@@ -11,10 +11,10 @@ import {
   insertUserWatchlistSchema, insertPriceAlertSchema
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
-import crypto from "crypto";
+import rateLimit from "express-rate-limit";
+import { DUMMY_PASSWORD_HASH, generateToken, hashToken, isPublicApi, publicEventSchema, publicLeadSchema, verifyPassword } from "./auth";
 import { runScraperJob, getDefaultConfigs } from "./scraper";
 import { insightEngine } from "./insights/engine";
-import { seedDatabase } from "./seed";
 import { intelligenceCollector } from "./intelligence/collector";
 import multer from "multer";
 import { parse } from "csv-parse/sync";
@@ -57,38 +57,64 @@ interface AuthenticatedRequest extends Request {
 }
 
 async function authMiddleware(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  if (req.userId) return next();
+
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
   const token = authHeader.substring(7);
-  const session = await storage.getSession(token);
+  const session = await storage.getSession(hashToken(token));
   
   if (!session || new Date(session.expiresAt) < new Date()) {
     return res.status(401).json({ message: "Session expired" });
+  }
+
+  const user = await storage.getUser(session.userId);
+  if (user?.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden" });
   }
 
   req.userId = session.userId;
   next();
 }
 
-// Simple password hashing (in production, use bcrypt)
-function hashPassword(password: string): string {
-  return crypto.createHash('sha256').update(password + 'nagpur_salt_2024').digest('hex');
-}
-
-function generateToken(): string {
-  return crypto.randomBytes(32).toString('hex');
-}
-
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-  
+  // Default deny: a route is public only if it is listed in PUBLIC_API (server/auth.ts).
+  app.use("/api", (req, res, next) => {
+    if (isPublicApi(req.method, req.path)) return next();
+    authMiddleware(req as AuthenticatedRequest, res, next).catch(next);
+  });
+
+  const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: "Too many login attempts. Try again in 15 minutes." },
+  });
+  const publicFormLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    limit: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: "Too many requests. Please try again later." },
+  });
+
+  const publicEventLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    limit: 200,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: "Too many requests." },
+  });
+
   // ============ AUTH ROUTES ============
-  app.post("/api/auth/login", async (req, res) => {
+  app.post("/api/auth/login", loginLimiter, async (req, res) => {
     try {
       const { username, password } = req.body;
       if (!username || !password) {
@@ -96,7 +122,8 @@ export async function registerRoutes(
       }
 
       const user = await storage.getUserByUsername(username);
-      if (!user || user.password !== hashPassword(password)) {
+      // Unknown usernames do the same hashing work, so timing doesn't reveal which names exist.
+      if (!verifyPassword(String(password), user?.password ?? DUMMY_PASSWORD_HASH) || !user) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
@@ -104,36 +131,12 @@ export async function registerRoutes(
       const expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + 7); // 7 day session
 
-      await storage.createSession(user.id, token, expiresAt);
+      await storage.createSession(user.id, hashToken(token), expiresAt);
 
       res.json({ token, user: { id: user.id, username: user.username, role: user.role } });
     } catch (error) {
       console.error("Login error:", error);
       res.status(500).json({ message: "Login failed" });
-    }
-  });
-
-  app.post("/api/auth/register", async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username and password required" });
-      }
-
-      const existing = await storage.getUserByUsername(username);
-      if (existing) {
-        return res.status(409).json({ message: "Username already exists" });
-      }
-
-      const user = await storage.createUser({
-        username,
-        password: hashPassword(password)
-      });
-
-      res.status(201).json({ id: user.id, username: user.username });
-    } catch (error) {
-      console.error("Registration error:", error);
-      res.status(500).json({ message: "Registration failed" });
     }
   });
 
@@ -308,7 +311,7 @@ export async function registerRoutes(
     try {
       const token = req.headers.authorization?.substring(7);
       if (token) {
-        await storage.deleteSession(token);
+        await storage.deleteSession(hashToken(token));
       }
       res.json({ message: "Logged out" });
     } catch (error) {
@@ -413,7 +416,47 @@ export async function registerRoutes(
     }
   });
 
-  // Public read for dashboard, mutations remain protected
+  // Visitor enquiries from the public forms
+  app.post("/api/public/leads", publicFormLimiter, async (req, res) => {
+    const result = publicLeadSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ message: result.error.issues[0]?.message ?? "Invalid details" });
+    }
+    const { kind, name, phone, email, locality, message, website } = result.data;
+    if (website) {
+      return res.status(201).json({ received: true });
+    }
+    try {
+      await storage.createLead({
+        name: name || email || "Newsletter subscriber",
+        phone: phone || "",
+        email,
+        locality,
+        message,
+        requirementType: kind,
+        source: kind,
+        notes: `Agreed to privacy policy on ${new Date().toISOString()}`,
+      });
+      res.status(201).json({ received: true });
+    } catch (error) {
+      res.status(500).json({ message: "Could not save your request. Please try again." });
+    }
+  });
+
+  app.post("/api/public/events", publicEventLimiter, async (req, res) => {
+    const result = publicEventSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ message: "Invalid event" });
+    }
+    try {
+      const { event, page, language } = result.data;
+      await storage.trackEvent({ sessionId: "anonymous", eventType: event, eventData: { page, language } });
+      res.status(204).end();
+    } catch (error) {
+      res.status(500).json({ message: "Could not record event" });
+    }
+  });
+
   app.get("/api/leads", async (req, res) => {
     try {
       const { status, source } = req.query;
@@ -1101,27 +1144,6 @@ export async function registerRoutes(
     }
   });
 
-  // ============ SEED DATABASE ROUTE ============
-  app.post("/api/admin/seed", authMiddleware as any, async (_req, res) => {
-    try {
-      await seedDatabase();
-      res.json({ message: "Database seeded successfully" });
-    } catch (error) {
-      res.status(500).json({ message: "Failed to seed database" });
-    }
-  });
-
-  // Public seed endpoint for initial setup (remove in production)
-  app.post("/api/seed", async (_req, res) => {
-    try {
-      await seedDatabase();
-      res.json({ message: "Database seeded successfully" });
-    } catch (error) {
-      console.error("Seed error:", error);
-      res.status(500).json({ message: "Failed to seed database" });
-    }
-  });
-
   // ============ WEB INTELLIGENCE - SOURCES ============
   app.get("/api/intelligence/sources", async (req, res) => {
     try {
@@ -1170,7 +1192,7 @@ export async function registerRoutes(
     }
   });
 
-  app.delete("/api/intelligence/sources/:id", authMiddleware as any, async (req, res) => {
+  app.delete("/api/intelligence/sources/:id", authMiddleware as any, async (req: AuthenticatedRequest, res) => {
     try {
       const { adminPassword } = req.body;
       
@@ -1178,13 +1200,13 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Admin password is required" });
       }
       
-      // Verify the admin password using the local hashPassword function
-      const adminUser = await storage.getUserByUsername("admin");
+      // Confirm the admin password again before this destructive action
+      const adminUser = await storage.getUser(req.userId!);
       if (!adminUser) {
         return res.status(403).json({ message: "Admin account not found" });
       }
       
-      const isValidPassword = adminUser.password === hashPassword(adminPassword);
+      const isValidPassword = verifyPassword(String(adminPassword), adminUser.password);
       if (!isValidPassword) {
         return res.status(403).json({ message: "Invalid admin password" });
       }

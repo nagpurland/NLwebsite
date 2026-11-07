@@ -14,7 +14,7 @@ export default function TPSchemeCheckGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -24,7 +24,7 @@ export default function TPSchemeCheckGuide() {
           </Link>
           
           <Badge className="bg-amber-100 text-amber-700 mb-4">Check #12 - Physical</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             How to Check TP Scheme Restrictions on Your Plot
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,7 +37,7 @@ export default function TPSchemeCheckGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why This Matters</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
               Town Planning (TP) schemes in Nagpur regularly mark land for road widening, public amenities, or green zones. If your plot falls under TP reservation, you may lose a significant portion without any compensation choice. Worse, building permission will be denied for reserved portions.
             </p>
@@ -49,7 +49,7 @@ export default function TPSchemeCheckGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Step-by-Step TP Check</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Step-by-Step TP Check</h2>
             
             <div className="space-y-6">
               <Card className="border-l-4 border-l-amber-500">
@@ -57,7 +57,7 @@ export default function TPSchemeCheckGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold flex-shrink-0">1</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Visit the Town Planning Office</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Visit the Town Planning Office</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Go to NMC (Nagpur Municipal Corporation) Town Planning Department with your survey number and property details.
                       </p>
@@ -74,7 +74,7 @@ export default function TPSchemeCheckGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold flex-shrink-0">2</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Request the TP Scheme Map</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Request the TP Scheme Map</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Ask for the approved TP scheme layout for your area. They will show you the map with your plot marked.
                       </p>
@@ -91,7 +91,7 @@ export default function TPSchemeCheckGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold flex-shrink-0">3</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check for Reservations</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check for Reservations</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Look for color-coded markings on the map. Common reservations include:
                       </p>
@@ -111,7 +111,7 @@ export default function TPSchemeCheckGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold flex-shrink-0">4</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check Development Plan (DP)</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check Development Plan (DP)</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Besides TP scheme, also check the approved Development Plan for any future road proposals or zone changes.
                       </p>
@@ -125,7 +125,7 @@ export default function TPSchemeCheckGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold flex-shrink-0">5</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Get Written Confirmation</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Get Written Confirmation</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Request a "No Objection" certificate or written confirmation that your plot has no TP reservations affecting construction.
                       </p>
@@ -137,7 +137,7 @@ export default function TPSchemeCheckGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Red Flags to Watch</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Red Flags to Watch</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -191,7 +191,7 @@ export default function TPSchemeCheckGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
               <MapPin className="w-6 h-6 inline mr-2 text-amber-600" />
               Where to Check in Nagpur
             </h2>
@@ -199,7 +199,7 @@ export default function TPSchemeCheckGuide() {
             <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">NMC Town Planning Department</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">NMC Town Planning Department</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">NMC Main Building, Civil Lines, Nagpur</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10 AM - 5 PM</span>
@@ -210,7 +210,7 @@ export default function TPSchemeCheckGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">NMRDA (Nagpur Metropolitan Region Development Authority)</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">NMRDA (Nagpur Metropolitan Region Development Authority)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Seminary Hills, Near RBI, Nagpur</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10:30 AM - 5:30 PM</span>
@@ -221,7 +221,7 @@ export default function TPSchemeCheckGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Collector Office (District Planning)</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Collector Office (District Planning)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Civil Lines, Near High Court, Nagpur</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10 AM - 5 PM</span>
@@ -233,21 +233,21 @@ export default function TPSchemeCheckGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Understanding TP Impact</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Understanding TP Impact</h2>
             
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
-              <h3 className="font-bold text-slate-900 dark:text-white mb-4">If Part of Your Plot is Reserved:</h3>
+            <div className="bg-primary/5 dark:bg-blue-900/20 border border-primary/20 dark:border-blue-800 rounded-xl p-6">
+              <h3 className="font-bold text-primary dark:text-white mb-4">If Part of Your Plot is Reserved:</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span className="text-slate-700 dark:text-slate-300">You may get TDR (Transferable Development Rights) as compensation</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span className="text-slate-700 dark:text-slate-300">Building permission will only be given for unreserved portion</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span className="text-slate-700 dark:text-slate-300">Negotiate price reduction based on reserved area percentage</span>
                 </li>
                 <li className="flex items-start gap-3">
@@ -259,7 +259,7 @@ export default function TPSchemeCheckGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Common Mistakes to Avoid</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Common Mistakes to Avoid</h2>
             
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
               <ul className="space-y-3">
@@ -287,7 +287,7 @@ export default function TPSchemeCheckGuide() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-between mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
           <Link href="/step-3-safety-check">
-            <Button size="lg" className="w-full sm:w-auto bg-green-600 hover:bg-green-700" data-testid="button-back-mark">
+            <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90" data-testid="button-back-mark">
               <CheckCircle className="w-4 h-4 mr-2" />
               Back to Checklist & Mark Complete
             </Button>
@@ -302,7 +302,7 @@ export default function TPSchemeCheckGuide() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
-          <h3 className="font-bold text-slate-900 dark:text-white mb-4">Related Guides</h3>
+          <h3 className="font-bold text-primary dark:text-white mb-4">Related Guides</h3>
           <div className="grid md:grid-cols-3 gap-4">
             <Link href="/guide/boundary-verification">
               <Card className="hover-elevate cursor-pointer">

@@ -14,7 +14,7 @@ export default function EncumbranceCertificateGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -24,7 +24,7 @@ export default function EncumbranceCertificateGuide() {
           </Link>
           
           <Badge className="bg-emerald-100 text-emerald-700 mb-4">Check #6 - Legal</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             Encumbrance Certificate in Nagpur: How to Obtain and Verify
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,7 +37,7 @@ export default function EncumbranceCertificateGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">What is an Encumbrance Certificate?</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">What is an Encumbrance Certificate?</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
               An Encumbrance Certificate (EC) is a legal document that records all monetary transactions registered against a property. It shows loans, mortgages, liens, court attachments, and other charges that affect the property's title.
             </p>
@@ -51,7 +51,7 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why EC is Essential</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why EC is Essential</h2>
             <ul className="space-y-3 text-slate-600 dark:text-slate-400">
               <li className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -77,10 +77,10 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">How to Apply for EC</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">How to Apply for EC</h2>
             
             <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
-              <Globe className="w-5 h-5 text-blue-600" /> Online Method (Recommended)
+              <Globe className="w-5 h-5 text-primary" /> Online Method (Recommended)
             </h3>
             
             <div className="space-y-4 mb-8">
@@ -89,7 +89,7 @@ export default function EncumbranceCertificateGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold flex-shrink-0">1</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Visit Maharashtra Government Portal</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Visit Maharashtra Government Portal</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Go to <span className="font-mono bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">igrmaharashtra.gov.in</span> and register/login
                       </p>
@@ -103,7 +103,7 @@ export default function EncumbranceCertificateGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold flex-shrink-0">2</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Select "Encumbrance Certificate"</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Select "Encumbrance Certificate"</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Navigate to Services → Encumbrance Certificate → Apply Online
                       </p>
@@ -117,7 +117,7 @@ export default function EncumbranceCertificateGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold flex-shrink-0">3</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Enter Property Details</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Enter Property Details</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Provide survey number, village/ward, Sub-Registrar office, and period (recommend 30 years)
                       </p>
@@ -131,7 +131,7 @@ export default function EncumbranceCertificateGuide() {
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold flex-shrink-0">4</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Pay Fees and Download</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Pay Fees and Download</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Pay online (Rs. 25 per year checked). EC available in 3-7 business days.
                       </p>
@@ -148,7 +148,7 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Documents Needed</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Documents Needed</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card>
@@ -187,14 +187,14 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Fees and Timeline</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Fees and Timeline</h2>
             
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="border-2 border-emerald-200">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Banknote className="w-6 h-6 text-emerald-600" />
-                    <h4 className="font-bold text-slate-900 dark:text-white">Fees</h4>
+                    <h4 className="font-bold text-primary dark:text-white">Fees</h4>
                   </div>
                   <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
                     <li>• Rs. 25 per year checked</li>
@@ -204,11 +204,11 @@ export default function EncumbranceCertificateGuide() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-blue-200">
+              <Card className="border-2 border-primary/20">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <Clock className="w-6 h-6 text-blue-600" />
-                    <h4 className="font-bold text-slate-900 dark:text-white">Processing Time</h4>
+                    <Clock className="w-6 h-6 text-primary" />
+                    <h4 className="font-bold text-primary dark:text-white">Processing Time</h4>
                   </div>
                   <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
                     <li>• Online: 3-7 business days</li>
@@ -221,15 +221,15 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Nagpur Sub-Registrar Offices</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Nagpur Sub-Registrar Offices</h2>
             
             <div className="grid gap-4">
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Joint Sub-Registrar Office, Nagpur (City)</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Joint Sub-Registrar Office, Nagpur (City)</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Civil Lines, Near District Court, Nagpur - 440001</p>
                       <p className="text-slate-500 text-xs mt-1">Phone: 0712-2560123 | Hours: 10 AM - 5:45 PM</p>
                     </div>
@@ -240,9 +240,9 @@ export default function EncumbranceCertificateGuide() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Sub-Registrar Office, Sadar</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Sub-Registrar Office, Sadar</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Sadar Area, Nagpur</p>
                       <p className="text-slate-500 text-xs mt-1">Hours: 10 AM - 5:45 PM (Closed: Sundays, 2nd & 4th Saturdays)</p>
                     </div>
@@ -253,9 +253,9 @@ export default function EncumbranceCertificateGuide() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Sub-Registrar Office, Kamptee</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Sub-Registrar Office, Kamptee</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Kamptee Taluka Office</p>
                       <p className="text-slate-500 text-xs mt-1">Hours: 10 AM - 5:45 PM (Closed: Sundays, 2nd & 4th Saturdays)</p>
                     </div>
@@ -266,7 +266,7 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">How to Read an EC</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">How to Read an EC</h2>
             
             <div className="space-y-4">
               <Card className="bg-green-50 dark:bg-green-900/20 border-green-200">
@@ -313,7 +313,7 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Red Flags in EC</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Red Flags in EC</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -367,16 +367,16 @@ export default function EncumbranceCertificateGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Recommended Period to Check</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Recommended Period to Check</h2>
             
-            <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200">
+            <Card className="bg-primary/5 dark:bg-blue-900/20 border-primary/20">
               <CardContent className="p-6">
                 <p className="text-slate-700 dark:text-slate-300 mb-4">
                   <strong>Recommended: 30 years</strong> - This covers the standard limitation period for property disputes in India. Banks typically require 13-30 year EC for home loans.
                 </p>
                 <div className="grid md:grid-cols-3 gap-4 text-center">
                   <div className="p-3 bg-white dark:bg-slate-800 rounded-lg">
-                    <p className="text-2xl font-bold text-blue-600">13 years</p>
+                    <p className="text-2xl font-bold text-primary">13 years</p>
                     <p className="text-xs text-slate-500">Minimum (Bank standard)</p>
                   </div>
                   <div className="p-3 bg-white dark:bg-slate-800 rounded-lg border-2 border-green-500">
@@ -407,7 +407,7 @@ export default function EncumbranceCertificateGuide() {
                   </div>
                 </div>
                 <Link href="/step-3-safety-check">
-                  <Button className="bg-green-600 hover:bg-green-700" data-testid="button-mark-complete">
+                  <Button className="bg-primary hover:bg-primary/90" data-testid="button-mark-complete">
                     Mark Complete <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>

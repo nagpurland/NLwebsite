@@ -183,7 +183,7 @@ export default function Leads() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1 text-slate-900" data-testid="text-leads-title">Lead Intelligence Queue</h1>
+          <h1 className="text-4xl font-semibold tracking-tight mb-1 text-primary" data-testid="text-leads-title">Lead Intelligence Queue</h1>
           <p className="text-muted-foreground font-medium italic">Behavioral prioritization for the Nagpur market.</p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
@@ -325,21 +325,21 @@ export default function Leads() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-4">
-        <Card className="border-none shadow-md bg-indigo-600 text-white overflow-hidden relative">
+        <Card className="border-none shadow-md bg-primary text-white overflow-hidden relative">
           <div className="absolute right-0 top-0 p-4 opacity-20">
             <Target className="h-16 w-16" />
           </div>
           <CardContent className="p-6">
             <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">High Intent</p>
-            <p className="text-3xl font-black mb-2" data-testid="text-high-intent-count">{highIntentCount} Leads</p>
+            <p className="text-3xl font-semibold mb-2" data-testid="text-high-intent-count">{highIntentCount} Leads</p>
             <Badge className="bg-white/20 text-white border-none font-bold">Score 70+</Badge>
           </CardContent>
         </Card>
         
         {[
-          { label: "Avg Intent Score", value: `${avgIntentScore}/10`, icon: Zap, color: "text-orange-600", bg: "bg-orange-50" },
+          { label: "Avg Intent Score", value: `${avgIntentScore}/10`, icon: Zap, color: "text-accent-strong", bg: "bg-accent/15" },
           { label: "Total Leads", value: leads?.length || 0, icon: TrendingUp, color: "text-green-600", bg: "bg-green-50" },
-          { label: "Active Follow-ups", value: activeFollowups, icon: Phone, color: "text-blue-600", bg: "bg-blue-50" },
+          { label: "Active Follow-ups", value: activeFollowups, icon: Phone, color: "text-primary", bg: "bg-primary/5" },
         ].map((stat, i) => (
           <Card key={i} className="border-none shadow-md">
             <CardContent className="p-6 flex items-center gap-4">
@@ -348,7 +348,7 @@ export default function Leads() {
               </div>
               <div>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{stat.label}</p>
-                <p className="text-2xl font-black">{stat.value}</p>
+                <p className="text-2xl font-semibold">{stat.value}</p>
               </div>
             </CardContent>
           </Card>
@@ -390,11 +390,17 @@ export default function Leads() {
                       <TableRow key={lead.id} className="group hover:bg-slate-50/50 transition-colors" data-testid={`row-lead-${lead.id}`}>
                         <TableCell className="px-8 py-6">
                           <div>
-                            <div className="font-black text-slate-900">{lead.name}</div>
+                            <div className="font-semibold text-slate-900">{lead.name}</div>
                             <div className="flex items-center gap-1.5 text-xs font-bold text-green-600 mt-1">
                               <MessageSquare className="h-3 w-3" />
                               {lead.phone}
                             </div>
+                            {lead.email && <div className="text-xs font-medium text-slate-600 mt-1">{lead.email}</div>}
+                            {lead.message && (
+                              <p className="text-sm text-slate-700 mt-2 max-w-sm whitespace-pre-wrap break-words" data-testid={`text-lead-message-${lead.id}`}>
+                                {lead.message}
+                              </p>
+                            )}
                             <Badge variant="outline" className="mt-2 text-[9px] uppercase font-bold border-slate-200">
                               Via {lead.source?.replace('_', ' ') || 'website'}
                             </Badge>
@@ -416,14 +422,14 @@ export default function Leads() {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between gap-4 w-32">
                               <span className="text-[10px] font-bold text-muted-foreground uppercase">Score</span>
-                              <span className="font-black text-slate-900">{(lead.intentScore || 0) / 10}/10</span>
+                              <span className="font-semibold text-slate-900">{(lead.intentScore || 0) / 10}/10</span>
                             </div>
                             <div className="h-1.5 w-32 bg-slate-100 rounded-full overflow-hidden">
                               <div 
                                 className={cn(
                                   "h-full rounded-full",
                                   intentLevel === "High" ? "bg-green-500" : 
-                                  intentLevel === "Medium" ? "bg-orange-500" : "bg-slate-400"
+                                  intentLevel === "Medium" ? "bg-accent-strong" : "bg-slate-400"
                                 )} 
                                 style={{ width: `${lead.intentScore || 0}%` }} 
                               />
@@ -433,7 +439,7 @@ export default function Leads() {
                               className={cn(
                                 "text-[9px] uppercase font-bold",
                                 intentLevel === "High" ? "bg-green-100 text-green-700" : 
-                                intentLevel === "Medium" ? "bg-orange-100 text-orange-700" : "bg-slate-100"
+                                intentLevel === "Medium" ? "bg-accent/15 text-accent-strong" : "bg-slate-100"
                               )}
                             >
                               {intentLevel} Intent
@@ -453,6 +459,8 @@ export default function Leads() {
                           <div className="flex items-center justify-end gap-2">
                             <Button 
                               className="bg-green-600 h-9 px-4 rounded-lg font-bold text-xs shadow-lg shadow-green-600/10"
+                              disabled={!lead.phone}
+                              onClick={() => { window.location.href = `tel:${lead.phone}`; }}
                               data-testid={`button-call-lead-${lead.id}`}
                             >
                               Call Lead
@@ -479,7 +487,7 @@ export default function Leads() {
                                   disabled={updateLeadMutation.isPending}
                                   data-testid={`button-mark-contacted-${lead.id}`}
                                 >
-                                  <CheckCircle className="h-4 w-4 mr-2 text-blue-500" />
+                                  <CheckCircle className="h-4 w-4 mr-2 text-primary" />
                                   Mark as Contacted
                                 </DropdownMenuItem>
                                 <DropdownMenuItem 
@@ -488,7 +496,7 @@ export default function Leads() {
                                   disabled={updateLeadMutation.isPending}
                                   data-testid={`button-schedule-visit-${lead.id}`}
                                 >
-                                  <Calendar className="h-4 w-4 mr-2 text-orange-500" />
+                                  <Calendar className="h-4 w-4 mr-2 text-accent-strong" />
                                   Schedule Site Visit
                                 </DropdownMenuItem>
                                 <DropdownMenuItem 

@@ -165,10 +165,10 @@ export default function PropertyEngine() {
 
   const getSourceBadgeClass = (source: string) => {
     switch(source.toLowerCase()) {
-      case "99acres": return "bg-blue-50 text-blue-700 border-blue-100";
-      case "magicbricks": return "bg-orange-50 text-orange-700 border-orange-100";
+      case "99acres": return "bg-primary/5 text-primary border-primary/20";
+      case "magicbricks": return "bg-accent/15 text-accent-strong border-accent/40";
       case "housing": return "bg-green-50 text-green-700 border-green-100";
-      default: return "bg-purple-50 text-purple-700 border-purple-100";
+      default: return "bg-primary/5 text-primary border-primary/20";
     }
   };
 
@@ -176,7 +176,7 @@ export default function PropertyEngine() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1" data-testid="text-properties-title">Property Intelligence Engine</h1>
+          <h1 className="text-4xl font-semibold tracking-tight mb-1" data-testid="text-properties-title">Property Intelligence Engine</h1>
           <p className="text-muted-foreground font-medium italic">Aggregating properties across Nagpur from multiple sources.</p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
@@ -208,13 +208,13 @@ export default function PropertyEngine() {
           <>
             <Card className="border-none shadow-md">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                  <Database className="h-6 w-6 text-blue-600" />
+                <div className="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center">
+                  <Database className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Aggregated</p>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-black" data-testid="text-total-properties">{totalProperties}</p>
+                    <p className="text-2xl font-semibold" data-testid="text-total-properties">{totalProperties}</p>
                     <span className="text-[10px] font-bold text-green-600">Active</span>
                   </div>
                 </div>
@@ -222,13 +222,13 @@ export default function PropertyEngine() {
             </Card>
             <Card className="border-none shadow-md">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-purple-50 flex items-center justify-center">
-                  <LayoutGrid className="h-6 w-6 text-purple-600" />
+                <div className="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center">
+                  <LayoutGrid className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Sources</p>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-black">{sources?.length || 0}</p>
+                    <p className="text-2xl font-semibold">{sources?.length || 0}</p>
                     <span className="text-[10px] font-bold text-green-600">Connected</span>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function PropertyEngine() {
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Verified</p>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-black" data-testid="text-verified-properties">{verifiedCount}</p>
+                    <p className="text-2xl font-semibold" data-testid="text-verified-properties">{verifiedCount}</p>
                     <span className="text-[10px] font-bold text-muted-foreground">of {totalProperties}</span>
                   </div>
                 </div>
@@ -250,13 +250,13 @@ export default function PropertyEngine() {
             </Card>
             <Card className="border-none shadow-md">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-orange-50 flex items-center justify-center">
-                  <CheckCircle2 className="h-6 w-6 text-orange-600" />
+                <div className="h-12 w-12 rounded-xl bg-accent/15 flex items-center justify-center">
+                  <CheckCircle2 className="h-6 w-6 text-accent-strong" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Avg Quality</p>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-black">{avgQualityScore}</p>
+                    <p className="text-2xl font-semibold">{avgQualityScore}</p>
                     <span className="text-[10px] font-bold text-green-600">/10</span>
                   </div>
                 </div>
@@ -272,7 +272,6 @@ export default function PropertyEngine() {
             <CardTitle>Properties Aggregated</CardTitle>
             <CardDescription>Consolidated listings with deduplication</CardDescription>
           </div>
-          <Button variant="ghost" size="sm" className="font-bold text-primary" data-testid="button-view-all-properties">View All</Button>
         </CardHeader>
         <CardContent className="p-0">
           {propertiesLoading ? (
@@ -299,7 +298,7 @@ export default function PropertyEngine() {
                     <TableRow key={prop.id} className="group hover:bg-slate-50/50 transition-colors cursor-pointer" data-testid={`row-property-${prop.id}`}>
                       <TableCell className="px-8 py-6">
                         <div>
-                          <div className="font-black text-slate-900">{prop.title}</div>
+                          <div className="font-semibold text-slate-900">{prop.title}</div>
                           <div className="text-xs font-bold text-primary mt-1">{prop.price} - {prop.locality}</div>
                           <div className="text-[10px] text-muted-foreground mt-1 font-medium italic">
                             {prop.type} | {prop.area} {prop.bhk && `| ${prop.bhk}`}
@@ -320,7 +319,7 @@ export default function PropertyEngine() {
                       <TableCell>
                         <div className="space-y-1">
                           <div className="flex items-center gap-1.5">
-                            <div className="text-[10px] font-black">{qualityScore.toFixed(1)}/10</div>
+                            <div className="text-[10px] font-semibold">{qualityScore.toFixed(1)}/10</div>
                             <div className="flex gap-0.5">
                               {[...Array(5)].map((_, i) => (
                                 <div 
@@ -383,7 +382,7 @@ export default function PropertyEngine() {
                       <TableCell className="text-right px-8">
                         <div className="flex flex-col items-end">
                           <Badge 
-                            className={prop.isVerified ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-700"}
+                            className={prop.isVerified ? "bg-green-100 text-green-700" : "bg-accent/15 text-accent-strong"}
                           >
                             {prop.isVerified ? "Verified" : "Pending"}
                           </Badge>
@@ -409,7 +408,7 @@ export default function PropertyEngine() {
         </CardContent>
       </Card>
 
-      <Card className="border-none shadow-xl rounded-[2rem] overflow-hidden bg-slate-900 text-white">
+      <Card className="border-none shadow-xl rounded-[2rem] overflow-hidden bg-primary text-white">
         <CardHeader className="p-8 pb-4">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div>
@@ -424,7 +423,7 @@ export default function PropertyEngine() {
             {sources?.map((source) => (
               <div key={source.id} className="bg-white/5 rounded-2xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-black text-sm">{source.name}</span>
+                  <span className="font-semibold text-sm">{source.name}</span>
                   <Badge className={source.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}>
                     {source.isActive ? "Active" : "Inactive"}
                   </Badge>

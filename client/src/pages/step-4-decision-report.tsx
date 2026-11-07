@@ -1,268 +1,182 @@
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { SimpleBreadcrumb } from "@/components/ui/simple-breadcrumb";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { StepHeader } from "@/components/ui/step-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  FileText, Download, Calendar, Phone, CheckCircle2,
-  Star, Trophy, Sparkles, ArrowRight, HelpCircle,
-  TrendingUp, Shield, AlertTriangle, Target
-} from "lucide-react";
-
-const STEP_NAMES = ["Market Intel", "Filter Risky", "Safety Check", "Decision Report"];
-
-const REPORT_SECTIONS = [
-  {
-    icon: TrendingUp,
-    title: "Market Analysis Summary",
-    description: "Price trends, locality comparison, and investment potential score for your shortlisted properties."
-  },
-  {
-    icon: AlertTriangle,
-    title: "Risk Assessment",
-    description: "Comprehensive risk profile including legal status, documentation gaps, and potential red flags."
-  },
-  {
-    icon: Shield,
-    title: "Verification Status",
-    description: "Results of all safety checks including document verification, legal search, and physical inspection."
-  },
-  {
-    icon: Target,
-    title: "Final Recommendation",
-    description: "Clear go/no-go recommendation with supporting rationale and suggested next steps."
-  }
-];
-
-const LEARNING_SUMMARY = [
-  { step: 1, title: "Market Intelligence", lesson: "You learned to analyze price trends and compare localities" },
-  { step: 2, title: "Risk Filtering", lesson: "You identified and eliminated high-risk properties" },
-  { step: 3, title: "Safety Verification", lesson: "You verified legal status and documentation" },
-  { step: 4, title: "Decision Making", lesson: "You're ready to make an informed investment decision" }
-];
-
-const NEXT_ACTIONS = [
-  { icon: Download, title: "Download Full Report", description: "Get PDF with all findings", primary: true },
-  { icon: Calendar, title: "Schedule Site Visit", description: "Book guided property tour", primary: false },
-  { icon: Phone, title: "Talk to Expert", description: "Free 15-min consultation", primary: false }
-];
+import { ALL_CHECKS } from "@/pages/step-3-safety-check";
+import { ArrowRight, CheckCircle2, Circle, Printer, Scale, Trash2 } from "lucide-react";
+import { SCREENING_IDS, screeningFollowUpIds, useBuyerDraft } from "@/lib/buyer-draft";
+import { useTranslation } from "@/lib/i18n/context";
+import { comparisonText } from "@/lib/i18n/comparison";
+import { fill } from "@/lib/i18n/site";
+import { calculatePlotCost, compareWithSimilar, rupees } from "@/lib/plot-price";
+import { STEPS } from "@/lib/step-navigation";
 
 export default function Step4DecisionReport() {
   const [, navigate] = useLocation();
+  const t = useTranslation();
+  const s = t.step4;
+  const { draft, resetDraft } = useBuyerDraft();
 
-  const handleStepClick = (stepNum: number) => {
-    const routes = [
-      "/step-1-market-intel",
-      "/step-2-filter-risky",
-      "/step-3-safety-check",
-      "/step-4-decision-report"
-    ];
-    navigate(routes[stepNum - 1] || "/");
+  const pending = ALL_CHECKS.filter((check) => !draft.checks.includes(check.id));
+  const done = ALL_CHECKS.filter((check) => draft.checks.includes(check.id));
+  const cost = calculatePlotCost(Number(draft.askingPrice), Number(draft.area), Number(draft.otherCharges || 0));
+  const comparison = cost ? compareWithSimilar(cost.quotedPerSqFt, Number(draft.similarPricePerSqFt)) : null;
+  const unanswered = SCREENING_IDS.filter((id) => !draft.screening[id]).length;
+  const advocateQuestions = [
+    ...screeningFollowUpIds(draft).map((id) => t.step2.questions[id].followUp),
+    ...pending.map((check) => fill(s.openQuestion, { check: t.checks[check.id - 1].title })),
+  ];
+
+  const handleReset = () => {
+    if (window.confirm(s.resetConfirm)) {
+      resetDraft();
+      navigate(STEPS[0].link);
+    }
   };
+
+  const facts = [
+    { label: s.facts.area, value: draft.locality },
+    { label: s.facts.price, value: Number(draft.askingPrice) > 0 ? rupees(Number(draft.askingPrice)) : "" },
+    { label: s.facts.size, value: Number(draft.area) > 0 ? `${Number(draft.area).toLocaleString("en-IN")} sq.ft` : "" },
+    { label: s.facts.other, value: Number(draft.otherCharges) > 0 ? rupees(Number(draft.otherCharges)) : "" },
+    { label: s.facts.quoted, value: cost ? rupees(cost.quotedPerSqFt) : "" },
+    { label: s.facts.total, value: cost ? rupees(cost.totalPerSqFt) : "" },
+  ];
 
   return (
     <PublicLayout>
       <div className="min-h-screen bg-white dark:bg-slate-900">
-        <SimpleBreadcrumb
-          steps={[
-            { label: "Home", link: "/" },
-            { label: "4-Step System", link: "/invest-safely" }
-          ]}
-          currentPage="Step 4: Decision Report"
-        />
+        <div className="print:hidden">
+          <SimpleBreadcrumb
+            steps={[
+              { label: t.common.home, link: "/" },
+              { label: t.common.fourStep, link: "/4-step-system" }
+            ]}
+            currentPage={`${fill(t.common.stepLabel, { step: 4 })}: ${t.steps[3].title}`}
+          />
 
-        <ProgressBar
-          currentStep={4}
-          stepNames={STEP_NAMES}
-          onStepClick={handleStepClick}
-        />
+          <ProgressBar currentStep={4} />
 
-        <StepHeader
-          stepNumber={4}
-          totalSteps={4}
-          stepTitle="Decision Report"
-          description="Generate your comprehensive investment decision report with all findings, analysis, and recommendations."
-          previousStep={{ title: "Safety Check", link: "/step-3-safety-check" }}
-        />
+          <StepHeader
+            stepNumber={4}
+            description={s.description}
+          />
+        </div>
 
-        <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-12">
-          <section 
-            className="bg-gradient-to-br from-[#2180a8]/10 to-[#208a4a]/10 dark:from-[#2180a8]/20 dark:to-[#208a4a]/20 rounded-2xl p-8 text-center"
-            data-testid="section-celebration"
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#208a4a] text-white mb-4">
-              <Trophy className="w-8 h-8" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-              Congratulations! You've Completed All Steps
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-6">
-              You're now equipped with the knowledge and tools to make a confident, informed real estate investment decision. Most buyers skip these steps - you didn't.
-            </p>
-            <div className="flex items-center justify-center gap-2 text-[#208a4a] dark:text-green-400">
-              <Sparkles className="w-5 h-5" />
-              <span className="font-medium">You're in the top 10% of informed buyers</span>
-              <Sparkles className="w-5 h-5" />
-            </div>
-          </section>
+        <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-10">
+          <h1 className="hidden print:block text-2xl text-slate-900">{fill(s.printTitle, { title: t.steps[3].title })}</h1>
 
-          <section data-testid="section-journey-summary">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              Your Learning Journey
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {LEARNING_SUMMARY.map((item) => (
-                <Card 
-                  key={item.step} 
-                  className="border-slate-200 dark:border-slate-700"
-                  data-testid={`journey-step-${item.step}`}
-                >
-                  <CardContent className="p-5">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#208a4a] text-white flex items-center justify-center">
-                        <CheckCircle2 className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-medium text-[#2180a8] dark:text-blue-400 mb-1">
-                          Step {item.step}
-                        </p>
-                        <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
-                          {item.lesson}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+          <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900" role="note" data-testid="self-reported-notice">
+            {s.notice}
+          </p>
+
+          <section data-testid="section-location-price">
+            <h2 className="text-2xl text-primary dark:text-white mb-4">{s.locationTitle}</h2>
+            <dl className="rounded-xl border border-slate-200 dark:border-slate-700 divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+              {facts.map((fact) => (
+                <div key={fact.label} className="grid grid-cols-2 gap-4 p-3">
+                  <dt className="text-slate-600 dark:text-slate-400">{fact.label}</dt>
+                  <dd className={fact.value ? "font-semibold text-slate-900 dark:text-white" : "text-slate-400"}>{fact.value || s.notEntered}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
+            {comparison && <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{comparisonText(t.calculator, comparison)}</p>}
+            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">{s.figuresNote}</p>
           </section>
 
-          <section data-testid="section-report-contents">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              What's in Your Decision Report
+          <section data-testid="section-prescreen">
+            <h2 className="text-2xl text-primary dark:text-white mb-4">
+              {s.answersTitle} {unanswered > 0 && <span className="font-sans text-base font-medium text-amber-700">{fill(s.unanswered, { count: unanswered })}</span>}
             </h2>
-            <div className="space-y-4">
-              {REPORT_SECTIONS.map((section, index) => (
-                <Card 
-                  key={section.title} 
-                  className="border-slate-200 dark:border-slate-700"
-                  data-testid={`report-section-${index + 1}`}
-                >
-                  <CardContent className="p-5">
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#2180a8]/10 dark:bg-blue-500/20 flex items-center justify-center">
-                        <section.icon className="w-5 h-5 text-[#2180a8] dark:text-blue-400" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                          {section.title}
-                        </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
-                          {section.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <dl className="rounded-xl border border-slate-200 dark:border-slate-700 divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+              {SCREENING_IDS.map((id) => {
+                const answer = draft.screening[id];
+                return (
+                  <div key={id} className="grid sm:grid-cols-[1fr_120px] gap-1 sm:gap-4 p-3" data-testid={`summary-${id}`}>
+                    <dt className="text-slate-600 dark:text-slate-400">{t.step2.questions[id].question}</dt>
+                    <dd className={answer ? "font-semibold text-slate-900 dark:text-white" : "text-slate-400"}>
+                      {answer ? t.step2.answers[answer] : s.notAnswered}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
           </section>
 
-          <section data-testid="section-next-actions">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              Suggested Next Actions
+          <section data-testid="section-summary">
+            <h2 className="text-2xl text-primary dark:text-white mb-4">
+              {fill(s.checklistTitle, { done: done.length, total: ALL_CHECKS.length })}
             </h2>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {NEXT_ACTIONS.map((action, index) => (
-                <Card 
-                  key={action.title} 
-                  className={`border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow cursor-pointer ${
-                    action.primary ? "ring-2 ring-[#2180a8] dark:ring-blue-500" : ""
-                  }`}
-                  data-testid={`action-card-${index + 1}`}
-                >
-                  <CardContent className="p-6 text-center">
-                    {action.primary && (
-                      <Badge className="mb-3 bg-[#2180a8] text-white">Recommended</Badge>
-                    )}
-                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 ${
-                      action.primary 
-                        ? "bg-[#2180a8] text-white" 
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                    }`}>
-                      <action.icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-                      {action.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                      {action.description}
-                    </p>
-                    <Button 
-                      variant={action.primary ? "default" : "outline"}
-                      className={action.primary ? "bg-[#2180a8] hover:bg-[#1a6a8a] w-full" : "w-full"}
-                    >
-                      {action.primary ? "Download Now" : "Learn More"}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="grid gap-6 sm:grid-cols-2">
+              <Card className="border-slate-200 dark:border-slate-700 shadow-none">
+                <CardContent className="p-5">
+                  <h3 className="font-sans font-semibold text-slate-900 dark:text-white mb-4">{fill(s.open, { count: pending.length })}</h3>
+                  <ul className="space-y-3" data-testid="list-pending">
+                    {pending.map((check) => (
+                      <li key={check.id} className="flex gap-3 text-sm text-slate-700 dark:text-slate-300">
+                        <Circle className="w-4 h-4 mt-0.5 shrink-0 text-amber-600" />
+                        {t.checks[check.id - 1].title}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card className="border-slate-200 dark:border-slate-700 shadow-none">
+                <CardContent className="p-5">
+                  <h3 className="font-sans font-semibold text-slate-900 dark:text-white mb-4">{fill(s.marked, { count: done.length })}</h3>
+                  <ul className="space-y-3" data-testid="list-done">
+                    {done.map((check) => (
+                      <li key={check.id} className="flex gap-3 text-sm text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-slate-500" />
+                        {t.checks[check.id - 1].title}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
           </section>
 
-          <section 
-            className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 sm:p-8"
-            data-testid="section-final-cta"
-          >
-            <div className="text-center mb-6">
-              <div className="flex items-center justify-center gap-1 mb-3">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                ))}
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
-                Need Expert Guidance?
-              </h2>
-              <p className="text-slate-600 dark:text-slate-400">
-                Our team of real estate experts can help you with verification, negotiation, and purchase
+          <section data-testid="section-advocate-questions">
+            <h2 className="text-2xl text-primary dark:text-white mb-4">{s.questionsTitle}</h2>
+            {advocateQuestions.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                {advocateQuestions.map((question) => <li key={question}>{question}</li>)}
+              </ul>
+            ) : (
+              <p className="text-sm text-slate-700 dark:text-slate-300">{s.noOpen}</p>
+            )}
+          </section>
+
+          <section className="flex gap-4 bg-primary/5 border border-border rounded-xl p-6 text-primary" data-testid="section-advocate">
+            <Scale className="w-6 h-6 shrink-0 text-accent-strong" />
+            <div>
+              <h2 className="text-lg mb-1">{s.nextTitle}</h2>
+              <p className="text-sm text-slate-700">{s.nextBody}</p>
+              <p className="text-sm text-slate-700 mt-2 print:hidden" data-testid="inquiry-option">
+                {s.inquiryLead}{" "}
+                <Link href="/plot-checkup" className="font-semibold underline text-primary" data-testid="link-inquiry">{s.inquiryLink}</Link>.{" "}
+                {s.inquiryNote}
               </p>
             </div>
+          </section>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto bg-[#208a4a] hover:bg-[#1a7a3a] text-white"
-                data-testid="button-schedule-consultation"
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                Schedule Free Consultation
-              </Button>
-
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => navigate("/step-1-market-intel")}
-                  data-testid="button-restart"
-                >
-                  <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
-                  Start Over
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => navigate("/contact")}
-                  data-testid="button-get-help"
-                >
-                  <HelpCircle className="w-4 h-4 mr-2" />
-                  Get Help
-                </Button>
-              </div>
-            </div>
+          <section className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 print:hidden" data-testid="section-final-cta">
+            <Button size="lg" className="w-full sm:w-auto" onClick={() => window.print()} data-testid="button-print-summary">
+              <Printer className="w-4 h-4 mr-2" />
+              {s.print}
+            </Button>
+            <Button variant="outline" className="w-full sm:w-auto" onClick={() => navigate(STEPS[2].link)} data-testid="button-back-checklist">
+              <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
+              {s.back}
+            </Button>
+            <Button variant="ghost" className="w-full sm:w-auto whitespace-normal h-auto py-2" onClick={handleReset} data-testid="button-reset-draft">
+              <Trash2 className="w-4 h-4 mr-2 shrink-0" />
+              {s.reset}
+            </Button>
           </section>
         </div>
       </div>

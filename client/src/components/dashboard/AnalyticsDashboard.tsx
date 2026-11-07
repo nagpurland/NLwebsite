@@ -62,7 +62,7 @@ export function AnalyticsDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Analytics Overview</h2>
+          <h2 className="text-2xl font-bold text-primary dark:text-white">Analytics Overview</h2>
           <p className="text-slate-600 dark:text-slate-400">Last 7 days performance</p>
         </div>
         <Button onClick={handleRefresh} variant="outline" disabled={isRefreshing}>
@@ -79,8 +79,8 @@ export function AnalyticsDashboard() {
                 <p className="text-sm text-slate-600">Total Page Views</p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">{totalViews.toLocaleString()}</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                <Eye className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-full bg-primary/5 dark:bg-blue-900/30 flex items-center justify-center">
+                <Eye className="w-6 h-6 text-primary" />
               </div>
             </div>
             <div className="flex items-center gap-1 mt-2 text-sm text-green-600">
@@ -115,8 +115,8 @@ export function AnalyticsDashboard() {
                 <p className="text-sm text-slate-600">Avg. Session Time</p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">5:23</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 rounded-full bg-primary/5 dark:bg-purple-900/30 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-primary" />
               </div>
             </div>
             <div className="flex items-center gap-1 mt-2 text-sm text-green-600">
@@ -235,7 +235,7 @@ export function AnalyticsDashboard() {
                 <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
                   {item.element}
                 </p>
-                <p className="text-2xl font-bold text-[#2180a8]">{item.clicks}</p>
+                <p className="text-2xl font-bold text-primary">{item.clicks}</p>
                 <p className="text-xs text-slate-500">clicks</p>
                 <div className="mt-2 pt-2 border-t">
                   <p className="text-sm">

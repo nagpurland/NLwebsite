@@ -1,4 +1,6 @@
 import { Link, useLocation } from "wouter";
+import { useAdminUser } from "@/components/layout/AdminGate";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -6,7 +8,6 @@ import {
   Users,
   Newspaper,
   Megaphone,
-  Settings,
   Search,
   Bell,
   Menu,
@@ -19,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,21 +37,31 @@ const NAV_ITEMS = [
   { label: "Web Intelligence", icon: Newspaper, href: "/admin/intel" },
   { label: "Campaigns", icon: Megaphone, href: "/admin/campaigns" },
   { label: "Behavioral Analytics", icon: TrendingUp, href: "/admin/analytics" },
+  { label: "Data Refresh", icon: Database, href: "/admin/data-refresh" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
+  const { data: user } = useAdminUser();
+  const username = user?.username ?? "Admin";
+
+  const handleLogout = async () => {
+    await apiRequest("POST", "/api/auth/logout").catch(() => undefined);
+    localStorage.removeItem("admin_token");
+    queryClient.clear();
+    setLocation("/");
+  };
 
   const SidebarContent = () => (
-    <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shadow-sm">
+    <div className="site flex h-full flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shadow-sm">
       <div className="flex h-20 items-center px-8 border-b border-sidebar-border">
         <Link href="/">
           <div className="flex items-center cursor-pointer">
             <div className="bg-primary/10 p-2 rounded-xl mr-3">
               <Building2 className="h-6 w-6 text-primary" />
             </div>
-            <span className="font-extrabold text-xl tracking-tighter">
-              NAGPUR<span className="text-accent">OS</span>
+            <span className="font-display font-semibold text-xl text-primary">
+              Nagpur<span className="text-accent-strong">Land</span>
             </span>
           </div>
         </Link>
@@ -83,41 +94,21 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="mt-10 px-4">
             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 opacity-50">Public Links</p>
             <div className="space-y-1">
-              <Link href="/understand-nagpur">
-                <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground hover:bg-sidebar-accent transition-all cursor-pointer">
-                  <ExternalLink className="h-4 w-4 opacity-50" />
-                  Understand Nagpur
-                </div>
-              </Link>
               <Link href="/4-step-system">
                 <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground hover:bg-sidebar-accent transition-all cursor-pointer">
                   <ExternalLink className="h-4 w-4 opacity-50" />
                   4-Step System
                 </div>
               </Link>
-              <Link href="/public/blog">
-                <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground hover:bg-sidebar-accent transition-all cursor-pointer">
-                  <ExternalLink className="h-4 w-4 opacity-50" />
-                  Market Strategy Blog
-                </div>
-              </Link>
             </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-sidebar-border p-6">
-        <Link href="/settings">
-          <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground hover:bg-sidebar-accent transition-all cursor-pointer">
-            <Settings className="h-4 w-4 opacity-50" />
-            Settings
-          </div>
-        </Link>
       </div>
     </div>
   );
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="site flex h-screen overflow-hidden bg-background">
       <aside className="hidden w-72 md:block shrink-0">
         <SidebarContent />
       </aside>
@@ -153,32 +144,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-11 px-2 rounded-xl hover:bg-muted transition-all gap-3">
                   <div className="text-right hidden sm:block">
-                    <p className="text-sm font-bold leading-none">John Doe</p>
-                    <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider mt-1">Founder</p>
+                    <p className="text-sm font-bold leading-none">{username}</p>
+                    <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider mt-1">Admin</p>
                   </div>
                   <Avatar className="h-9 w-9 border-2 border-background shadow-sm">
-                    <AvatarImage src="/placeholder-avatar.jpg" alt="@founder" />
-                    <AvatarFallback className="bg-primary/10 text-primary font-bold">JD</AvatarFallback>
+                    <AvatarFallback className="bg-primary/10 text-primary font-bold">{username.slice(0, 2).toUpperCase()}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 mt-2 rounded-xl shadow-2xl border-border/50" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal p-4">
-                  <div className="flex flex-col space-y-2">
-                    <p className="text-sm font-bold leading-none">John Doe</p>
-                    <p className="text-xs text-muted-foreground font-medium">
-                      founder@nagpur-os.com
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
                 <div className="p-2">
-                  <DropdownMenuItem className="rounded-lg py-2 font-medium">Profile</DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-lg py-2 font-medium">Billing</DropdownMenuItem>
-                </div>
-                <DropdownMenuSeparator />
-                <div className="p-2">
-                  <DropdownMenuItem className="text-destructive focus:text-destructive rounded-lg py-2 font-bold">
+                  <DropdownMenuItem onSelect={handleLogout} className="text-destructive focus:text-destructive rounded-lg py-2 font-bold">
                     <LogOut className="mr-3 h-4 w-4" />
                     Log out
                   </DropdownMenuItem>

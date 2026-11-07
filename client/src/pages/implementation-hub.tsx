@@ -26,18 +26,18 @@ function OverviewTab() {
   return (
     <div className="space-y-8">
       <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+        <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
           What This Dashboard Does
         </h2>
         <div className="grid gap-6 sm:grid-cols-2">
           <Card className="border-slate-200 dark:border-slate-700">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                  <TestTube className="w-6 h-6 text-purple-600" />
+                <div className="w-12 h-12 rounded-lg bg-primary/5 dark:bg-purple-900/30 flex items-center justify-center">
+                  <TestTube className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Testing</h3>
+                  <h3 className="font-semibold text-primary dark:text-white mb-2">Testing</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                     Run user testing sessions with different scenarios. Track user behavior, navigation patterns, and answer key questions about usability.
                   </p>
@@ -54,11 +54,11 @@ function OverviewTab() {
           <Card className="border-slate-200 dark:border-slate-700">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                  <BarChart3 className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 rounded-lg bg-primary/5 dark:bg-blue-900/30 flex items-center justify-center">
+                  <BarChart3 className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Analytics</h3>
+                  <h3 className="font-semibold text-primary dark:text-white mb-2">Analytics</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                     Monitor user behavior in real-time. Track page views, conversion funnels, click patterns, and identify drop-off points.
                   </p>
@@ -80,7 +80,7 @@ function OverviewTab() {
                   <Target className="w-6 h-6 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Success Metrics</h3>
+                  <h3 className="font-semibold text-primary dark:text-white mb-2">Success Metrics</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                     Compare actual performance against targets. Track 5 key success metrics with baseline, current, and target values.
                   </p>
@@ -98,11 +98,11 @@ function OverviewTab() {
           <Card className="border-slate-200 dark:border-slate-700">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-orange-600" />
+                <div className="w-12 h-12 rounded-lg bg-accent/15 dark:bg-orange-900/30 flex items-center justify-center">
+                  <Calendar className="w-6 h-6 text-accent-strong" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Roadmap</h3>
+                  <h3 className="font-semibold text-primary dark:text-white mb-2">Roadmap</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                     4-week implementation plan with task tracking, time estimates, and team assignments.
                   </p>
@@ -120,7 +120,7 @@ function OverviewTab() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+        <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
           Quick Start Guide
         </h2>
         <Card className="border-slate-200 dark:border-slate-700">
@@ -134,7 +134,7 @@ function OverviewTab() {
                 { week: "Ongoing", title: "Iterate", desc: "Use insights from testing and analytics to improve UX" },
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2180a8] text-white flex items-center justify-center font-semibold">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
                     {index + 1}
                   </div>
                   <div>
@@ -154,13 +154,13 @@ function OverviewTab() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+        <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
           Weekly Review Cycle
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          <Card className="border-l-4 border-l-[#2180a8]">
+          <Card className="border-l-4 border-l-primary">
             <CardContent className="pt-6 text-center">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Monday</h3>
+              <h3 className="font-semibold text-primary dark:text-white mb-2">Monday</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 Review last week's metrics
               </p>
@@ -168,7 +168,7 @@ function OverviewTab() {
           </Card>
           <Card className="border-l-4 border-l-[#208a4a]">
             <CardContent className="pt-6 text-center">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Tuesday - Thursday</h3>
+              <h3 className="font-semibold text-primary dark:text-white mb-2">Tuesday - Thursday</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 Run testing sessions & collect feedback
               </p>
@@ -176,7 +176,7 @@ function OverviewTab() {
           </Card>
           <Card className="border-l-4 border-l-purple-500">
             <CardContent className="pt-6 text-center">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Friday</h3>
+              <h3 className="font-semibold text-primary dark:text-white mb-2">Friday</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 Analyze data, update metrics, plan next week
               </p>
@@ -199,12 +199,12 @@ export default function ImplementationHub() {
           currentPage="Implementation Hub"
         />
 
-        <div className="bg-gradient-to-r from-[#2180a8] to-[#1a6a8a] text-white py-8 px-4">
+        <div className="bg-primary text-white py-8 px-4">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl font-black mb-2">
+            <h1 className="text-3xl sm:text-4xl font-semibold mb-2">
               4-Step System - Implementation Hub
             </h1>
-            <p className="text-blue-100">
+            <p className="text-white/80">
               Testing - Analytics - Metrics - Roadmap
             </p>
           </div>
@@ -217,7 +217,7 @@ export default function ImplementationHub() {
                 <Button
                   key={tab.id}
                   variant={activeTab === tab.id ? "default" : "ghost"}
-                  className={activeTab === tab.id ? "bg-[#2180a8]" : ""}
+                  className={activeTab === tab.id ? "bg-primary" : ""}
                   onClick={() => setActiveTab(tab.id)}
                   data-testid={`tab-${tab.id}`}
                 >

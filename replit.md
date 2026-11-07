@@ -23,7 +23,7 @@ The frontend follows a page-based structure with distinct public-facing pages (h
 ### Backend Architecture
 - **Framework**: Express.js with TypeScript
 - **API Design**: RESTful endpoints under `/api/` prefix
-- **Authentication**: Session-based with token storage in PostgreSQL
+- **Authentication**: Bearer session tokens, stored hashed in PostgreSQL; passwords use scrypt
 - **Development**: Vite middleware integration for HMR during development
 
 The server handles property data, lead capture, user events tracking, and admin operations. It includes a scraper infrastructure designed to aggregate listings from multiple real estate portals.
@@ -45,6 +45,15 @@ Key tables include: users, sessions, properties, leads, localities, buyer_events
 - **Development**: `npm run dev` starts the Express server with Vite middleware
 - **Production**: `npm run build` uses esbuild for server bundling and Vite for client, outputting to `dist/`
 - **Database**: `npm run db:push` syncs schema to PostgreSQL using Drizzle Kit
+
+## Going Live
+
+- Add `DATABASE_URL`, `GEMINI_API_KEY` and `PERPLEXITY_API_KEY` under Replit Secrets. Never put them in `.replit`.
+- Create the admin: `ADMIN_PASSWORD='at least 12 characters' npm run admin:set-password -- <username>`.
+- Old accounts can't log in because their password format is no longer accepted. Remove any you don't recognise.
+- Never run `npm run db:seed` against production. The sample data is fictional.
+- Run `TEST_DATABASE_URL=<throwaway database> npm test` before shipping.
+- Every `/api` route needs a login unless it is listed in `PUBLIC_API` in `server/auth.ts`.
 
 ## External Dependencies
 

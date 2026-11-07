@@ -9,30 +9,30 @@ export interface StepData {
 export const STEPS: StepData[] = [
   {
     number: 1,
-    title: "Market Intelligence",
-    shortTitle: "Market Intel",
-    description: "Gather comprehensive market data to make informed decisions.",
+    title: "Check the Area & Rate",
+    shortTitle: "Area & Rate",
+    description: "Note the area, work out the rate per sq.ft and learn which comparisons are useful.",
     link: "/step-1-market-intel"
   },
   {
     number: 2,
-    title: "Filter Risky Options",
-    shortTitle: "Filter Risky",
-    description: "Identify and eliminate high-risk properties from your shortlist.",
+    title: "First Plot Check",
+    shortTitle: "First Check",
+    description: "Answer five short questions to find missing information and early concerns.",
     link: "/step-2-filter-risky"
   },
   {
     number: 3,
-    title: "Safety Checkup",
-    shortTitle: "Safety Check",
-    description: "Conduct thorough verification of legal status and documentation.",
+    title: "12-Point Paper & Site Check",
+    shortTitle: "12-Point Check",
+    description: "Work through paper, legal, planning and site checks using our guides.",
     link: "/step-3-safety-check"
   },
   {
     number: 4,
-    title: "Decision Report",
-    shortTitle: "Decision Report",
-    description: "Generate your comprehensive investment decision report.",
+    title: "Your Plot Summary",
+    shortTitle: "Summary",
+    description: "See your answers, open checks and questions to discuss with an advocate.",
     link: "/step-4-decision-report"
   }
 ];
@@ -149,5 +149,5 @@ export function canAccessStep(stepNumber: number): boolean {
 export function getResumeLink(): string {
   const progress = getProgress();
   const lastIncomplete = STEPS.find(s => !progress.completedSteps.includes(s.number));
-  return lastIncomplete?.link || "/step-complete";
+  return lastIncomplete?.link || "/step-4-decision-report";
 }

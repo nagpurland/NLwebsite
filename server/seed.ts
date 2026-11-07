@@ -1,9 +1,4 @@
 import { storage } from "./storage";
-import crypto from "crypto";
-
-function hashPassword(password: string): string {
-  return crypto.createHash('sha256').update(password + 'nagpur_salt_2024').digest('hex');
-}
 
 const NAGPUR_LOCALITIES = [
   {
@@ -382,22 +377,6 @@ export async function seedDatabase() {
   console.log("Starting database seed...");
 
   try {
-    // Seed admin user
-    console.log("Seeding admin user...");
-    try {
-      const existingAdmin = await storage.getUserByUsername("admin");
-      if (!existingAdmin) {
-        await storage.createUser({
-          username: "admin",
-          password: hashPassword("nagpur123")
-        });
-        console.log("  Created admin user (username: admin, password: nagpur123)");
-      } else {
-        console.log("  Admin user already exists, skipping...");
-      }
-    } catch (error) {
-      console.log("  Admin user creation failed, may already exist");
-    }
 
     // Seed localities
     console.log("Seeding localities...");

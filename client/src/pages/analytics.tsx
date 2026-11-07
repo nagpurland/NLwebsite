@@ -73,9 +73,9 @@ export default function BehaviorAnalytics() {
 
   const awarenessFunnel = [
     { level: "Unaware", users: awarenessLevels['unaware'] || 0, color: "#94a3b8" },
-    { level: "Problem Aware", users: awarenessLevels['problem_aware'] || 0, color: "#60a5fa" },
-    { level: "Solution Aware", users: awarenessLevels['solution_aware'] || 0, color: "#a78bfa" },
-    { level: "Product Aware", users: awarenessLevels['product_aware'] || 0, color: "#f97316" },
+    { level: "Problem Aware", users: awarenessLevels['problem_aware'] || 0, color: "#c9a44c" },
+    { level: "Solution Aware", users: awarenessLevels['solution_aware'] || 0, color: "#47638f" },
+    { level: "Product Aware", users: awarenessLevels['product_aware'] || 0, color: "#1f3556" },
     { level: "Most Aware", users: awarenessLevels['most_aware'] || 0, color: "#22c55e" },
   ];
 
@@ -134,7 +134,7 @@ export default function BehaviorAnalytics() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1">
+          <h1 className="text-4xl font-semibold tracking-tight mb-1">
             Behavioral Intelligence
           </h1>
           <p className="text-muted-foreground font-medium">
@@ -170,9 +170,9 @@ export default function BehaviorAnalytics() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {[
-          { label: "Total Leads", value: totalLeads.toString(), icon: Users, color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-50 dark:bg-blue-900/30" },
+          { label: "Total Leads", value: totalLeads.toString(), icon: Users, color: "text-primary dark:text-blue-400", bg: "bg-primary/5 dark:bg-blue-900/30" },
           { label: "High Intent Leads", value: highIntentLeads.toString(), icon: TrendingUp, color: "text-green-600 dark:text-green-400", bg: "bg-green-50 dark:bg-green-900/30" },
-          { label: "Properties Listed", value: propertyViews.toLocaleString(), icon: Eye, color: "text-purple-600 dark:text-purple-400", bg: "bg-purple-50 dark:bg-purple-900/30" },
+          { label: "Properties Listed", value: propertyViews.toLocaleString(), icon: Eye, color: "text-primary dark:text-purple-400", bg: "bg-primary/5 dark:bg-purple-900/30" },
         ].map((stat, i) => (
           <Card key={i} className="border-none shadow-md hover:shadow-lg transition-all rounded-2xl" data-testid={`stat-card-${i}`}>
             <CardContent className="p-6 flex items-center gap-4">
@@ -181,7 +181,7 @@ export default function BehaviorAnalytics() {
               </div>
               <div>
                 <p className="text-sm font-bold text-muted-foreground uppercase tracking-wide">{stat.label}</p>
-                <p className="text-2xl font-black">{stat.value}</p>
+                <p className="text-2xl font-semibold">{stat.value}</p>
               </div>
             </CardContent>
           </Card>
@@ -215,27 +215,27 @@ export default function BehaviorAnalytics() {
         <Card className="lg:col-span-3 rounded-3xl border-none shadow-xl bg-card">
           <CardHeader className="p-8 pb-4">
             <CardTitle className="text-xl flex items-center gap-2">
-              <Brain className="h-5 w-5 text-indigo-500" /> AI Insight Stream
+              <Brain className="h-5 w-5 text-primary" /> AI Insight Stream
             </CardTitle>
             <CardDescription className="font-medium mt-1">Real-time behavior analysis</CardDescription>
           </CardHeader>
           <CardContent className="p-8 pt-0">
             <div className="space-y-6">
               {aiInsightsLog.map((item, i) => (
-                <div key={i} className="relative pl-6 border-l-2 border-indigo-100 dark:border-indigo-800 pb-2 last:pb-0">
-                  <div className="absolute left-[-9px] top-0 h-4 w-4 rounded-full bg-indigo-500 border-4 border-background" />
+                <div key={i} className="relative pl-6 border-l-2 border-primary/20 dark:border-indigo-800 pb-2 last:pb-0">
+                  <div className="absolute left-[-9px] top-0 h-4 w-4 rounded-full bg-primary border-4 border-background" />
                   <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
-                    <span className="text-[10px] font-black uppercase text-indigo-400 tracking-wider">{item.timestamp}</span>
+                    <span className="text-[10px] font-semibold uppercase text-primary tracking-wider">{item.timestamp}</span>
                     <Badge variant="outline" className="text-[10px] font-bold px-2 py-0">{item.user}</Badge>
                   </div>
                   <p className="text-sm font-bold leading-snug mb-2">{item.insight}</p>
-                  <div className="bg-indigo-50 dark:bg-indigo-900/30 p-2 rounded-lg text-[10px] font-black text-indigo-700 dark:text-indigo-300 flex items-center gap-2">
+                  <div className="bg-primary/5 dark:bg-indigo-900/30 p-2 rounded-lg text-[10px] font-semibold text-primary dark:text-indigo-300 flex items-center gap-2">
                     <Zap className="h-3 w-3" /> ACTION: {item.action}
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="ghost" className="w-full mt-6 font-bold text-indigo-600 dark:text-indigo-400">
+            <Button variant="ghost" className="w-full mt-6 font-bold text-primary dark:text-indigo-400">
               View All Intelligence <ArrowUpRight className="ml-2 h-4 w-4" />
             </Button>
           </CardContent>
@@ -280,7 +280,7 @@ export default function BehaviorAnalytics() {
               {hotLocalities.map((loc, i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/50 transition-colors" data-testid={`hot-locality-${i}`}>
                   <div className="flex items-center gap-4">
-                    <div className="font-black text-lg text-muted-foreground/50">0{i+1}</div>
+                    <div className="font-semibold text-lg text-muted-foreground/50">0{i+1}</div>
                     <div>
                       <div className="font-bold text-base">{loc.name}</div>
                       <div className="text-xs font-medium text-muted-foreground">{loc.views} views today</div>
@@ -322,11 +322,11 @@ export default function BehaviorAnalytics() {
 
       <div className="mt-12 pt-8 border-t">
         <div className="flex items-center gap-3 mb-8">
-          <div className="h-12 w-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
-            <Brain className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+          <div className="h-12 w-12 rounded-2xl bg-primary/5 dark:bg-indigo-900/30 flex items-center justify-center">
+            <Brain className="h-6 w-6 text-primary dark:text-indigo-400" />
           </div>
           <div>
-            <h2 className="text-2xl font-black tracking-tight">Awareness Engine Analytics</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Awareness Engine Analytics</h2>
             <p className="text-muted-foreground font-medium">User journey stage tracking & personalization metrics</p>
           </div>
         </div>
@@ -334,8 +334,8 @@ export default function BehaviorAnalytics() {
         <div className="grid gap-6 md:grid-cols-3 mb-8">
           {[
             { label: "Awareness Progression Rate", value: "34%", icon: TrendingUp, color: "text-green-600 dark:text-green-400", bg: "bg-green-50 dark:bg-green-900/30", desc: "Users moving up stages" },
-            { label: "Personalization Accuracy", value: "89%", icon: Target, color: "text-indigo-600 dark:text-indigo-400", bg: "bg-indigo-50 dark:bg-indigo-900/30", desc: "Content match rate" },
-            { label: "High-Intent Captures", value: highIntentLeads.toString(), icon: Zap, color: "text-orange-600 dark:text-orange-400", bg: "bg-orange-50 dark:bg-orange-900/30", desc: "Signal 3 users today" },
+            { label: "Personalization Accuracy", value: "89%", icon: Target, color: "text-primary dark:text-indigo-400", bg: "bg-primary/5 dark:bg-indigo-900/30", desc: "Content match rate" },
+            { label: "High-Intent Captures", value: highIntentLeads.toString(), icon: Zap, color: "text-accent-strong dark:text-orange-400", bg: "bg-accent/15 dark:bg-orange-900/30", desc: "Signal 3 users today" },
           ].map((stat, i) => (
             <Card key={i} className="border-none shadow-md hover:shadow-lg transition-all rounded-2xl" data-testid={`awareness-stat-${i}`}>
               <CardContent className="p-6">
@@ -345,7 +345,7 @@ export default function BehaviorAnalytics() {
                   </div>
                   <p className="text-sm font-bold text-muted-foreground uppercase tracking-wide">{stat.label}</p>
                 </div>
-                <p className="text-3xl font-black">{stat.value}</p>
+                <p className="text-3xl font-semibold">{stat.value}</p>
                 <p className="text-xs text-muted-foreground mt-1">{stat.desc}</p>
               </CardContent>
             </Card>
@@ -372,7 +372,7 @@ export default function BehaviorAnalytics() {
                         }}
                       />
                     </div>
-                    <div className="w-16 text-right font-black">{level.users}</div>
+                    <div className="w-16 text-right font-semibold">{level.users}</div>
                   </div>
                 ))}
               </div>
@@ -410,7 +410,7 @@ export default function BehaviorAnalytics() {
               {conversionSignals.map((signal, i) => (
                 <div key={i} className="bg-muted/50 rounded-2xl p-6 text-center" data-testid={`conversion-signal-${i}`}>
                   <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">{signal.signal}</div>
-                  <div className="text-3xl font-black mb-1">{signal.count}</div>
+                  <div className="text-3xl font-semibold mb-1">{signal.count}</div>
                   <div className="text-xs text-muted-foreground mb-3">users</div>
                   <Badge className={`font-bold ${i === 2 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : i === 1 ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-muted text-muted-foreground'}`}>
                     {signal.conversion} conversion

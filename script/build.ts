@@ -1,6 +1,6 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile, cp } from "fs/promises";
+import { rm, readFile } from "fs/promises";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -59,13 +59,6 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
-
-  try {
-    await cp("dist", "dist/public", {
-      recursive: true,
-      filter: (src) => !src.endsWith("index.cjs") && !src.includes("public"),
-    });
-  } catch {}
 }
 
 buildAll().catch((err) => {

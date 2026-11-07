@@ -150,7 +150,7 @@ export function TestingDashboard() {
                   key={scenario.id}
                   className={`p-4 rounded-lg border cursor-pointer transition-all ${
                     selectedScenario?.id === scenario.id
-                      ? "border-[#2180a8] bg-[#2180a8]/5"
+                      ? "border-primary bg-primary/5"
                       : "border-slate-200 hover:border-slate-300"
                   }`}
                   onClick={() => !isRunning && setSelectedScenario(scenario)}
@@ -158,7 +158,7 @@ export function TestingDashboard() {
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white">
+                      <h3 className="font-semibold text-primary dark:text-white">
                         {scenario.name}
                       </h3>
                       <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
@@ -179,7 +179,7 @@ export function TestingDashboard() {
                   <CardTitle>Test Steps</CardTitle>
                   <div className="flex gap-2">
                     {!isRunning ? (
-                      <Button onClick={startTest} className="bg-[#208a4a] hover:bg-[#1a7a3a]">
+                      <Button onClick={startTest} className="bg-primary hover:bg-[#1a7a3a]">
                         <Play className="w-4 h-4 mr-2" />
                         Start Test
                       </Button>
@@ -204,15 +204,15 @@ export function TestingDashboard() {
                         index < currentStep
                           ? "bg-green-50 dark:bg-green-900/20"
                           : index === currentStep && isRunning
-                            ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200"
+                            ? "bg-primary/5 dark:bg-blue-900/20 border border-primary/20"
                             : "bg-slate-50 dark:bg-slate-800"
                       }`}
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                         index < currentStep
-                          ? "bg-[#208a4a] text-white"
+                          ? "bg-primary text-white"
                           : index === currentStep && isRunning
-                            ? "bg-[#2180a8] text-white"
+                            ? "bg-primary text-white"
                             : "bg-slate-200 dark:bg-slate-700 text-slate-500"
                       }`}>
                         {index < currentStep ? (

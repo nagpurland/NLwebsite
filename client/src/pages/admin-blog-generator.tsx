@@ -237,7 +237,7 @@ export default function AdminBlogGenerator() {
 
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">AI Blog Generator</h1>
+            <h1 className="text-2xl font-bold text-primary dark:text-white">AI Blog Generator</h1>
             <p className="text-slate-600 dark:text-slate-400">Generate and publish content with AI</p>
           </div>
           

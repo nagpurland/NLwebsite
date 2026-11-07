@@ -14,7 +14,7 @@ export default function MutationsTransfersGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -23,8 +23,8 @@ export default function MutationsTransfersGuide() {
             </Button>
           </Link>
           
-          <Badge className="bg-blue-100 text-blue-700 mb-4">Check #2 - Documents</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <Badge className="bg-primary/5 text-primary mb-4">Check #2 - Documents</Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             Complete Guide: How to Check Property Mutations and Transfers in Nagpur
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,11 +37,11 @@ export default function MutationsTransfersGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">What is Property Mutation?</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">What is Property Mutation?</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
               Mutation (also called "Ferfar" in Maharashtra) is the official process of updating land records when ownership changes. It reflects the new owner's name in government records after a sale, inheritance, gift, or partition.
             </p>
-            <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200">
+            <Card className="bg-primary/5 dark:bg-blue-900/20 border-primary/20">
               <CardContent className="p-4">
                 <p className="text-sm text-slate-700 dark:text-slate-300">
                   <strong>Why it matters:</strong> Without mutation, the seller's claim to ownership isn't fully established in government records. Pending mutations can indicate disputes, legal issues, or incomplete transactions.
@@ -51,18 +51,18 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">How to Check Mutation Records</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">How to Check Mutation Records</h2>
             
             <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">Online Method</h3>
             <div className="space-y-4 mb-8">
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">1</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">1</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Visit Maharashtra Bhumi Abhilekh Portal</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Visit Maharashtra Bhumi Abhilekh Portal</h4>
                       <p className="text-slate-600 dark:text-slate-400 mb-2">
-                        Go to <span className="font-mono bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">mahabhulekh.maharashtra.gov.in</span>
+                        Go to <span className="font-mono bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">bhulekh.mahabhumi.gov.in</span>
                       </p>
                       <p className="text-slate-600 dark:text-slate-400">
                         Select Nagpur Division → Nagpur District → Your Taluka → Village
@@ -75,9 +75,9 @@ export default function MutationsTransfersGuide() {
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">2</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">2</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Search Property Records</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Search Property Records</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Enter Survey Number or Gat Number. View the 7/12 extract which shows mutation entries in column 11 and 12.
                       </p>
@@ -89,9 +89,9 @@ export default function MutationsTransfersGuide() {
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">3</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">3</div>
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white mb-2">Check Ferfar (Mutation) Register</h4>
+                      <h4 className="font-bold text-primary dark:text-white mb-2">Check Ferfar (Mutation) Register</h4>
                       <p className="text-slate-600 dark:text-slate-400">
                         Click on "Ferfar" to see detailed history of all ownership changes with dates and transaction types.
                       </p>
@@ -108,15 +108,15 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Nagpur Sub-Registrar Offices</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Nagpur Sub-Registrar Offices</h2>
             
             <div className="grid gap-4">
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Sub-Registrar Office, Nagpur (City)</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Sub-Registrar Office, Nagpur (City)</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Near Civil Lines, Nagpur - 440001</p>
                       <p className="text-slate-500 text-xs mt-1">Hours: 10:00 AM - 5:45 PM (Closed: Sundays, 2nd & 4th Saturdays)</p>
                     </div>
@@ -127,9 +127,9 @@ export default function MutationsTransfersGuide() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Sub-Registrar Office, Nagpur (Rural)</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Sub-Registrar Office, Nagpur (Rural)</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Collectorate Building, Civil Lines, Nagpur</p>
                       <p className="text-slate-500 text-xs mt-1">Hours: 10:00 AM - 5:45 PM (Closed: Sundays, 2nd & 4th Saturdays)</p>
                     </div>
@@ -140,9 +140,9 @@ export default function MutationsTransfersGuide() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white">Sub-Registrar Office, Hingna</h4>
+                      <h4 className="font-bold text-primary dark:text-white">Sub-Registrar Office, Hingna</h4>
                       <p className="text-slate-600 dark:text-slate-400 text-sm">Hingna Taluka Office, Near Hingna Bus Stand</p>
                       <p className="text-slate-500 text-xs mt-1">Hours: 10:00 AM - 5:45 PM (Closed: Sundays, 2nd & 4th Saturdays)</p>
                     </div>
@@ -153,7 +153,7 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Documents Required</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Documents Required</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card>
@@ -208,7 +208,7 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Red Flags to Watch</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Red Flags to Watch</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -276,46 +276,46 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Application Process (8 Steps)</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Application Process (8 Steps)</h2>
             
             <ol className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
                 <span className="text-slate-600 dark:text-slate-400">Collect all required documents (sale deed, tax receipts, ID proof)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
                 <span className="text-slate-600 dark:text-slate-400">Fill mutation application form (available at Talathi office)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
                 <span className="text-slate-600 dark:text-slate-400">Submit application with fees (Rs. 25 - Rs. 1,000 depending on property value)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
                 <span className="text-slate-600 dark:text-slate-400">Talathi verifies documents and conducts inquiry</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
                 <span className="text-slate-600 dark:text-slate-400">Public notice period (15 days) for objections</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
                 <span className="text-slate-600 dark:text-slate-400">Circle Officer approval if no objections</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">7</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">7</span>
                 <span className="text-slate-600 dark:text-slate-400">Entry made in Record of Rights (7/12)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">8</span>
+                <span className="w-6 h-6 rounded-full bg-primary/5 text-primary flex items-center justify-center text-sm font-bold flex-shrink-0">8</span>
                 <span className="text-slate-600 dark:text-slate-400">Collect updated 7/12 extract (15-30 days total)</span>
               </li>
             </ol>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">If Property Has Disputed Mutation</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">If Property Has Disputed Mutation</h2>
             
             <Card className="bg-red-50 dark:bg-red-900/20 border-red-200">
               <CardContent className="p-6">
@@ -336,7 +336,7 @@ export default function MutationsTransfersGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Quick Verification Checklist</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Quick Verification Checklist</h2>
             
             <div className="space-y-3">
               <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
@@ -377,7 +377,7 @@ export default function MutationsTransfersGuide() {
                   </div>
                 </div>
                 <Link href="/step-3-safety-check">
-                  <Button className="bg-green-600 hover:bg-green-700" data-testid="button-mark-complete">
+                  <Button className="bg-primary hover:bg-primary/90" data-testid="button-mark-complete">
                     Mark Complete <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -14,33 +15,18 @@ import AdminScraping from "@/pages/admin-scraping";
 import WebIntelligence from "@/pages/web-intelligence";
 import PublicHome from "@/pages/public-home";
 import InvestSafely from "@/pages/invest-safely";
-import PropertyDetail from "@/pages/property-detail";
-import PrePurchaseWizard from "@/pages/pre-purchase-wizard";
 import PlotCheckup from "@/pages/plot-checkup";
-import LocalityOS from "@/pages/locality-os";
-import PublicIntel from "@/pages/public-intel";
-import MyWatchlist from "@/pages/my-watchlist";
+import LocalityGuides from "@/pages/locality-guides";
+import ForAgents from "@/pages/for-agents";
 import DataRefresh from "@/pages/data-refresh";
 import Step1MarketIntel from "@/pages/step-1-market-intel";
 import Step2FilterRisky from "@/pages/step-2-filter-risky";
 import Step3SafetyCheck from "@/pages/step-3-safety-check";
 import Step4DecisionReport from "@/pages/step-4-decision-report";
-import PremiumVerification from "@/pages/premium-verification";
 import FourStepSystem from "@/pages/four-step-system";
-import StepComplete from "@/pages/step-complete";
 import ImplementationHub from "@/pages/implementation-hub";
 
-// Modals
-import { FilterBasedSubscriptionModal } from "@/components/modals/FilterBasedSubscriptionModal";
-import { CasualBrowserModal } from "@/components/modals/CasualBrowserModal";
-import { ExitIntentModal } from "@/components/modals/ExitIntentModal";
-import { useState, useEffect } from "react";
 
-import BlogDetail from "@/pages/blog-detail";
-import { PublicPropertySearch, PublicBlog } from "@/pages/public";
-import SearchResults from "@/pages/search";
-import LocalityGuides from "@/pages/localities";
-import DharampethGuide from "@/pages/guides/dharampeth";
 import OwnershipVerificationGuide from "@/pages/guides/ownership-verification";
 import LitigationSearchGuide from "@/pages/guides/litigation-search";
 import TPSchemeCheckGuide from "@/pages/guides/tp-scheme-check";
@@ -53,40 +39,43 @@ import NAConversionGuide from "@/pages/guides/na-conversion";
 import BoundaryVerificationGuide from "@/pages/guides/boundary-verification";
 import PossessionVerificationGuide from "@/pages/guides/possession-verification";
 import NeighborVerificationGuide from "@/pages/guides/neighbor-verification";
-import GuidePlaceholder from "@/pages/guides/guide-placeholder";
-import AwarenessDashboard from "@/pages/awareness-dashboard";
 import AdminBlogGenerator from "@/pages/admin-blog-generator";
-import BlogList from "@/pages/blog-list";
+import Contact from "@/pages/contact";
+import Privacy from "@/pages/privacy";
+import Terms from "@/pages/terms";
 import NotFound from "@/pages/not-found";
-import { useTracking } from "@/hooks/use-tracking";
+import { AdminGate } from "@/components/layout/AdminGate";
+import { track, TRACKED_EVENTS, type TrackedEvent } from "@/lib/track";
 
+// Not public at launch, because their data is sample or unverified: property pages,
+// search, the old localities page, intel, watchlist, premium service, blog and the Dharampeth guide.
+// Add a route back only once what the page shows is real and sourced.
 function Router() {
-  useTracking();
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const name = (e.target as HTMLElement).closest?.("[data-event]")?.getAttribute("data-event");
+      if (name && (TRACKED_EVENTS as readonly string[]).includes(name)) track(name as TrackedEvent);
+    };
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
   return (
     <Switch>
       {/* Public Pages */}
       <Route path="/" component={PublicHome} />
-      <Route path="/property/:id" component={PropertyDetail} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
       <Route path="/invest-safely" component={InvestSafely} />
-      <Route path="/pre-purchase-wizard" component={PrePurchaseWizard} />
       <Route path="/plot-checkup" component={PlotCheckup} />
-      <Route path="/locality/:id" component={LocalityOS} />
-      <Route path="/my-watchlist" component={MyWatchlist} />
-      <Route path="/data-refresh" component={DataRefresh} />
+      <Route path="/localities" component={LocalityGuides} />
+      <Route path="/for-agents" component={ForAgents} />
       <Route path="/step-1-market-intel" component={Step1MarketIntel} />
       <Route path="/step-2-filter-risky" component={Step2FilterRisky} />
       <Route path="/step-3-safety-check" component={Step3SafetyCheck} />
       <Route path="/step-4-decision-report" component={Step4DecisionReport} />
-      <Route path="/premium-verification" component={PremiumVerification} />
       <Route path="/4-step-system" component={FourStepSystem} />
-      <Route path="/step-complete" component={StepComplete} />
-      <Route path="/implementation-hub" component={ImplementationHub} />
       
-      <Route path="/public/intel" component={PublicIntel} />
-      <Route path="/public/search" component={PublicPropertySearch} />
-      <Route path="/search" component={SearchResults} />
-      <Route path="/public/localities" component={LocalityGuides} />
-      <Route path="/area-guide/dharampeth" component={DharampethGuide} />
       <Route path="/guide/ownership-verification" component={OwnershipVerificationGuide} />
       <Route path="/guide/litigation-search" component={LitigationSearchGuide} />
       <Route path="/guide/tp-scheme-check" component={TPSchemeCheckGuide} />
@@ -99,20 +88,18 @@ function Router() {
       <Route path="/guide/boundary-verification" component={BoundaryVerificationGuide} />
       <Route path="/guide/possession-verification" component={PossessionVerificationGuide} />
       <Route path="/guide/neighbor-verification" component={NeighborVerificationGuide} />
-      <Route path="/awareness" component={AwarenessDashboard} />
-      <Route path="/public/blog" component={PublicBlog} />
-      <Route path="/public/blog/:id" component={BlogDetail} />
-      <Route path="/blog" component={BlogList} />
-      <Route path="/blog/:slug" component={BlogDetail} />
       
-      {/* Admin Dashboard - No Login Required */}
+      {/* Admin Dashboard */}
       <Route path="/admin">
-        <AppShell>
-          <Dashboard />
-        </AppShell>
+        <AdminGate>
+          <AppShell>
+            <Dashboard />
+          </AppShell>
+        </AdminGate>
       </Route>
       
       <Route path="/admin/*">
+        <AdminGate>
         <AppShell>
           <Switch>
             <Route path="/admin" component={Dashboard} />
@@ -123,8 +110,12 @@ function Router() {
             <Route path="/admin/campaigns" component={Campaigns} />
             <Route path="/admin/analytics" component={Analytics} />
             <Route path="/admin/blog-generator" component={AdminBlogGenerator} />
+            <Route path="/admin/data-refresh" component={DataRefresh} />
+            <Route path="/admin/implementation-hub" component={ImplementationHub} />
+            <Route component={NotFound} />
           </Switch>
         </AppShell>
+        </AdminGate>
       </Route>
 
       <Route component={NotFound} />
@@ -133,35 +124,12 @@ function Router() {
 }
 
 function App() {
-  // Mock logic to trigger modals for demonstration
-  // In a real app, this would be driven by the tracking system logic
-  const [showFilterModal, setShowFilterModal] = useState(false);
-  const [showCasualModal, setShowCasualModal] = useState(false);
-  const [showExitModal, setShowExitModal] = useState(false);
-
-  // Demo triggers (just for showing they exist)
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).triggerFilterModal = () => setShowFilterModal(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).triggerCasualModal = () => setShowCasualModal(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).triggerExitModal = () => setShowExitModal(true);
-    
-    console.log("Lead Capture Modals ready. Open console and run `triggerFilterModal()` to test.");
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <I18nProvider>
         <TooltipProvider>
           <Toaster />
           <Router />
-          
-          {/* Global Modals */}
-          <FilterBasedSubscriptionModal open={showFilterModal} onOpenChange={setShowFilterModal} />
-          <CasualBrowserModal open={showCasualModal} onOpenChange={setShowCasualModal} />
-          <ExitIntentModal open={showExitModal} onOpenChange={setShowExitModal} />
         </TooltipProvider>
       </I18nProvider>
     </QueryClientProvider>

@@ -168,16 +168,12 @@ export default function AdminScraping() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1">Scraper Engine</h1>
+          <h1 className="text-4xl font-semibold tracking-tight mb-1">Scraper Engine</h1>
           <p className="text-muted-foreground font-medium mt-1">
             Manage data sources, crawling schedules, and pipelines.
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" className="rounded-xl font-bold gap-2" data-testid="button-global-config">
-            <Settings className="h-4 w-4" />
-            Global Config
-          </Button>
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
               <Button className="rounded-xl font-bold gap-2 shadow-lg shadow-primary/20" data-testid="button-add-source">
@@ -283,12 +279,12 @@ export default function AdminScraping() {
           <div className="grid gap-6 md:grid-cols-4">
             <Card className="rounded-2xl border-none shadow-lg bg-card">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <div className="h-12 w-12 rounded-2xl bg-primary/5 dark:bg-blue-900/30 flex items-center justify-center text-primary dark:text-blue-400">
                   <Database className="h-6 w-6" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Sources</p>
-                  <h3 className="text-2xl font-black" data-testid="stat-total-sources">{sources?.length || 0}</h3>
+                  <h3 className="text-2xl font-semibold" data-testid="stat-total-sources">{sources?.length || 0}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -299,18 +295,18 @@ export default function AdminScraping() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Active Jobs</p>
-                  <h3 className="text-2xl font-black" data-testid="stat-active-jobs">{activeJobs}</h3>
+                  <h3 className="text-2xl font-semibold" data-testid="stat-active-jobs">{activeJobs}</h3>
                 </div>
               </CardContent>
             </Card>
             <Card className="rounded-2xl border-none shadow-lg bg-card">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                <div className="h-12 w-12 rounded-2xl bg-accent/15 dark:bg-orange-900/30 flex items-center justify-center text-accent-strong dark:text-orange-400">
                   <Clock className="h-6 w-6" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Total Jobs</p>
-                  <h3 className="text-xl font-black" data-testid="stat-total-jobs">{jobs?.length || 0}</h3>
+                  <h3 className="text-xl font-semibold" data-testid="stat-total-jobs">{jobs?.length || 0}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -321,7 +317,7 @@ export default function AdminScraping() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Failed Jobs</p>
-                  <h3 className="text-2xl font-black" data-testid="stat-failed-jobs">{failedJobs}</h3>
+                  <h3 className="text-2xl font-semibold" data-testid="stat-failed-jobs">{failedJobs}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -376,7 +372,7 @@ export default function AdminScraping() {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-1">
-                            <h3 className="text-lg font-black">{source.name}</h3>
+                            <h3 className="text-lg font-semibold">{source.name}</h3>
                             <Badge variant="secondary" className="font-mono text-[10px] uppercase tracking-wider">
                               {source.type}
                             </Badge>
@@ -470,7 +466,7 @@ export default function AdminScraping() {
                                 "font-bold uppercase tracking-widest text-[10px] border-none px-2 py-0.5",
                                 job.status === 'completed' ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
                                 job.status === 'failed' ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" :
-                                "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 animate-pulse"
+                                "bg-primary/5 text-primary dark:bg-blue-900/30 dark:text-blue-400 animate-pulse"
                               )}
                             >
                               {job.status}
@@ -509,7 +505,7 @@ export default function AdminScraping() {
               )}
 
               {activeTab === 'logs' && (
-                <Card className="rounded-2xl border-none shadow-lg bg-slate-950 text-slate-400 font-mono text-sm overflow-hidden h-[500px] flex flex-col">
+                <Card className="rounded-2xl border-none shadow-lg bg-primary text-slate-400 font-mono text-sm overflow-hidden h-[500px] flex flex-col">
                   <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
                     <div className="flex items-center gap-2">
                       <Terminal className="h-4 w-4 text-green-500" />
@@ -523,7 +519,7 @@ export default function AdminScraping() {
                         <span className="text-slate-600 shrink-0 select-none w-20">{log.timestamp}</span>
                         <span className={cn(
                           "font-bold text-[10px] uppercase tracking-wider shrink-0 w-16 pt-0.5",
-                          log.level === 'info' ? "text-blue-500" :
+                          log.level === 'info' ? "text-primary" :
                           log.level === 'debug' ? "text-slate-500" :
                           "text-red-500"
                         )}>
@@ -543,20 +539,20 @@ export default function AdminScraping() {
             </div>
 
             <div className="w-80 hidden xl:block space-y-6">
-              <Card className="rounded-2xl border-none shadow-lg bg-blue-600 text-white overflow-hidden relative">
+              <Card className="rounded-2xl border-none shadow-lg bg-primary text-white overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10" />
                 <CardContent className="p-8 relative z-10">
-                  <h3 className="text-xl font-black mb-2">Legal Compliance</h3>
-                  <p className="text-blue-100 text-sm mb-6 leading-relaxed opacity-90">
+                  <h3 className="text-xl font-semibold mb-2">Legal Compliance</h3>
+                  <p className="text-white/80 text-sm mb-6 leading-relaxed opacity-90">
                     All scrapers are configured to respect robots.txt and use rate limiting.
                   </p>
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-sm font-bold bg-blue-500/50 p-3 rounded-xl border border-blue-400/30">
-                      <CheckCircle2 className="h-4 w-4 text-blue-200" />
+                    <div className="flex items-center gap-3 text-sm font-bold bg-primary p-3 rounded-xl border border-primary/20">
+                      <CheckCircle2 className="h-4 w-4 text-white/80" />
                       <span>Rate Limiting Active</span>
                     </div>
-                    <div className="flex items-center gap-3 text-sm font-bold bg-blue-500/50 p-3 rounded-xl border border-blue-400/30">
-                      <CheckCircle2 className="h-4 w-4 text-blue-200" />
+                    <div className="flex items-center gap-3 text-sm font-bold bg-primary p-3 rounded-xl border border-primary/20">
+                      <CheckCircle2 className="h-4 w-4 text-white/80" />
                       <span>No Login Access</span>
                     </div>
                   </div>

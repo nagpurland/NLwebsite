@@ -5,64 +5,65 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ShieldAlert, FileText, Scale, Eye, CheckCircle2, TrendingUp, AlertTriangle, ClipboardCheck, FileCheck, MessageCircle, Users, Lock } from "lucide-react";
 import { Link } from "wouter";
+import { whatsappUrl } from "@/lib/brand";
 
 export default function InvestSafely() {
   const steps = [
     {
       number: "1",
-      title: "Check Price Index",
-      description: "Check the price index for your locality. Compare asking price with actual market rates. Avoid overpaying 20-30% that brokers often add as hidden margin.",
+      title: "Check the Area & Rate",
+      description: "Note the area, work out the rate per sq.ft and learn which comparisons are useful.",
       icon: TrendingUp,
       link: "/step-1-market-intel",
-      linkText: "Start Step 1"
+      linkText: "Go to Step 1"
     },
     {
       number: "2", 
-      title: "Decision Wizard",
-      description: "Use our Decision Wizard to filter risky plots. It flags legal red flags, TP scheme issues, NA status problems, and encroachment risks automatically.",
+      title: "First Plot Check",
+      description: "Answer five short questions to find missing information and early concerns.",
       icon: AlertTriangle,
       link: "/step-2-filter-risky",
-      linkText: "Run Wizard"
+      linkText: "Go to Step 2"
     },
     {
       number: "3",
-      title: "12-Point Safety Check",
-      description: "The same 12-point checklist that property lawyers use. Covers title verification, encumbrance, mutation, tax receipts, and more. Spot issues in 30 minutes.",
+      title: "12-Point Paper & Site Check",
+      description: "Twelve checks covering ownership, loans on the land, mutation entries, tax receipts and more, each with a guide.",
       icon: ClipboardCheck,
       link: "/step-3-safety-check",
-      linkText: "Get Checklist"
+      linkText: "Go to Step 3"
     },
     {
       number: "4",
-      title: "Final Sanity Check",
-      description: "Before you sign anything, get a final sanity check. We compile everything into a clear report showing what's safe and what needs attention.",
+      title: "Your Plot Summary",
+      description: "See your answers, open checks and questions to discuss with a property advocate.",
       icon: FileCheck,
       link: "/step-4-decision-report",
-      linkText: "Generate Report"
+      linkText: "Go to Step 4"
     }
   ];
 
   const checkItems = [
-    { title: "NA (Non-Agricultural) Status", desc: "Critical for plots. Without this, you can't legally build a permanent structure.", icon: FileText },
-    { title: "TP (Town Planning) Scheme", desc: "Ensures the land is in a sanctioned layout and won't be acquired for roads.", icon: Scale },
-    { title: "Recent Litigation", desc: "We scan court records for active disputes on the survey number.", icon: ShieldAlert },
-    { title: "Circle Rate vs Asking", desc: "If the gap is too high, it's often a black money trap. We flag it.", icon: Eye },
+    { title: "Land Use and NA Status", desc: "Confirm the land can legally be used for what you plan. Rules changed recently, so ask your advocate what applies.", icon: FileText },
+    { title: "TP (Town Planning) Scheme", desc: "Find out whether the layout is sanctioned and whether any part is reserved for roads or public use.", icon: Scale },
+    { title: "Court Disputes", desc: "Search court records using the owner's name and related details. A search can miss cases, so ask your advocate too.", icon: ShieldAlert },
+    { title: "Ready Reckoner vs Asking Price", desc: "A large gap is worth asking about. Never agree to pay part of the price off the books.", icon: Eye },
   ];
 
   return (
     <PublicLayout>
       <ScrollToTop />
-      <div className="bg-amber-50 dark:bg-amber-950/30 py-20">
+      <div className="bg-primary py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 mb-6 px-4 py-1.5 rounded-full font-bold tracking-widest text-[10px] uppercase border-none">
+            <Badge className="bg-white/10 text-accent hover:bg-white/10 shadow-none mb-6 px-4 py-1.5 rounded-full font-bold tracking-widest text-[10px] uppercase border-none">
               Before You Buy
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 text-slate-900 dark:text-white leading-none">
-              Land Buying <span className="text-amber-600 dark:text-amber-400">Protocol</span>
+            <h1 className="text-5xl md:text-6xl mb-8 text-white leading-tight">
+              Land Buying <span className="text-accent">Protocol</span>
             </h1>
-            <p className="text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
-              Before you buy any land, verify it legally. This 4-step framework helps you check everything a lawyer would check — without expensive consultations.
+            <p className="text-xl text-white/80 leading-relaxed">
+              Before you buy any land, check it carefully. This 4-step framework helps you prepare for your advocate and ask better questions.
             </p>
           </div>
         </div>
@@ -70,17 +71,17 @@ export default function InvestSafely() {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto mb-20">
-          <h2 className="text-3xl font-black mb-4 text-center dark:text-white">The 4-Step Decision Framework</h2>
+          <h2 className="text-3xl font-semibold mb-4 text-center dark:text-white">The 4-Step Decision Framework</h2>
           <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
-            Follow these steps in order. Most people complete them in 2-3 hours and avoid costly mistakes.
+            Follow these steps in order. Collecting the documents usually takes the most time.
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
             {steps.map((step, i) => (
               <div key={i} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover-elevate" data-testid={`step-card-${i}`}>
                 <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center shrink-0">
-                    <span className="text-amber-700 dark:text-amber-300 font-black text-xl">{step.number}</span>
+                  <div className="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center shrink-0">
+                    <span className="text-accent-strong font-display text-xl">{step.number}</span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
@@ -102,7 +103,7 @@ export default function InvestSafely() {
 
         <div className="grid md:grid-cols-2 gap-16 mb-20">
           <div>
-            <h2 className="text-3xl font-black mb-8 dark:text-white">What We Check (and Why)</h2>
+            <h2 className="text-3xl font-semibold mb-8 dark:text-white">What to Check (and Why)</h2>
             <div className="space-y-8">
               {checkItems.map((item, i) => (
                 <div key={i} className="flex gap-4" data-testid={`check-item-${i}`}>
@@ -118,91 +119,59 @@ export default function InvestSafely() {
             </div>
           </div>
           
-          <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] relative overflow-hidden">
+          <div className="bg-primary text-white p-10 rounded-[2.5rem] relative overflow-hidden">
             <div className="relative z-10">
               <div className="bg-green-600/20 border border-green-500/30 rounded-2xl p-6 mb-8">
-                <h3 className="text-xl font-black mb-3 text-green-300">Most People Do This Themselves</h3>
+                <h3 className="text-xl font-semibold mb-3 text-green-300">You Can Start This Yourself</h3>
                 <p className="text-green-100 font-medium text-sm leading-relaxed">
-                  Use the checklist on the left to verify your plot independently. This framework covers 80% of what you need to know.
+                  The checklist helps you find problems early. It doesn't replace an advocate's review of the documents.
                 </p>
               </div>
 
-              <h3 className="text-2xl font-black mb-6">Our Promise of Honesty</h3>
+              <h3 className="text-2xl font-semibold mb-6">Our Promise of Honesty</h3>
               <p className="text-slate-300 mb-8 leading-relaxed">
-                We are not lawyers. We are a tech-enabled intelligence layer. We flag obvious risks based on public records, but you must verify independently.
+                We are not lawyers and this is not legal advice. We explain what to check, and you verify it with the official offices and your own advocate.
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
-                  <span className="font-bold">We never hide negative data</span>
+                  <span className="font-bold">We don't list or sell land</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
-                  <span className="font-bold">We don't take commissions to hide flaws</span>
+                  <span className="font-bold">We don't take commission from sellers or brokers</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
-                  <span className="font-bold">We prioritize your capital safety</span>
+                  <span className="font-bold">We never ask you to pay a token</span>
                 </div>
               </div>
 
               <div className="border-t border-slate-700/50 pt-6 mt-8">
                 <p className="text-slate-500 text-xs text-center">
                   Have a specific question?{" "}
-                  <a 
-                    href="mailto:help@nagpurland.com" 
-                    className="text-slate-400 hover:text-white underline underline-offset-2"
-                    data-testid="link-contact"
-                  >
+                  <Link href="/contact" className="text-slate-400 hover:text-white underline underline-offset-2" data-testid="link-contact">
                     Contact us
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-3xl p-10 mb-20">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8 mb-10">
-              <div className="text-center">
-                <div className="text-4xl font-black text-amber-600 dark:text-amber-400 mb-2">1,248+</div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">People used this</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-green-600 dark:text-green-400 mb-2">186</div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Avoided disaster</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-2">12</div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Checkpoints covered</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2">2-3 hrs</div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Total time needed</p>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
-              <Lock className="h-4 w-4" />
-              <span className="text-sm">Your plot data stays private. Never shared with brokers.</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-slate-900 dark:bg-slate-950 rounded-3xl p-10 mb-20">
+        <div className="bg-primary dark:bg-slate-950 rounded-3xl p-10 mb-20">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-black text-white mb-4">Ready to Start?</h2>
-            <p className="text-slate-400 mb-8">Choose how you want to proceed. Most people start with Step 1 and complete all steps themselves.</p>
+            <h2 className="text-3xl font-semibold text-white mb-4">Ready to Start?</h2>
+            <p className="text-slate-400 mb-8">Start with Step 1, or go straight to the checklist if you already have a plot in mind.</p>
             
             <div className="grid md:grid-cols-3 gap-4 mb-8">
               <Link href="/step-1-market-intel">
-                <Button className="w-full h-auto py-4 bg-amber-600 hover:bg-amber-700 text-white" data-testid="button-start-step1">
+                <Button className="w-full h-auto py-4 bg-accent text-accent-foreground hover:bg-accent/90" data-testid="button-start-step1">
                   <div className="flex flex-col items-center gap-1">
                     <TrendingUp className="h-5 w-5 mb-1" />
                     <span className="font-bold">Start Step 1</span>
-                    <span className="text-xs opacity-80">Check Price Index</span>
+                    <span className="text-xs opacity-80">Compare prices</span>
                   </div>
                 </Button>
               </Link>
@@ -211,40 +180,39 @@ export default function InvestSafely() {
                 <Button variant="outline" className="w-full h-auto py-4 border-slate-600 text-white hover:bg-slate-800" data-testid="button-free-opinion">
                   <div className="flex flex-col items-center gap-1">
                     <Users className="h-5 w-5 mb-1" />
-                    <span className="font-bold">Get Free Opinion</span>
-                    <span className="text-xs opacity-80">12-Point Checkup</span>
+                    <span className="font-bold">Ask About Your Plot</span>
+                    <span className="text-xs opacity-80">Send a question</span>
                   </div>
                 </Button>
               </Link>
               
-              <a href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20with%20land%20verification" target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl("Hi, I have a question about buying land in Nagpur.")} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="w-full h-auto py-4 border-green-600 text-green-400 hover:bg-green-950" data-testid="button-whatsapp">
                   <div className="flex flex-col items-center gap-1">
                     <MessageCircle className="h-5 w-5 mb-1" />
-                    <span className="font-bold">WhatsApp Consultation</span>
-                    <span className="text-xs opacity-80">Talk to an expert</span>
+                    <span className="font-bold">Message on WhatsApp</span>
+                    <span className="text-xs opacity-80">Ask a question</span>
                   </div>
                 </Button>
               </a>
             </div>
             
-            <p className="text-slate-500 text-sm">Most people complete this themselves in 2-3 hours</p>
           </div>
         </div>
 
         <div className="max-w-3xl mx-auto" id="faq">
-          <h2 className="text-3xl font-black mb-8 text-center dark:text-white">Common Questions About Land Buying</h2>
+          <h2 className="text-3xl font-semibold mb-8 text-center dark:text-white">Common Questions About Land Buying</h2>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-lg font-bold dark:text-white" data-testid="faq-trigger-1">What is NA Status and why does it matter?</AccordionTrigger>
               <AccordionContent className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                NA (Non-Agricultural) status means the land has been converted from agricultural use to non-agricultural use. Without NA status, you cannot legally construct a permanent building. Always verify NA status before buying any plot.
+                NA (Non-Agricultural) status relates to whether land may be used for something other than farming. Maharashtra changed these rules recently, so ask your advocate what applies to the plot before you buy.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger className="text-lg font-bold dark:text-white" data-testid="faq-trigger-2">How do I check for litigation on a plot?</AccordionTrigger>
               <AccordionContent className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                You can check litigation by searching the survey number on eCourts website, visiting the local sub-registrar office, or using our Decision Wizard which scans public records automatically.
+                You can search the eCourts website using party names and case details. An online search can miss cases, so ask your advocate to run a proper search as well.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
@@ -256,7 +224,7 @@ export default function InvestSafely() {
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-lg font-bold dark:text-white" data-testid="faq-trigger-4">How long does the verification process take?</AccordionTrigger>
               <AccordionContent className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                Using our 4-step framework, most people complete all verifications in 2-3 hours. This includes checking the price index, running the decision wizard, going through the 12-point checklist, and generating the final report.
+                It depends on the plot and the offices involved. Reading the steps takes minutes, but collecting documents can take days or longer, and you should allow time for your advocate.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

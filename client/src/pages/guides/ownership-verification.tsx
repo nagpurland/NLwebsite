@@ -14,7 +14,7 @@ export default function OwnershipVerificationGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -23,8 +23,8 @@ export default function OwnershipVerificationGuide() {
             </Button>
           </Link>
           
-          <Badge className="bg-blue-100 text-blue-700 mb-4">Check #1 - Documents</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <Badge className="bg-primary/5 text-primary mb-4">Check #1 - Documents</Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             How to Verify Ownership Name Matches Seller
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,22 +37,22 @@ export default function OwnershipVerificationGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why This Matters</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
               Every year, dozens of property fraud cases in Nagpur involve sellers who don't actually own the land they're selling. They might be relatives, former owners, or complete fraudsters. This single check can save you from losing your entire investment.
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Step-by-Step Verification</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Step-by-Step Verification</h2>
             
             <div className="space-y-6">
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">1</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">1</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Get the Property Card (Maalki Patrak)</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Get the Property Card (Maalki Patrak)</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Visit the Talathi office for rural land or City Survey Office for urban land. Request the Property Card for the specific survey number.
                       </p>
@@ -67,14 +67,14 @@ export default function OwnershipVerificationGuide() {
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">2</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">2</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Get the 7/12 Extract (Satbara)</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Get the 7/12 Extract (Satbara)</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         The 7/12 shows the current legal owner's name. This is available online at Maharashtra Bhumi Abhilekh portal or at Talathi office.
                       </p>
-                      <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded-lg text-sm">
-                        <strong>Online:</strong> mahabhulekh.maharashtra.gov.in → Select Nagpur District → Enter Survey Number
+                      <div className="bg-primary/5 dark:bg-blue-900/30 p-3 rounded-lg text-sm">
+                        <strong>Online:</strong> bhulekh.mahabhumi.gov.in → Select Nagpur District → Enter Survey Number
                       </div>
                     </div>
                   </div>
@@ -84,9 +84,9 @@ export default function OwnershipVerificationGuide() {
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">3</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">3</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Compare Names Exactly</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Compare Names Exactly</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         The name on the Property Card / 7/12 must match the seller's Aadhaar card and PAN card exactly. Watch for spelling variations.
                       </p>
@@ -101,9 +101,9 @@ export default function OwnershipVerificationGuide() {
               <Card className="border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold flex-shrink-0">4</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">4</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check for Joint Owners</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check for Joint Owners</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         If the property has multiple owners, ALL owners must sign the sale deed. One owner cannot sell without others' consent.
                       </p>
@@ -115,7 +115,7 @@ export default function OwnershipVerificationGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Red Flags to Watch</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Red Flags to Watch</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -169,15 +169,15 @@ export default function OwnershipVerificationGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              <MapPin className="w-6 h-6 inline mr-2 text-blue-600" />
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
+              <MapPin className="w-6 h-6 inline mr-2 text-primary" />
               Where to Get Documents in Nagpur
             </h2>
             
             <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">City Survey Office (Urban Land)</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">City Survey Office (Urban Land)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Civil Lines, Near Commissioner Office, Nagpur</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10 AM - 5 PM</span>
@@ -188,7 +188,7 @@ export default function OwnershipVerificationGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Talathi Office (Rural Land)</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Talathi Office (Rural Land)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Located in each taluka - varies by location</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10 AM - 5 PM</span>
@@ -199,8 +199,8 @@ export default function OwnershipVerificationGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Online (7/12 Extract)</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">mahabhulekh.maharashtra.gov.in</p>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Online (7/12 Extract)</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">bhulekh.mahabhumi.gov.in</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 24/7 Available</span>
                     <span><FileText className="w-4 h-4 inline mr-1" /> Free</span>
@@ -211,7 +211,7 @@ export default function OwnershipVerificationGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Common Mistakes to Avoid</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Common Mistakes to Avoid</h2>
             
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
               <ul className="space-y-3">
@@ -239,7 +239,7 @@ export default function OwnershipVerificationGuide() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-between mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
           <Link href="/step-3-safety-check">
-            <Button size="lg" className="w-full sm:w-auto bg-green-600 hover:bg-green-700" data-testid="button-back-mark">
+            <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90" data-testid="button-back-mark">
               <CheckCircle className="w-4 h-4 mr-2" />
               Back to Checklist & Mark Complete
             </Button>
@@ -254,9 +254,9 @@ export default function OwnershipVerificationGuide() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
-          <h3 className="font-bold text-slate-900 dark:text-white mb-4">Related Guides</h3>
+          <h3 className="font-bold text-primary dark:text-white mb-4">Related Guides</h3>
           <div className="grid md:grid-cols-3 gap-4">
-            <Link href="/guide/chain-of-title">
+            <Link href="/guide/title-verification">
               <Card className="hover-elevate cursor-pointer">
                 <CardContent className="p-4">
                   <Badge variant="outline" className="mb-2 text-xs">Legal</Badge>
@@ -272,7 +272,7 @@ export default function OwnershipVerificationGuide() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/encumbrance-check">
+            <Link href="/guide/encumbrance-certificate">
               <Card className="hover-elevate cursor-pointer">
                 <CardContent className="p-4">
                   <Badge variant="outline" className="mb-2 text-xs">Legal</Badge>

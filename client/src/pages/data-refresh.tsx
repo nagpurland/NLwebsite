@@ -154,6 +154,7 @@ export default function DataRefresh() {
 
       const response = await fetch("/api/process-csv", {
         method: "POST",
+        headers: { Authorization: `Bearer ${localStorage.getItem("admin_token") ?? ""}` },
         body: formData,
       });
 
@@ -181,13 +182,13 @@ export default function DataRefresh() {
 
   return (
     <PublicLayout>
-      <div className="min-h-screen bg-slate-900 py-12">
+      <div className="min-h-screen bg-primary py-12">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 mb-4">
+            <Badge className="bg-primary text-primary border-primary/20 mb-4">
               Admin Tool
             </Badge>
-            <h1 className="text-4xl font-black text-white mb-4">
+            <h1 className="text-4xl font-semibold text-white mb-4">
               Data Refresh Center
             </h1>
             <p className="text-slate-400 max-w-2xl mx-auto">
@@ -199,7 +200,7 @@ export default function DataRefresh() {
             <Card className="bg-slate-800 border-slate-700" data-testid="step-1-card">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-bold">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold">
                     1
                   </div>
                   <div>
@@ -209,7 +210,7 @@ export default function DataRefresh() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-slate-900 rounded-lg p-4 max-h-48 overflow-y-auto">
+                <div className="bg-primary rounded-lg p-4 max-h-48 overflow-y-auto">
                   <pre className="text-slate-300 text-xs whitespace-pre-wrap font-mono">
                     {COMET_PROMPT}
                   </pre>
@@ -217,7 +218,7 @@ export default function DataRefresh() {
                 <div className="flex flex-wrap gap-3">
                   <Button 
                     onClick={copyPrompt}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-primary hover:bg-primary/90"
                     data-testid="button-copy-prompt"
                   >
                     <Copy className="h-4 w-4 mr-2" />
@@ -226,7 +227,7 @@ export default function DataRefresh() {
                   <Button 
                     onClick={openComet}
                     variant="outline"
-                    className="border-purple-500 text-purple-400 hover:bg-purple-500/10"
+                    className="border-primary/20 text-primary hover:bg-primary/90"
                     data-testid="button-open-comet"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
@@ -320,7 +321,7 @@ export default function DataRefresh() {
             <Card className="bg-slate-800 border-slate-700" data-testid="step-3-card">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500 text-white font-bold">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold">
                     3
                   </div>
                   <div>
@@ -333,7 +334,7 @@ export default function DataRefresh() {
                 <Button
                   onClick={processCSV}
                   disabled={!file || isProcessing}
-                  className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                  className="w-full h-14 text-lg bg-background "
                   data-testid="button-process-csv"
                 >
                   {isProcessing ? (
@@ -352,21 +353,21 @@ export default function DataRefresh() {
                 {result && (
                   <div className="space-y-6" data-testid="results-section">
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="bg-slate-900 rounded-lg p-4 text-center">
+                      <div className="bg-primary rounded-lg p-4 text-center">
                         <p className="text-3xl font-bold text-white">{result.totalListings}</p>
                         <p className="text-slate-400 text-sm">Total Listings</p>
                       </div>
-                      <div className="bg-slate-900 rounded-lg p-4 text-center">
+                      <div className="bg-primary rounded-lg p-4 text-center">
                         <p className="text-3xl font-bold text-white">{result.localityCount}</p>
                         <p className="text-slate-400 text-sm">Localities</p>
                       </div>
-                      <div className="bg-slate-900 rounded-lg p-4 text-center">
+                      <div className="bg-primary rounded-lg p-4 text-center">
                         <p className="text-3xl font-bold text-green-400">Live</p>
                         <p className="text-slate-400 text-sm">API Status</p>
                       </div>
                     </div>
 
-                    <div className="bg-slate-900 rounded-lg p-4">
+                    <div className="bg-primary rounded-lg p-4">
                       <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                         <TrendingUp className="h-5 w-5 text-green-500" />
                         Price Index by Locality
@@ -411,7 +412,7 @@ export default function DataRefresh() {
                       </div>
                     </div>
 
-                    <div className="bg-slate-900 rounded-lg p-4">
+                    <div className="bg-primary rounded-lg p-4">
                       <h3 className="text-white font-semibold mb-3">API Endpoints (Now Live)</h3>
                       <div className="space-y-2 font-mono text-sm">
                         <div className="flex items-center gap-2">

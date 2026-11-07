@@ -1,13 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
+import { whatsappUrl } from "@/lib/brand";
+import { useTranslation } from "@/lib/i18n/context";
 
-export function FloatingWhatsAppButton({ phone = "918857801966" }) {
+export function FloatingWhatsAppButton({ hideOnPhone }: { hideOnPhone?: boolean }) {
+  const t = useTranslation();
   return (
     <Button
-      onClick={() => window.open(`https://wa.me/${phone}`, "_blank")}
-      className="fixed bottom-24 right-6 h-14 w-14 md:h-16 md:w-16 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl z-50 p-0 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 mb-[env(safe-area-inset-bottom)]"
+      onClick={() => window.open(whatsappUrl(t.nav.whatsappMessage), "_blank", "noopener")}
+      aria-label="Message us on WhatsApp"
+      data-event="whatsapp_click"
+      className={`print:hidden fixed bottom-4 right-4 md:bottom-6 md:right-6 h-12 w-12 min-[700px]:h-12 min-[700px]:w-auto min-[700px]:px-5 rounded-full gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg z-50 ${hideOnPhone ? "max-[699px]:hidden" : ""}`}
     >
-      <MessageSquare className="h-7 w-7 md:h-8 md:w-8 text-white" />
+      <MessageSquare className="h-6 w-6" />
+      <span className="hidden min-[700px]:inline">{t.nav.whatsapp}</span>
     </Button>
   );
 }

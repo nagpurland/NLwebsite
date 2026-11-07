@@ -14,7 +14,7 @@ export default function PossessionVerificationGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -23,8 +23,8 @@ export default function PossessionVerificationGuide() {
             </Button>
           </Link>
           
-          <Badge className="bg-orange-100 text-orange-700 mb-4">Check #10 - Physical</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <Badge className="bg-accent/15 text-accent-strong mb-4">Check #10 - Physical</Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             How to Verify Current Possession Status
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,22 +37,22 @@ export default function PossessionVerificationGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why This Matters</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
               In India, "possession is nine-tenths of the law." Someone physically occupying land for years can claim adverse possession rights. In Nagpur's peri-urban areas, agricultural tenants, caretakers, or encroachers may occupy land the owner is trying to sell. Verify possession before buying.
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Step-by-Step Verification</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Step-by-Step Verification</h2>
             
             <div className="space-y-6">
               <Card className="border-l-4 border-l-orange-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold flex-shrink-0">1</div>
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent-strong font-bold flex-shrink-0">1</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Visit the Plot Unannounced</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Visit the Plot Unannounced</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Make at least 2-3 surprise visits at different times (morning, evening, weekend). Observe who is using the land.
                       </p>
@@ -67,13 +67,13 @@ export default function PossessionVerificationGuide() {
               <Card className="border-l-4 border-l-orange-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold flex-shrink-0">2</div>
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent-strong font-bold flex-shrink-0">2</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Ask Neighbors About Land Use</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Ask Neighbors About Land Use</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Talk to at least 3 neighboring plot owners. Ask who has been using the land and for how long.
                       </p>
-                      <div className="bg-orange-50 dark:bg-orange-900/30 p-3 rounded-lg text-sm">
+                      <div className="bg-accent/15 dark:bg-orange-900/30 p-3 rounded-lg text-sm">
                         <strong>Key questions:</strong> "Who farms this land?" "Have you seen the owner recently?" "Any disputes?"
                       </div>
                     </div>
@@ -84,9 +84,9 @@ export default function PossessionVerificationGuide() {
               <Card className="border-l-4 border-l-orange-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold flex-shrink-0">3</div>
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent-strong font-bold flex-shrink-0">3</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check for Tenant Agreements</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check for Tenant Agreements</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Ask the seller if any tenant, caretaker, or farmer has a written or verbal agreement to use the land. Get written confirmation of termination.
                       </p>
@@ -101,9 +101,9 @@ export default function PossessionVerificationGuide() {
               <Card className="border-l-4 border-l-orange-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold flex-shrink-0">4</div>
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent-strong font-bold flex-shrink-0">4</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Verify Seller Has Physical Access</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Verify Seller Has Physical Access</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Ask the seller to take you to the plot. If they can't freely access it or need "permission" from someone, that's a red flag.
                       </p>
@@ -115,9 +115,9 @@ export default function PossessionVerificationGuide() {
               <Card className="border-l-4 border-l-orange-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold flex-shrink-0">5</div>
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent-strong font-bold flex-shrink-0">5</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Get Possession Certificate</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Get Possession Certificate</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         For plots in layouts, ask for Possession Certificate from the developer. For agricultural land, get a letter from the Talathi confirming possession status.
                       </p>
@@ -129,7 +129,7 @@ export default function PossessionVerificationGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
               <AlertCircle className="text-red-500" /> Red Flags to Watch
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -153,20 +153,20 @@ export default function PossessionVerificationGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-              <MapPin className="text-indigo-500" /> Where to Get Help in Nagpur
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
+              <MapPin className="text-primary" /> Where to Get Help in Nagpur
             </h2>
             <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white">Talathi Office (Village Level)</h3>
+                  <h3 className="font-bold text-primary dark:text-white">Talathi Office (Village Level)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Each village has a Talathi who maintains possession records</p>
                   <p className="text-slate-500 text-sm mt-1">For rural/agricultural land possession verification</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white">NMC Ward Office (Urban)</h3>
+                  <h3 className="font-bold text-primary dark:text-white">NMC Ward Office (Urban)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Nagpur Municipal Corporation ward offices</p>
                   <p className="text-slate-500 text-sm mt-1">For urban plots - property tax records show occupancy</p>
                 </CardContent>
@@ -182,7 +182,7 @@ export default function PossessionVerificationGuide() {
               </Button>
             </Link>
             <Link href="/guide/neighbor-verification">
-              <Button className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700">
+              <Button className="w-full md:w-auto bg-primary hover:bg-primary/90">
                 Next: Neighbor Verification
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

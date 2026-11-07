@@ -146,12 +146,12 @@ export default function Campaigns() {
       <div className="grid gap-6 md:grid-cols-3 mb-6">
         <Card className="rounded-2xl border-none shadow-lg">
           <CardContent className="p-6 flex items-center gap-4">
-            <div className="h-12 w-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <div className="h-12 w-12 rounded-2xl bg-primary/5 dark:bg-blue-900/30 flex items-center justify-center text-primary dark:text-blue-400">
               <Megaphone className="h-6 w-6" />
             </div>
             <div>
               <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Total Campaigns</p>
-              <h3 className="text-2xl font-black" data-testid="stat-total-campaigns">{campaigns?.length || 0}</h3>
+              <h3 className="text-2xl font-semibold" data-testid="stat-total-campaigns">{campaigns?.length || 0}</h3>
             </div>
           </CardContent>
         </Card>
@@ -162,18 +162,18 @@ export default function Campaigns() {
             </div>
             <div>
               <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Total Leads</p>
-              <h3 className="text-2xl font-black" data-testid="stat-total-leads">{totalLeads}</h3>
+              <h3 className="text-2xl font-semibold" data-testid="stat-total-leads">{totalLeads}</h3>
             </div>
           </CardContent>
         </Card>
         <Card className="rounded-2xl border-none shadow-lg">
           <CardContent className="p-6 flex items-center gap-4">
-            <div className="h-12 w-12 rounded-2xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+            <div className="h-12 w-12 rounded-2xl bg-accent/15 dark:bg-orange-900/30 flex items-center justify-center text-accent-strong dark:text-orange-400">
               <CheckCircle2 className="h-6 w-6" />
             </div>
             <div>
               <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Hot Leads</p>
-              <h3 className="text-2xl font-black" data-testid="stat-hot-leads">{hotLeads}</h3>
+              <h3 className="text-2xl font-semibold" data-testid="stat-hot-leads">{hotLeads}</h3>
             </div>
           </CardContent>
         </Card>
@@ -360,7 +360,7 @@ export default function Campaigns() {
                           className={
                             campaign.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
                             campaign.status === 'paused' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' :
-                            campaign.status === 'sent' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                            campaign.status === 'sent' ? 'bg-primary/5 text-primary dark:bg-blue-900/30 dark:text-blue-400' :
                             ''
                           }
                           data-testid={`badge-status-${campaign.id}`}

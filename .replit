@@ -46,8 +46,3 @@ mockupState = "FULLSTACK"
 expertMode = true
 integrations = ["javascript_database:1.0.0"]
 
-[userenv]
-
-[userenv.shared]
-GEMINI_API_KEY = ""
-PERPLEXITY_API_KEY = ""

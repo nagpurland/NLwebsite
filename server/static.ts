@@ -3,11 +3,10 @@ import fs from "fs";
 import path from "path";
 
 export function serveStatic(app: Express) {
-  const publicPath = path.resolve(__dirname, "public");
-  const distPath = fs.existsSync(publicPath) ? publicPath : __dirname;
-  if (!fs.existsSync(path.resolve(distPath, "index.html"))) {
+  const distPath = path.resolve(__dirname, "public");
+  if (!fs.existsSync(distPath)) {
     throw new Error(
-      `Could not find the build directory with index.html at: ${distPath}, make sure to build the client first`,
+      `Could not find the build directory: ${distPath}, make sure to build the client first`,
     );
   }
 

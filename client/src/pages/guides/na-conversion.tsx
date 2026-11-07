@@ -14,7 +14,7 @@ export default function NAConversionGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -23,8 +23,8 @@ export default function NAConversionGuide() {
             </Button>
           </Link>
           
-          <Badge className="bg-purple-100 text-purple-700 mb-4">Check #5 - Legal</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <Badge className="bg-primary/5 text-primary mb-4">Check #5 - Legal</Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             How to Verify NA (Non-Agricultural) Conversion
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,22 +37,22 @@ export default function NAConversionGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why This Matters</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
               In Maharashtra, all agricultural land must be converted to Non-Agricultural (NA) status before any construction or non-farming use. Buying land without proper NA conversion means you cannot build, get electricity connection, or get building permissions. Many plots in Nagpur's outskirts are sold without proper NA - this is illegal.
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Step-by-Step Verification</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Step-by-Step Verification</h2>
             
             <div className="space-y-6">
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">1</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">1</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Request NA Order Copy</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Request NA Order Copy</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Ask the seller for the original NA Order issued by the Collector's office. This document is the official proof of conversion.
                       </p>
@@ -67,13 +67,13 @@ export default function NAConversionGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">2</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">2</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Verify at Collector Office</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Verify at Collector Office</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Visit the Nagpur Collector's office to verify the NA order is genuine and not forged. Cross-check the order number and date.
                       </p>
-                      <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
+                      <div className="bg-primary/5 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
                         <strong>Office:</strong> Collector Office, Civil Lines, Nagpur - Land Records Section
                       </div>
                     </div>
@@ -84,14 +84,14 @@ export default function NAConversionGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">3</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">3</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check 7/12 Extract for NA Entry</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check 7/12 Extract for NA Entry</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         The 7/12 extract should show "bin-sheti" (non-agricultural) in the land use column. If it still shows "sheti" (agricultural), NA mutation is pending.
                       </p>
                       <div className="bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-sm">
-                        <strong>Online check:</strong> mahabhulekh.maharashtra.gov.in → Select Nagpur → View 7/12
+                        <strong>Online check:</strong> bhulekh.mahabhumi.gov.in → Select Nagpur → View 7/12
                       </div>
                     </div>
                   </div>
@@ -101,9 +101,9 @@ export default function NAConversionGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">4</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">4</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Confirm Conversion Fees Paid</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Confirm Conversion Fees Paid</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         NA conversion requires payment of conversion fees (typically 2-3% of land value). Request payment receipts to confirm all dues are cleared.
                       </p>
@@ -118,9 +118,9 @@ export default function NAConversionGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">5</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">5</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check NA Purpose Matches Your Use</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check NA Purpose Matches Your Use</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         NA conversion is granted for specific purposes: Residential, Commercial, Industrial, etc. Ensure the purpose matches your intended use.
                       </p>
@@ -132,7 +132,7 @@ export default function NAConversionGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
               <AlertCircle className="text-red-500" /> Red Flags to Watch
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -156,28 +156,28 @@ export default function NAConversionGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-              <MapPin className="text-indigo-500" /> Where to Verify in Nagpur
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
+              <MapPin className="text-primary" /> Where to Verify in Nagpur
             </h2>
             <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white">Collector Office - Land Records</h3>
+                  <h3 className="font-bold text-primary dark:text-white">Collector Office - Land Records</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Civil Lines, Near Vidhan Bhavan, Nagpur - 440001</p>
                   <p className="text-slate-500 text-sm mt-1">Mon-Sat: 10:00 AM - 5:00 PM | Fee: Rs. 100-500</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white">Tehsildar Office (Taluka Level)</h3>
+                  <h3 className="font-bold text-primary dark:text-white">Tehsildar Office (Taluka Level)</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Nagpur City, Nagpur Rural, Hingna, Kamptee, Umred tehsils</p>
                   <p className="text-slate-500 text-sm mt-1">Mon-Sat: 10:00 AM - 5:00 PM</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white">Online Verification</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">mahabhulekh.maharashtra.gov.in - Check 7/12 for NA status</p>
+                  <h3 className="font-bold text-primary dark:text-white">Online Verification</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">bhulekh.mahabhumi.gov.in - Check 7/12 for NA status</p>
                   <p className="text-slate-500 text-sm mt-1">Available 24/7 | Free</p>
                 </CardContent>
               </Card>
@@ -192,7 +192,7 @@ export default function NAConversionGuide() {
               </Button>
             </Link>
             <Link href="/guide/encumbrance-certificate">
-              <Button className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700">
+              <Button className="w-full md:w-auto bg-primary hover:bg-primary/90">
                 Next: Encumbrance Certificate
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

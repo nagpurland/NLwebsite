@@ -1,10 +1,28 @@
+// One place for public contact details. Set VITE_CONTACT_* at build time to change them.
+export const CONTACT = {
+  whatsapp: import.meta.env.VITE_CONTACT_WHATSAPP || "918857801966",
+  email: (import.meta.env.VITE_CONTACT_EMAIL as string | undefined) || "",
+};
+
+// Footer icons appear only once a real address is set, so there are no dead links.
+export const SOCIAL_LINKS = {
+  youtube: import.meta.env.VITE_SOCIAL_YOUTUBE as string | undefined,
+  instagram: import.meta.env.VITE_SOCIAL_INSTAGRAM as string | undefined,
+  linkedin: import.meta.env.VITE_SOCIAL_LINKEDIN as string | undefined,
+};
+
+export function whatsappUrl(message?: string): string {
+  const text = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${CONTACT.whatsapp}${text}`;
+}
+
 export const BRAND = {
   name: "NagpurLand Intelligence",
   shortName: "NagpurLand",
   tagline: "Trusted Real Estate OS for Nagpur",
   website: "https://nagpurland.com",
-  phone: "+91 9876543210",
-  email: "info@nagpurland.com",
+  phone: `+${CONTACT.whatsapp}`,
+  email: CONTACT.email,
   address: "Dharampeth, Nagpur, Maharashtra 440010",
   footer: "Data-Driven Decisions for Smart Property Investments",
 };

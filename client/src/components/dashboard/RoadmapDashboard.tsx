@@ -104,7 +104,7 @@ export function RoadmapDashboard() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed": return <CheckCircle2 className="w-4 h-4 text-green-500" />;
-      case "in-progress": return <Circle className="w-4 h-4 text-blue-500 fill-blue-500" />;
+      case "in-progress": return <Circle className="w-4 h-4 text-primary fill-primary" />;
       case "blocked": return <AlertTriangle className="w-4 h-4 text-red-500" />;
       default: return <Circle className="w-4 h-4 text-slate-300" />;
     }
@@ -113,7 +113,7 @@ export function RoadmapDashboard() {
   const getStatusBadge = (status: string) => {
     const styles: Record<string, string> = {
       completed: "bg-green-100 text-green-700",
-      "in-progress": "bg-blue-100 text-blue-700",
+      "in-progress": "bg-primary/5 text-primary",
       blocked: "bg-red-100 text-red-700",
       pending: "bg-slate-100 text-slate-700"
     };
@@ -129,7 +129,7 @@ export function RoadmapDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Implementation Roadmap</h2>
+          <h2 className="text-2xl font-bold text-primary dark:text-white">Implementation Roadmap</h2>
           <p className="text-slate-600 dark:text-slate-400">4-week implementation plan</p>
         </div>
       </div>
@@ -137,7 +137,7 @@ export function RoadmapDashboard() {
       <div className="grid gap-4 sm:grid-cols-4">
         <Card>
           <CardContent className="pt-6 text-center">
-            <Calendar className="w-8 h-8 text-[#2180a8] mx-auto mb-2" />
+            <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
             <p className="text-2xl font-bold">{phases.length}</p>
             <p className="text-sm text-slate-500">Phases</p>
           </CardContent>
@@ -151,7 +151,7 @@ export function RoadmapDashboard() {
         </Card>
         <Card>
           <CardContent className="pt-6 text-center">
-            <Clock className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+            <Clock className="w-8 h-8 text-primary mx-auto mb-2" />
             <p className="text-2xl font-bold">{completedHours}/{totalHours}h</p>
             <p className="text-sm text-slate-500">Hours Tracked</p>
           </CardContent>
@@ -194,7 +194,7 @@ export function RoadmapDashboard() {
                       <p className="text-sm font-medium">{phaseCompleted}/{phase.tasks.length} tasks</p>
                       <Progress value={phaseProgress} className="w-24 h-2 mt-1" />
                     </div>
-                    <Badge className={phaseProgress === 100 ? "bg-green-500" : phaseProgress > 0 ? "bg-blue-500" : "bg-slate-300"}>
+                    <Badge className={phaseProgress === 100 ? "bg-green-500" : phaseProgress > 0 ? "bg-primary" : "bg-slate-300"}>
                       {phaseProgress === 100 ? "Complete" : phaseProgress > 0 ? "In Progress" : "Pending"}
                     </Badge>
                   </div>
@@ -211,7 +211,7 @@ export function RoadmapDashboard() {
                           task.status === "completed" 
                             ? "bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800"
                             : task.status === "in-progress"
-                              ? "bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800"
+                              ? "bg-primary/5 dark:bg-blue-900/10 border-primary/20 dark:border-blue-800"
                               : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
                         }`}
                       >

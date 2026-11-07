@@ -25,10 +25,10 @@ export function SimpleBreadcrumb({ steps, currentPage }: SimpleBreadcrumbProps) 
           <li key={step.link} className="flex items-center">
             <Link
               href={step.link}
-              className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-[#2180a8] dark:hover:text-blue-400 transition-colors duration-200 truncate max-w-[120px] sm:max-w-none"
+              className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors duration-200 truncate max-w-[120px] sm:max-w-none"
               data-testid={`breadcrumb-link-${index}`}
             >
-              {index === 0 && step.label === "Home" && (
+              {index === 0 && (
                 <Home className="w-4 h-4 flex-shrink-0" />
               )}
               <span className="hidden sm:inline">{step.label}</span>

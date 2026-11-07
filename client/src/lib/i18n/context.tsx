@@ -1,29 +1,34 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useEffect } from "react";
-import { Language, translations, TranslationKeys } from "./translations";
+import { SITE_TEXT, type Language, type SiteText } from "./site";
+
+const LANGUAGE_KEY = "nagpurland_lang";
 
 interface I18nContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: TranslationKeys;
+  t: SiteText;
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("nagpurland_lang");
-      if (saved && (saved === "en" || saved === "hi" || saved === "mr")) {
-        return saved as Language;
-      }
-    }
+function savedLanguage(): Language {
+  try {
+    const saved = window.localStorage.getItem(LANGUAGE_KEY);
+    return saved === "hi" || saved === "mr" ? saved : "en";
+  } catch {
     return "en";
-  });
+  }
+}
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<Language>(savedLanguage);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("nagpurland_lang", lang);
+    try {
+      window.localStorage.setItem(LANGUAGE_KEY, lang);
+    } catch {
+      // Private windows can block storage. The choice still works until the page closes.
     }
   }, []);
 
@@ -31,10 +36,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = language;
   }, [language]);
 
-  const t = translations[language];
-
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={{ language, setLanguage, t: SITE_TEXT[language] }}>
       {children}
     </I18nContext.Provider>
   );
@@ -49,6 +52,5 @@ export function useI18n() {
 }
 
 export function useTranslation() {
-  const { t } = useI18n();
-  return t;
+  return useI18n().t;
 }

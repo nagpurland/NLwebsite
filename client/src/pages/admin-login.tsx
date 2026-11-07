@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "wouter";
+import { useState } from "react";
+import { queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -11,16 +11,7 @@ export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [, setLocation] = useLocation();
   const { toast } = useToast();
-
-  useEffect(() => {
-    // Check if already logged in
-    const isAuthenticated = localStorage.getItem("admin_authenticated") === "true";
-    if (isAuthenticated) {
-      setLocation("/admin");
-    }
-  }, [setLocation]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,18 +26,17 @@ export default function AdminLogin() {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("admin_authenticated", "true");
         localStorage.setItem("admin_token", data.token);
+        await queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
         toast({
           title: "Welcome back",
-          description: "Successfully logged into NagpurOS Admin.",
+          description: "Successfully logged into NagpurLand Admin.",
         });
-        setLocation("/admin");
       } else {
         toast({
           variant: "destructive",
           title: "Access Denied",
-          description: "Invalid credentials. Please try again.",
+          description: response.status === 429 ? "Too many attempts. Try again in 15 minutes." : "Invalid credentials. Please try again.",
         });
       }
     } catch (error) {
@@ -61,7 +51,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-muted/30 p-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-muted/30 p-4 site">
       <Card className="w-full max-w-md border-none shadow-2xl shadow-black/10">
         <CardHeader className="space-y-1 text-center pb-8">
           <div className="flex justify-center mb-4">
@@ -69,7 +59,7 @@ export default function AdminLogin() {
               <Building2 className="h-10 w-10 text-primary" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-black tracking-tight">NagpurOS Admin</CardTitle>
+          <CardTitle className="text-2xl font-semibold tracking-tight">NagpurLand Admin</CardTitle>
           <CardDescription className="text-base font-medium">
             Enter your credentials to access the control center
           </CardDescription>
@@ -80,7 +70,7 @@ export default function AdminLogin() {
               <Label htmlFor="username">Username</Label>
               <Input 
                 id="username" 
-                placeholder="admin"
+                autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="h-11"
@@ -92,7 +82,7 @@ export default function AdminLogin() {
               <Input 
                 id="password" 
                 type="password"
-                placeholder="••••••••"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="h-11"

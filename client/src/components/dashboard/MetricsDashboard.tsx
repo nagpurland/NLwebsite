@@ -105,7 +105,7 @@ export function MetricsDashboard() {
   const getStatus = (metric: Metric) => {
     const progress = getProgress(metric);
     if (progress >= 100) return { label: "Target Met", color: "bg-green-500" };
-    if (progress >= 70) return { label: "On Track", color: "bg-blue-500" };
+    if (progress >= 70) return { label: "On Track", color: "bg-primary" };
     if (progress >= 40) return { label: "Needs Work", color: "bg-yellow-500" };
     return { label: "At Risk", color: "bg-red-500" };
   };
@@ -116,14 +116,14 @@ export function MetricsDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Success Metrics</h2>
+          <h2 className="text-2xl font-bold text-primary dark:text-white">Success Metrics</h2>
           <p className="text-slate-600 dark:text-slate-400">Track progress against targets</p>
         </div>
         <Card className="px-6 py-3">
           <div className="flex items-center gap-4">
             <div>
               <p className="text-sm text-slate-600">Overall Progress</p>
-              <p className="text-2xl font-bold text-[#2180a8]">{overallProgress.toFixed(0)}%</p>
+              <p className="text-2xl font-bold text-primary">{overallProgress.toFixed(0)}%</p>
             </div>
             <div className="w-24">
               <Progress value={overallProgress} className="h-3" />
@@ -146,7 +146,7 @@ export function MetricsDashboard() {
                 <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-lg text-slate-900 dark:text-white">
+                      <h3 className="font-semibold text-lg text-primary dark:text-white">
                         {metric.name}
                       </h3>
                       <Badge className={status.color}>{status.label}</Badge>
@@ -208,7 +208,7 @@ export function MetricsDashboard() {
 
                     <div className="text-center">
                       <p className="text-xs text-slate-500 mb-1">Target</p>
-                      <p className="text-xl font-semibold text-[#2180a8]">
+                      <p className="text-xl font-semibold text-primary">
                         {metric.target}{metric.unit}
                       </p>
                     </div>
@@ -222,7 +222,7 @@ export function MetricsDashboard() {
 
       <Card className="bg-slate-50 dark:bg-slate-800/50">
         <CardContent className="pt-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
+          <h3 className="font-semibold text-primary dark:text-white mb-4">
             Metrics Summary
           </h3>
           <div className="grid gap-4 sm:grid-cols-4">
@@ -232,7 +232,7 @@ export function MetricsDashboard() {
               <p className="text-sm text-slate-500">Targets Met</p>
             </div>
             <div className="text-center p-4 bg-white dark:bg-slate-800 rounded-lg">
-              <Target className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+              <Target className="w-8 h-8 text-primary mx-auto mb-2" />
               <p className="text-2xl font-bold">{metrics.filter(m => getProgress(m) >= 70 && getProgress(m) < 100).length}</p>
               <p className="text-sm text-slate-500">On Track</p>
             </div>

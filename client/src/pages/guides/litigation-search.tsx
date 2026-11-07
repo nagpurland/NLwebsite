@@ -14,7 +14,7 @@ export default function LitigationSearchGuide() {
     <PublicLayout>
       <ScrollToTop />
       
-      <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 py-12">
+      <div className="bg-background py-12">
         <div className="container mx-auto px-4">
           <Link href="/step-3-safety-check">
             <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-checklist">
@@ -23,8 +23,8 @@ export default function LitigationSearchGuide() {
             </Button>
           </Link>
           
-          <Badge className="bg-purple-100 text-purple-700 mb-4">Check #8 - Legal</Badge>
-          <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">
+          <Badge className="bg-primary/5 text-primary mb-4">Check #8 - Legal</Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary dark:text-white mb-4">
             How to Search for Active Litigation on Property
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -37,26 +37,26 @@ export default function LitigationSearchGuide() {
         <div className="prose dark:prose-invert max-w-none">
           
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Why This Matters</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
               If a property is under litigation, the court may issue a stay order preventing any sale. Even if the sale goes through, you could lose the property when the case concludes. In Nagpur, boundary disputes and inheritance cases are common and can take 5-15 years to resolve.
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Step-by-Step Court Search</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Step-by-Step Court Search</h2>
             
             <div className="space-y-6">
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">1</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">1</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Search District Court Records</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Search District Court Records</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Visit the Nagpur District Court or use ecourts.gov.in to search by survey number or owner name.
                       </p>
-                      <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
+                      <div className="bg-primary/5 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
                         <strong>Online:</strong> ecourts.gov.in → Case Status → Search by Party Name → Enter seller's full name
                       </div>
                     </div>
@@ -67,9 +67,9 @@ export default function LitigationSearchGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">2</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">2</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check Revenue Court (Tahsildar)</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check Revenue Court (Tahsildar)</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Revenue disputes are heard at Tahsildar level. These include boundary disputes, encroachment cases, and mutation objections.
                       </p>
@@ -84,14 +84,14 @@ export default function LitigationSearchGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">3</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">3</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Search High Court Database</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Search High Court Database</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Appeals from district courts go to Bombay High Court (Nagpur Bench). Important for older, ongoing disputes.
                       </p>
-                      <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
-                        <strong>Online:</strong> bombayhighcourt.nic.in → Case Status → Search by Party Name
+                      <div className="bg-primary/5 dark:bg-purple-900/30 p-3 rounded-lg text-sm">
+                        <strong>Online:</strong> bombayhighcourt.gov.in → Case Status → Search by Party Name
                       </div>
                     </div>
                   </div>
@@ -101,9 +101,9 @@ export default function LitigationSearchGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">4</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">4</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Check for Injunctions/Stay Orders</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Check for Injunctions/Stay Orders</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         Even if a case exists, ask specifically if there's an injunction preventing sale. A case without injunction may still allow sale.
                       </p>
@@ -115,9 +115,9 @@ export default function LitigationSearchGuide() {
               <Card className="border-l-4 border-l-purple-500">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold flex-shrink-0">5</div>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold flex-shrink-0">5</div>
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white mb-2">Get a Legal Opinion</h3>
+                      <h3 className="font-bold text-primary dark:text-white mb-2">Get a Legal Opinion</h3>
                       <p className="text-slate-600 dark:text-slate-400 mb-3">
                         If you find any case, consult a property lawyer to understand the impact before proceeding.
                       </p>
@@ -129,7 +129,7 @@ export default function LitigationSearchGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Red Flags to Watch</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Red Flags to Watch</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="border-2 border-red-200 bg-red-50 dark:bg-red-900/20">
@@ -183,15 +183,15 @@ export default function LitigationSearchGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              <MapPin className="w-6 h-6 inline mr-2 text-purple-600" />
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">
+              <MapPin className="w-6 h-6 inline mr-2 text-primary" />
               Court Locations in Nagpur
             </h2>
             
             <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Nagpur District Court</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Nagpur District Court</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Civil Lines, Near Zero Mile, Nagpur</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10:30 AM - 5:30 PM</span>
@@ -202,7 +202,7 @@ export default function LitigationSearchGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Bombay High Court - Nagpur Bench</h3>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Bombay High Court - Nagpur Bench</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Civil Lines, Nagpur - 440001</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 10:30 AM - 5:00 PM</span>
@@ -213,8 +213,8 @@ export default function LitigationSearchGuide() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-2">Online Search</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">ecourts.gov.in | bombayhighcourt.nic.in</p>
+                  <h3 className="font-bold text-primary dark:text-white mb-2">Online Search</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">ecourts.gov.in | bombayhighcourt.gov.in</p>
                   <div className="flex items-center gap-4 text-sm text-slate-500">
                     <span><Clock className="w-4 h-4 inline mr-1" /> 24/7 Available</span>
                     <span><FileText className="w-4 h-4 inline mr-1" /> Free</span>
@@ -225,7 +225,7 @@ export default function LitigationSearchGuide() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Common Mistakes to Avoid</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Common Mistakes to Avoid</h2>
             
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
               <ul className="space-y-3">
@@ -253,7 +253,7 @@ export default function LitigationSearchGuide() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-between mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
           <Link href="/step-3-safety-check">
-            <Button size="lg" className="w-full sm:w-auto bg-green-600 hover:bg-green-700" data-testid="button-back-mark">
+            <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90" data-testid="button-back-mark">
               <CheckCircle className="w-4 h-4 mr-2" />
               Back to Checklist & Mark Complete
             </Button>
@@ -268,9 +268,9 @@ export default function LitigationSearchGuide() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
-          <h3 className="font-bold text-slate-900 dark:text-white mb-4">Related Guides</h3>
+          <h3 className="font-bold text-primary dark:text-white mb-4">Related Guides</h3>
           <div className="grid md:grid-cols-3 gap-4">
-            <Link href="/guide/encumbrance-check">
+            <Link href="/guide/encumbrance-certificate">
               <Card className="hover-elevate cursor-pointer">
                 <CardContent className="p-4">
                   <Badge variant="outline" className="mb-2 text-xs">Legal</Badge>
@@ -278,7 +278,7 @@ export default function LitigationSearchGuide() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/chain-of-title">
+            <Link href="/guide/title-verification">
               <Card className="hover-elevate cursor-pointer">
                 <CardContent className="p-4">
                   <Badge variant="outline" className="mb-2 text-xs">Legal</Badge>

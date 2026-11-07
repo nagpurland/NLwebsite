@@ -31,6 +31,10 @@ export default function Dashboard() {
     queryKey: ["/api/leads"]
   });
 
+  const { data: eventStats } = useQuery<{ eventCounts: Record<string, number> }>({
+    queryKey: ["/api/events/stats"],
+  });
+
   const { data: analytics, isLoading: analyticsLoading } = useQuery({
     queryKey: ["/api/analytics/dashboard"]
   });
@@ -41,15 +45,22 @@ export default function Dashboard() {
   
   const isLoading = propertiesLoading || leadsLoading || analyticsLoading;
 
+  // Visitors can type anything into a lead form, so stop spreadsheets running it as a formula.
+  const csvCell = (value: unknown) => {
+    const text = String(value ?? "");
+    const safe = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
+    return `"${safe.replace(/"/g, '""')}"`;
+  };
+
   const handleExport = () => {
     let csv = "Type,ID,Title/Name,Locality,Price/Budget,Status\n";
     
     properties?.forEach((p) => {
-      csv += `Property,${p.id},"${p.title}",${p.locality || ""},${p.price || ""},${p.isVerified ? "Verified" : "Pending"}\n`;
+      csv += ["Property", p.id, p.title, p.locality, p.price, p.isVerified ? "Verified" : "Pending"].map(csvCell).join(",") + "\n";
     });
     
     leads?.forEach((l) => {
-      csv += `Lead,${l.id},"${l.name}",${l.locality || ""},${l.budget || ""},${l.status}\n`;
+      csv += ["Lead", l.id, l.name, l.locality, l.budget, l.status].map(csvCell).join(",") + "\n";
     });
     
     const blob = new Blob([csv], { type: "text/csv" });
@@ -65,7 +76,7 @@ export default function Dashboard() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1" data-testid="text-dashboard-title">
+          <h1 className="text-4xl font-semibold tracking-tight mb-1" data-testid="text-dashboard-title">
             Overview
           </h1>
           <p className="text-muted-foreground font-medium">
@@ -259,6 +270,26 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      <Card data-testid="card-site-actions">
+        <CardHeader>
+          <CardTitle>Website Actions (last 30 days)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {eventStats && Object.keys(eventStats.eventCounts).length > 0 ? (
+            <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              {Object.entries(eventStats.eventCounts).map(([name, count]) => (
+                <div key={name}>
+                  <dt className="text-muted-foreground">{name.replace(/_/g, " ")}</dt>
+                  <dd className="text-xl font-semibold">{count}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <p className="text-sm text-muted-foreground">No actions recorded yet.</p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

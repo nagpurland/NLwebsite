@@ -1,21 +1,25 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+import { PublicLayout } from "@/components/layout/PublicLayout";
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  const [location] = useLocation();
+  const t = useTranslation();
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+  const content = (
+    <div className="min-h-[60vh] flex items-center justify-center px-4 py-16">
+      <div className="max-w-md text-center">
+        <p className="font-display text-5xl text-accent-strong mb-4">404</p>
+        <h1 className="text-3xl text-primary mb-3">{t.notFound.title}</h1>
+        <p className="text-slate-600 mb-6">{t.notFound.body}</p>
+        <Link href={location.startsWith("/admin") ? "/admin" : "/"}>
+          <Button>{t.notFound.home}</Button>
+        </Link>
+      </div>
     </div>
   );
+
+  // Admin pages already sit inside their own layout.
+  return location.startsWith("/admin") ? content : <PublicLayout>{content}</PublicLayout>;
 }

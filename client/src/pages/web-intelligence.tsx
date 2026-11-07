@@ -255,7 +255,7 @@ export default function WebIntelligence() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black tracking-tight mb-1">Web Intelligence</h1>
+          <h1 className="text-4xl font-semibold tracking-tight mb-1">Web Intelligence</h1>
           <p className="text-muted-foreground font-medium mt-1">
             Real-time market data, news, social sentiment, and job market analysis for Nagpur.
           </p>
@@ -263,7 +263,7 @@ export default function WebIntelligence() {
         <div className="flex gap-3 flex-wrap">
           <Button 
             variant="default" 
-            className="rounded-xl font-bold gap-2 bg-green-600 hover:bg-green-700"
+            className="rounded-xl font-bold gap-2 bg-primary hover:bg-primary/90"
             onClick={() => collectAllMutation.mutate()}
             disabled={collectAllMutation.isPending}
             data-testid="button-collect-all"
@@ -293,12 +293,12 @@ export default function WebIntelligence() {
           <div className="grid gap-4 md:grid-cols-4">
             <Card className="rounded-2xl border-none shadow-lg">
               <CardContent className="p-5 flex items-center gap-4">
-                <div className="h-11 w-11 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                <div className="h-11 w-11 rounded-xl bg-primary/5 dark:bg-blue-900/30 flex items-center justify-center text-primary">
                   <Globe className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Sources</p>
-                  <h3 className="text-2xl font-black">{dashboard?.stats.sourcesCount || 0}</h3>
+                  <h3 className="text-2xl font-semibold">{dashboard?.stats.sourcesCount || 0}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -309,18 +309,18 @@ export default function WebIntelligence() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">News</p>
-                  <h3 className="text-2xl font-black">{dashboard?.stats.newsCount || 0}</h3>
+                  <h3 className="text-2xl font-semibold">{dashboard?.stats.newsCount || 0}</h3>
                 </div>
               </CardContent>
             </Card>
             <Card className="rounded-2xl border-none shadow-lg">
               <CardContent className="p-5 flex items-center gap-4">
-                <div className="h-11 w-11 rounded-xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600">
+                <div className="h-11 w-11 rounded-xl bg-primary/5 dark:bg-purple-900/30 flex items-center justify-center text-primary">
                   <MessageSquare className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Social</p>
-                  <h3 className="text-2xl font-black">{dashboard?.stats.socialCount || 0}</h3>
+                  <h3 className="text-2xl font-semibold">{dashboard?.stats.socialCount || 0}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -331,7 +331,7 @@ export default function WebIntelligence() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Jobs</p>
-                  <h3 className="text-2xl font-black">{dashboard?.stats.jobsCount || 0}</h3>
+                  <h3 className="text-2xl font-semibold">{dashboard?.stats.jobsCount || 0}</h3>
                 </div>
               </CardContent>
             </Card>
@@ -389,7 +389,7 @@ export default function WebIntelligence() {
                 <Card className="rounded-2xl border-none shadow-xl">
                   <CardHeader className="p-6 pb-4">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <MessageSquare className="h-5 w-5 text-purple-500" />
+                      <MessageSquare className="h-5 w-5 text-primary" />
                       Social Sentiment
                     </CardTitle>
                     <CardDescription>What people are saying about Nagpur properties</CardDescription>
@@ -456,7 +456,7 @@ export default function WebIntelligence() {
                 <Card className="rounded-2xl border-none shadow-xl">
                   <CardHeader className="p-6 pb-4">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Building className="h-5 w-5 text-blue-500" />
+                      <Building className="h-5 w-5 text-primary" />
                       Infrastructure Updates
                     </CardTitle>
                     <CardDescription>Projects impacting property values</CardDescription>
@@ -572,7 +572,7 @@ export default function WebIntelligence() {
                   <CardContent className="p-6 pt-0">
                     <Button 
                       size="lg"
-                      className="w-full rounded-xl font-bold gap-2 bg-green-600 hover:bg-green-700 h-14"
+                      className="w-full rounded-xl font-bold gap-2 bg-primary hover:bg-primary/90 h-14"
                       onClick={() => collectAllMutation.mutate()}
                       disabled={collectAllMutation.isPending}
                       data-testid="button-collect-now-large"
@@ -594,7 +594,7 @@ export default function WebIntelligence() {
               <Card className="rounded-2xl border-none shadow-xl">
                 <CardHeader className="p-6 pb-4">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-blue-500" />
+                    <Clock className="h-5 w-5 text-primary" />
                     Daily Schedule
                   </CardTitle>
                   <CardDescription>Configure automatic daily data collection times (click time to edit)</CardDescription>
@@ -614,8 +614,8 @@ export default function WebIntelligence() {
                       <span className="flex-1">News scraped & analyzed</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30">
-                      <div className="h-2 w-2 rounded-full bg-purple-500" />
-                      <MessageSquare className="h-4 w-4 text-purple-600" />
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <MessageSquare className="h-4 w-4 text-primary" />
                       <Input
                         type="time"
                         value={scheduleSettings?.dailySocialTime || '03:00'}
@@ -638,8 +638,8 @@ export default function WebIntelligence() {
                       <span className="flex-1">Job market data refreshed</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30">
-                      <div className="h-2 w-2 rounded-full bg-blue-500" />
-                      <Building className="h-4 w-4 text-blue-600" />
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <Building className="h-4 w-4 text-primary" />
                       <Input
                         type="time"
                         value={scheduleSettings?.dailyInfraTime || '05:00'}
@@ -650,8 +650,8 @@ export default function WebIntelligence() {
                       <span className="flex-1">Infrastructure status checked</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30">
-                      <div className="h-2 w-2 rounded-full bg-indigo-500" />
-                      <BarChart3 className="h-4 w-4 text-indigo-600" />
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <BarChart3 className="h-4 w-4 text-primary" />
                       <Input
                         type="time"
                         value={scheduleSettings?.dailyMarketTime || '06:00'}
@@ -662,8 +662,8 @@ export default function WebIntelligence() {
                       <span className="flex-1">Market intelligence generated</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30">
-                      <div className="h-2 w-2 rounded-full bg-teal-500" />
-                      <RefreshCw className="h-4 w-4 text-teal-600" />
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <RefreshCw className="h-4 w-4 text-primary" />
                       <Input
                         type="time"
                         value={scheduleSettings?.dailySyncTime || '07:00'}
@@ -681,7 +681,7 @@ export default function WebIntelligence() {
                 <Card className="rounded-2xl border-none shadow-xl">
                   <CardHeader className="p-6 pb-4">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Calendar className="h-5 w-5 text-purple-500" />
+                      <Calendar className="h-5 w-5 text-primary" />
                       Weekly Schedule
                     </CardTitle>
                     <CardDescription>Comprehensive analysis every {scheduleSettings?.weeklyAnalysisDay || 'Sunday'}</CardDescription>
@@ -689,19 +689,19 @@ export default function WebIntelligence() {
                   <CardContent className="p-6 pt-0">
                     <div className="space-y-3 text-sm">
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                         <span>Comprehensive sentiment analysis</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                         <span>Market trend reports</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                         <span>Infrastructure project status reviews</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                         <span>Buying clarity scores updated</span>
                       </div>
                     </div>
@@ -716,7 +716,7 @@ export default function WebIntelligence() {
                 <Card className="rounded-2xl border-none shadow-xl">
                   <CardHeader className="p-6 pb-4">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Calendar className="h-5 w-5 text-orange-500" />
+                      <Calendar className="h-5 w-5 text-accent-strong" />
                       Monthly Schedule
                     </CardTitle>
                     <CardDescription>Deep analysis on the {scheduleSettings?.monthlyReportDay || 1}st of each month</CardDescription>
@@ -724,19 +724,19 @@ export default function WebIntelligence() {
                   <CardContent className="p-6 pt-0">
                     <div className="space-y-3 text-sm">
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
                         <span>Legal dispute status check</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
                         <span>Market forecast for next month</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
                         <span>Competitive analysis update</span>
                       </div>
                       <div className="flex items-center gap-2 p-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
                         <span>New data source integration (if any)</span>
                       </div>
                     </div>
@@ -843,9 +843,9 @@ export default function WebIntelligence() {
                           <div className="flex items-center gap-4">
                             <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${
                               source.type === 'news' ? 'bg-green-100 text-green-600' :
-                              source.type === 'social' ? 'bg-purple-100 text-purple-600' :
+                              source.type === 'social' ? 'bg-primary/5 text-primary' :
                               source.type === 'jobs' ? 'bg-amber-100 text-amber-600' :
-                              'bg-blue-100 text-blue-600'
+                              'bg-primary/5 text-primary'
                             }`}>
                               {source.type === 'news' && <Newspaper className="h-5 w-5" />}
                               {source.type === 'social' && <MessageSquare className="h-5 w-5" />}
@@ -987,7 +987,7 @@ export default function WebIntelligence() {
                             <div className="text-xs text-muted-foreground flex items-center gap-2 mt-1">
                               <Badge variant="secondary" className="text-[10px]">{post.platform}</Badge>
                               <span>{post.author}</span>
-                              {post.isViral && <Badge className="bg-orange-100 text-orange-700 text-[10px]">Viral</Badge>}
+                              {post.isViral && <Badge className="bg-accent/15 text-accent-strong text-[10px]">Viral</Badge>}
                             </div>
                           </div>
                           <div className="flex items-center gap-4">
