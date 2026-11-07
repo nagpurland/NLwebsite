@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Switch, Route, Redirect } from "wouter";
+import { OLDER_PAGES_ON } from "@/lib/features";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -86,21 +87,25 @@ function Router() {
       <Route path="/localities" component={LocalityGuides} />
       <Route path="/public/localities" component={LocalityGuides} />
       <Route path="/locality/:id" component={LocalityOS} />
-      <Route path="/property/:id" component={PropertyDetail} />
-      <Route path="/find-properties" component={FindProperties} />
-      <Route path="/search" component={SearchResults} />
-      <Route path="/public/search" component={PublicPropertySearch} />
-      <Route path="/public/intel" component={PublicIntel} />
-      <Route path="/pre-purchase-wizard" component={PrePurchaseWizard} />
-      <Route path="/premium-verification" component={PremiumVerification} />
-      <Route path="/step-complete" component={StepComplete} />
-      <Route path="/my-watchlist" component={MyWatchlist} />
-      <Route path="/area-guide/dharampeth" component={DharampethGuide} />
-      <Route path="/awareness" component={AwarenessDashboard} />
-      <Route path="/public/blog" component={PublicBlog} />
-      <Route path="/public/blog/:id" component={BlogDetail} />
-      <Route path="/blog" component={BlogList} />
-      <Route path="/blog/:slug" component={BlogDetail} />
+      {OLDER_PAGES_ON && (
+        <>
+          <Route path="/property/:id" component={PropertyDetail} />
+          <Route path="/find-properties" component={FindProperties} />
+          <Route path="/search" component={SearchResults} />
+          <Route path="/public/search" component={PublicPropertySearch} />
+          <Route path="/public/intel" component={PublicIntel} />
+          <Route path="/pre-purchase-wizard" component={PrePurchaseWizard} />
+          <Route path="/premium-verification" component={PremiumVerification} />
+          <Route path="/step-complete" component={StepComplete} />
+          <Route path="/my-watchlist" component={MyWatchlist} />
+          <Route path="/area-guide/dharampeth" component={DharampethGuide} />
+          <Route path="/awareness" component={AwarenessDashboard} />
+          <Route path="/public/blog" component={PublicBlog} />
+          <Route path="/public/blog/:id" component={BlogDetail} />
+          <Route path="/blog" component={BlogList} />
+          <Route path="/blog/:slug" component={BlogDetail} />
+        </>
+      )}
       <Route path="/for-agents" component={ForAgents} />
       <Route path="/step-1-market-intel" component={Step1MarketIntel} />
       <Route path="/step-2-filter-risky" component={Step2FilterRisky} />

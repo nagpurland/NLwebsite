@@ -8,6 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle2 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/context";
 import { track } from "@/lib/track";
+import { FORMS_ON } from "@/lib/features";
+import { CONTACT, phoneDisplay, whatsappUrl } from "@/lib/brand";
 
 export async function submitPublicLead(data: Record<string, unknown>) {
   const res = await fetch("/api/public/leads", {
@@ -50,7 +52,34 @@ export function ConsentCheckbox({
   );
 }
 
-export function PublicLeadForm({
+// Shown in place of every form when the build has no server to send to.
+function FormsPaused() {
+  const t = useTranslation();
+  return (
+    <div className="rounded-xl border border-border bg-background p-5 text-left" role="note" data-testid="forms-paused">
+      <p className="font-semibold text-primary mb-1">{t.forms.pausedTitle}</p>
+      <p className="text-sm text-slate-600 mb-4">{t.forms.pausedBody}</p>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <Button asChild>
+          <a href={`tel:+${CONTACT.phone}`} data-event="call_click">
+            {t.contact.call} <span className="ml-2 font-normal" dir="ltr">{phoneDisplay()}</span>
+          </a>
+        </Button>
+        <Button asChild variant="outline">
+          <a href={whatsappUrl(t.nav.whatsappMessage)} target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">
+            {t.contact.whatsapp}
+          </a>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export function PublicLeadForm(props: Parameters<typeof LeadForm>[0]) {
+  return FORMS_ON ? <LeadForm {...props} /> : <FormsPaused />;
+}
+
+function LeadForm({
   kind,
   submitLabel,
   messageLabel,

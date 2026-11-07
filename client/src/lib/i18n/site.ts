@@ -162,6 +162,8 @@ const en = {
     ctaGuide: "See the 4 Steps",
   },
   forms: {
+    pausedTitle: "Online requests are paused",
+    pausedBody: "We can't take requests through the website yet. Please call or WhatsApp us, and we'll reply there.",
     consent: "I agree that NagpurLand may store these details and contact me about this request.",
     seePolicy: "See the",
     policy: "privacy policy",
@@ -558,6 +560,8 @@ const hi: SiteText = {
     ctaGuide: "4 कदम देखें",
   },
   forms: {
+    pausedTitle: "ऑनलाइन अनुरोध अभी बंद हैं",
+    pausedBody: "अभी हम वेबसाइट से अनुरोध नहीं ले पा रहे हैं। कृपया हमें कॉल या व्हाट्सऐप करें, हम वहीं जवाब देंगे।",
     consent: "मैं सहमत हूँ कि नागपुरलैंड ये जानकारी रख सकता है और इस अनुरोध के बारे में मुझसे संपर्क कर सकता है।",
     seePolicy: "देखें:",
     policy: "प्राइवेसी पॉलिसी",
@@ -952,6 +956,8 @@ const mr: SiteText = {
     ctaGuide: "4 टप्पे पाहा",
   },
   forms: {
+    pausedTitle: "ऑनलाइन विनंत्या सध्या बंद आहेत",
+    pausedBody: "सध्या आम्ही वेबसाइटवरून विनंत्या घेऊ शकत नाही. कृपया आम्हाला कॉल किंवा व्हॉट्सॲप करा, आम्ही तिथेच उत्तर देऊ.",
     consent: "नागपूरलँडने ही माहिती जपून ठेवण्यास आणि या विनंतीबद्दल माझ्याशी संपर्क करण्यास माझी संमती आहे.",
     seePolicy: "पाहा:",
     policy: "प्रायव्हसी पॉलिसी",

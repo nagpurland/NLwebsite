@@ -223,3 +223,22 @@ describe("legal expert wording", () => {
     assert.doesNotMatch(values(SITE_TEXT.mr).join("\n").replace(/\(वकील\)/g, ""), /वकि|वकी/);
   });
 });
+
+describe("live build switches", () => {
+  // The live site is static, with no server: forms must be off and the older unsourced pages out (gate condition 16).
+  it("turns forms and older pages off and publishes only the website folder", () => {
+    const vercel = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
+    assert.equal(vercel.outputDirectory, "dist/public");
+    assert.match(vercel.buildCommand, /VITE_FORMS=off/);
+    assert.match(vercel.buildCommand, /VITE_OLDER_PAGES=off/);
+  });
+
+  it("puts every older page behind the switch", () => {
+    const app = fs.readFileSync("client/src/App.tsx", "utf8");
+    const gated = app.slice(app.indexOf("{OLDER_PAGES_ON && ("), app.indexOf("      )}", app.indexOf("{OLDER_PAGES_ON && (")));
+    for (const path of ["/property/:id", "/find-properties", "/search", "/public/search", "/public/intel", "/pre-purchase-wizard", "/premium-verification", "/step-complete", "/my-watchlist", "/area-guide/dharampeth", "/awareness", "/public/blog", "/blog"]) {
+      assert.ok(gated.includes(`path="${path}"`), path);
+      assert.equal(app.split(`path="${path}"`).length, 2, `${path} is routed outside the switch`);
+    }
+  });
+});
