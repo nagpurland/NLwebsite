@@ -10,6 +10,7 @@ export const TRACKED_EVENTS = [
   "ask_click",
   "callout_open",
   "whatsapp_click",
+  "call_click",
   "form_start",
   "form_send",
   "language_change",

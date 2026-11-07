@@ -9,9 +9,7 @@ import { ALL_CHECKS } from "@/pages/step-3-safety-check";
 import { ArrowRight, CheckCircle2, Circle, Printer, Scale, Trash2 } from "lucide-react";
 import { SCREENING_IDS, screeningFollowUpIds, useBuyerDraft } from "@/lib/buyer-draft";
 import { useTranslation } from "@/lib/i18n/context";
-import { comparisonText } from "@/lib/i18n/comparison";
 import { fill } from "@/lib/i18n/site";
-import { calculatePlotCost, compareWithSimilar, rupees } from "@/lib/plot-price";
 import { STEPS } from "@/lib/step-navigation";
 
 export default function Step4DecisionReport() {
@@ -22,8 +20,6 @@ export default function Step4DecisionReport() {
 
   const pending = ALL_CHECKS.filter((check) => !draft.checks.includes(check.id));
   const done = ALL_CHECKS.filter((check) => draft.checks.includes(check.id));
-  const cost = calculatePlotCost(Number(draft.askingPrice), Number(draft.area), Number(draft.otherCharges || 0));
-  const comparison = cost ? compareWithSimilar(cost.quotedPerSqFt, Number(draft.similarPricePerSqFt)) : null;
   const unanswered = SCREENING_IDS.filter((id) => !draft.screening[id]).length;
   const advocateQuestions = [
     ...screeningFollowUpIds(draft).map((id) => t.step2.questions[id].followUp),
@@ -36,15 +32,6 @@ export default function Step4DecisionReport() {
       navigate(STEPS[0].link);
     }
   };
-
-  const facts = [
-    { label: s.facts.area, value: draft.locality },
-    { label: s.facts.price, value: Number(draft.askingPrice) > 0 ? rupees(Number(draft.askingPrice)) : "" },
-    { label: s.facts.size, value: Number(draft.area) > 0 ? `${Number(draft.area).toLocaleString("en-IN")} sq.ft` : "" },
-    { label: s.facts.other, value: Number(draft.otherCharges) > 0 ? rupees(Number(draft.otherCharges)) : "" },
-    { label: s.facts.quoted, value: cost ? rupees(cost.quotedPerSqFt) : "" },
-    { label: s.facts.total, value: cost ? rupees(cost.totalPerSqFt) : "" },
-  ];
 
   return (
     <PublicLayout>
@@ -72,20 +59,6 @@ export default function Step4DecisionReport() {
           <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900" role="note" data-testid="self-reported-notice">
             {s.notice}
           </p>
-
-          <section data-testid="section-location-price">
-            <h2 className="text-2xl text-primary dark:text-white mb-4">{s.locationTitle}</h2>
-            <dl className="rounded-xl border border-slate-200 dark:border-slate-700 divide-y divide-slate-200 dark:divide-slate-700 text-sm">
-              {facts.map((fact) => (
-                <div key={fact.label} className="grid grid-cols-2 gap-4 p-3">
-                  <dt className="text-slate-600 dark:text-slate-400">{fact.label}</dt>
-                  <dd className={fact.value ? "font-semibold text-slate-900 dark:text-white" : "text-slate-400"}>{fact.value || s.notEntered}</dd>
-                </div>
-              ))}
-            </dl>
-            {comparison && <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{comparisonText(t.calculator, comparison)}</p>}
-            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">{s.figuresNote}</p>
-          </section>
 
           <section data-testid="section-prescreen">
             <h2 className="text-2xl text-primary dark:text-white mb-4">

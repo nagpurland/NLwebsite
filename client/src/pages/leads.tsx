@@ -451,7 +451,7 @@ export default function Leads() {
                             <div className="text-sm font-bold text-slate-900">{lead.locality || "Not specified"}</div>
                             <div className="text-xs font-medium text-muted-foreground">{lead.budget || "Budget TBD"}</div>
                             <Badge variant="outline" className="text-[9px]">
-                              {lead.requirementType === "buy" ? "Buyer" : "Investor"}
+                              {lead.requirementType === "buy" ? "Buyer" : lead.requirementType === "invest" ? "Investor" : "Inquiry"}
                             </Badge>
                           </div>
                         </TableCell>

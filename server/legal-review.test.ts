@@ -66,6 +66,12 @@ describe("while the readiness gate is closed", () => {
     }
   });
 
+  it("sends inquiries only to the number set in brand.ts, never a placeholder", () => {
+    for (const file of fs.readdirSync("client/src/pages")) {
+      if (file.endsWith(".tsx")) assert.doesNotMatch(read(`client/src/pages/${file}`), /9876543210|help@nagpurland\.com/, file);
+    }
+  });
+
   it("doesn't tell a buyer the plot passed", () => {
     for (const file of ["pages/step-2-filter-risky.tsx", "pages/step-3-safety-check.tsx", "lib/i18n/site.ts"]) {
       assert.doesNotMatch(read(`client/src/${file}`), /has passed/i, file);

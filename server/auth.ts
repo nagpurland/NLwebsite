@@ -48,7 +48,7 @@ export const publicEventSchema = z
   .object({
     event: z.enum([
       "hero_check_click", "hero_guide_click", "sticky_check_click", "start_guide_click", "step_click",
-      "checklist_click", "ask_click", "callout_open", "whatsapp_click", "form_start", "form_send", "language_change",
+      "checklist_click", "ask_click", "callout_open", "whatsapp_click", "call_click", "form_start", "form_send", "language_change",
     ]),
     page: z.enum(["home", "inquiry", "contact", "steps", "other"]),
     language: z.enum(["en", "hi", "mr"]),
@@ -58,7 +58,7 @@ export const publicEventSchema = z
 // What a visitor may send. Status, score and notes stay server-controlled.
 export const publicLeadSchema = z
   .object({
-    kind: z.enum(["contact", "plot_question", "newsletter"]),
+    kind: z.enum(["contact", "plot_question", "consultation", "newsletter"]),
     name: z.string().trim().max(100).optional(),
     phone: z
       .string()

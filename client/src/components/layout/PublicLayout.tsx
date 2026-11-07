@@ -1,12 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Instagram, Languages, Menu, MessageSquare, Scale, Search } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Instagram, Languages, Menu, Scale } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { FloatingWhatsAppButton } from "@/components/conversion/FloatingWhatsAppButton";
@@ -16,7 +10,10 @@ import { useI18n } from "@/lib/i18n/context";
 import { STEPS } from "@/lib/step-navigation";
 
 // Legal pages and guides wait for advocate review before they are translated.
-const ENGLISH_ONLY = [/^\/guide\//, /^\/privacy$/, /^\/terms$/, /^\/invest-safely$/];
+const ENGLISH_ONLY = [
+  /^\/guide\//, /^\/privacy$/, /^\/terms$/,
+  /^\/(localities|public|locality|property|find-properties|search|pre-purchase-wizard|premium-verification|step-complete|my-watchlist|area-guide|awareness|blog)(\/|$)/,
+];
 
 // Shows the icon as in the design, and links it only once a real address is set.
 function SocialIcon({ href, label, children }: { href?: string; label: string; children: React.ReactNode }) {
@@ -28,83 +25,49 @@ function SocialIcon({ href, label, children }: { href?: string; label: string; c
 }
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
-  const [location, navigate] = useLocation();
+  const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, t } = useI18n();
-  const isHome = location === "/";
-
-  const navMenus = [
-    {
-      label: t.nav.learn,
-      items: [
-        { label: t.nav.buyingGuide, href: "/invest-safely" },
-        { label: t.nav.titleGuide, href: "/guide/title-verification" },
-        { label: t.nav.courtGuide, href: "/guide/litigation-search" },
-      ],
-    },
-  ];
 
   const navItems = [
     { label: t.nav.steps, href: "/4-step-system" },
     { label: t.nav.checklist, href: STEPS[2].link },
-    { label: t.nav.buyingGuide, href: "/invest-safely" },
+    { label: t.nav.learn, href: "/learn" },
     { label: t.nav.contact, href: "/contact" },
   ];
 
   const openWhatsApp = () => window.open(whatsappUrl(t.nav.whatsappMessage), "_blank", "noopener");
 
   return (
-    <div className={`site min-h-screen bg-background font-sans flex flex-col ${isHome ? "site-home" : ""}`}>
-      <header className="sh print:hidden">
-        <div className="sh-in">
+    <div className={`site min-h-screen bg-background font-sans flex flex-col`}>
+      <header className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 print:hidden">
+        <div className="container mx-auto px-3 sm:px-4 h-16 md:h-20 flex items-center justify-between gap-2 sm:gap-3">
           <Link href="/">
-            <div className="sh-logo" data-testid="site-logo">
-              <span className="sh-mark">
-                <img src="/home/logo-mark.webp" alt="" />
-              </span>
-              <span className="sh-name">
-                <span className="sh-word">
-                  Nagpur<span>Land</span>
-                </span>
-                <span className="sh-tag">{t.nav.tagline}</span>
-              </span>
+            <div className="font-black text-lg sm:text-xl md:text-2xl flex items-center gap-1 cursor-pointer tracking-tighter" data-testid="site-logo">
+              <span className="text-primary italic text-xl sm:text-2xl md:text-3xl">Nagpur</span>Land
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="sh-nav">
-            <Link href="/4-step-system" className={location === "/4-step-system" ? "text-primary" : "hover:text-primary"}>
-              {t.nav.steps}
-            </Link>
-            <Link href={STEPS[2].link} className={location === STEPS[2].link ? "text-primary" : "hover:text-primary"}>
-              {t.nav.checklist}
-            </Link>
-            {navMenus.map((menu) => (
-              <DropdownMenu key={menu.label}>
-                <DropdownMenuTrigger className="flex items-center gap-1 outline-none hover:text-primary" data-testid={`nav-menu-${menu.label}`}>
-                  {menu.label}
-                  <ChevronDown />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  {menu.items.map((item) => (
-                    <DropdownMenuItem key={item.href} className="cursor-pointer" onSelect={() => navigate(item.href)}>
-                      {item.label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+          <nav className="hidden md:flex items-center gap-8 font-bold text-sm">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors ${location === item.href ? "text-primary border-b-2 border-primary pb-1" : "text-muted-foreground hover:text-foreground"}`}
+                data-testid={item.href === "/learn" ? "nav-learn" : undefined}
+              >
+                {item.label}
+              </Link>
             ))}
-            <Link href="/contact" className={location === "/contact" ? "text-primary" : "hover:text-primary"}>
-              {t.nav.contact}
-            </Link>
           </nav>
 
-          <div className="sh-tools">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
             <LanguageSwitcher />
             {/* Mobile Nav */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="sh-menu" aria-label={t.nav.openMenu}>
+                <Button variant="ghost" size="icon" className="md:hidden" aria-label={t.nav.openMenu}>
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
@@ -113,14 +76,14 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                   {navItems.map((item) => (
                     <Link key={item.href} href={item.href}>
                       <div
-                        className="text-xl font-semibold text-foreground hover:text-primary cursor-pointer"
+                        className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {item.label}
                       </div>
                     </Link>
                   ))}
-                  <Button className="bg-green-700 hover:bg-green-800 text-white w-full font-semibold" onClick={openWhatsApp} data-event="whatsapp_click">
+                  <Button className="bg-green-600 hover:bg-green-700 text-white w-full font-bold" onClick={openWhatsApp} data-event="whatsapp_click">
                     {t.nav.whatsapp}
                   </Button>
                 </div>
@@ -150,20 +113,8 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      <FloatingWhatsAppButton hideOnPhone={isHome || location === "/plot-checkup" || location === "/contact"} />
+      {location !== "/contact" && <FloatingWhatsAppButton hideOnPhone={location === "/plot-checkup"} />}
 
-      {isHome && (
-        <div className="hd-phone-bar print:hidden" data-testid="phone-action-bar">
-          <Link href="/plot-checkup" className="hd-phone-check" data-event="sticky_check_click" data-testid="sticky-check">
-            <Search />
-            {t.home.primary}
-          </Link>
-          <button type="button" className="hd-phone-whatsapp" onClick={openWhatsApp} data-event="whatsapp_click" data-testid="sticky-whatsapp">
-            <MessageSquare />
-            {t.nav.whatsappShort}
-          </button>
-        </div>
-      )}
 
       <footer className="site-footer print:hidden" data-testid="site-footer">
         <div className="sf-top">
@@ -179,7 +130,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
             <ul className="sf-links">
               <li><Link href="/4-step-system">{t.nav.steps}</Link></li>
               <li><Link href={STEPS[2].link}>{t.nav.checklist}</Link></li>
-              <li><Link href="/invest-safely">{t.nav.learn}</Link></li>
+              <li><Link href="/learn" data-testid="footer-learn">{t.nav.learn}</Link></li>
               <li><Link href="/contact">{t.nav.contact}</Link></li>
             </ul>
             <ul className="sf-links">

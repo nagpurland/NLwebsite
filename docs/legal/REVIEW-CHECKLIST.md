@@ -22,6 +22,8 @@ section is missing from this list.
 | G10 | Boundary verification guide | client/src/pages/guides/boundary-verification.tsx | Not reviewed | | | | |
 | G11 | Possession verification guide | client/src/pages/guides/possession-verification.tsx | Not reviewed | | | | |
 | G12 | Neighbor verification guide | client/src/pages/guides/neighbor-verification.tsx | Not reviewed | | | | |
+| G13 | Dharampeth area guide | client/src/pages/guides/dharampeth.tsx | Not reviewed | | | | Older page: figures and examples have no source |
+| G14 | Area guide pages (Localities and each area) | client/src/pages/localities.tsx | Not reviewed | | | | Rebuilt on 2026-11-07: shows only the dated Square Yards rates from market-snapshot.ts, four generic checks, no legal status, listings or forecasts. Area page: client/src/pages/locality-os.tsx. Refresh the rates with Step 1 |
 | T01 | Terms: General information only | client/src/pages/terms.tsx | Not reviewed | | | | Add the service boundaries |
 | T02 | Terms: Your decision | client/src/pages/terms.tsx | Not reviewed | | | | |
 | T03 | Terms: We don't sell land | client/src/pages/terms.tsx | Not reviewed | | | | Conflicts with planned agent "listing management" |
@@ -29,25 +31,25 @@ section is missing from this list.
 | P02 | Privacy: Why we use it | client/src/pages/privacy.tsx | Not reviewed | | | | Doesn't cover passing an inquiry to the advocate |
 | P03 | Privacy: Where it is kept | client/src/pages/privacy.tsx | Not reviewed | | | | Set a real retention period |
 | P04 | Privacy: Your choices | client/src/pages/privacy.tsx | Not reviewed | | | | |
-| C01 | Home headline: "Know what to check before you pay" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
-| C02 | Home Independent Assistance wording, including "when a professional review by an independent advocate may be needed" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
-| C03 | Home land topic explanations, and "Built around common buyer questions" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
-| C04 | Homepage legal note on independent professionals | client/src/lib/i18n/site.ts | Not reviewed | | | | |
+| C01 | Home headline and opening panel: "Before you buy land, know what to check" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
+| C02 | Home points: "We don't sell land", "Step by step", "You stay in control" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
+| C03 | Home step cards and the two free tools | client/src/lib/i18n/site.ts | Not reviewed | | | | |
+| C04 | Home lines on advocate review, and on free guides and paid consultations | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C05 | Document notice on the inquiry forms | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C06 | "Agent services won't buy or influence any review" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C07 | Checklist results: "doesn't establish clear title", and the red, yellow and green flag wording | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C08 | Step 3 advocate card, including "Written legal opinion" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C09 | Property Summary wording, including the self-reported notice | client/src/lib/i18n/site.ts | Not reviewed | | | | |
-| C10 | "Invest safely" page | client/src/pages/invest-safely.tsx | Not reviewed | | | | |
+| C10 | Learn page | client/src/pages/learn.tsx | Not reviewed | | | | |
 | C11 | Four-step page | client/src/pages/four-step-system.tsx | Not reviewed | | | | |
 | C12 | Footer and guide disclaimer | client/src/components/layout/PublicLayout.tsx | Not reviewed | | | | |
 | C13 | Step 1 price guidance, including stamp duty and ready reckoner wording | client/src/lib/i18n/site.ts | Not reviewed | | | | |
-| C14 | Calculator note: "isn't a valuation" | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C15 | Pre-screen questions and their note | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C16 | Follow-up questions shown in the summary | client/src/lib/i18n/site.ts | Not reviewed | | | | |
 | C17 | Nagpur terms: mouza, khasra, 7/12 (Satbara), ferfar, NIT/NMRDA sanction, token | client/src/lib/i18n/site.ts | Not reviewed | | | | Confirm correct and in common local use |
 | C18 | Slogan: "Better information. Safer decisions." | client/src/lib/i18n/site.ts | Not reviewed | | | | Owner chose this wording; check whether "safer" implies an outcome |
 | C19 | "Free guides", "any fee before you pay" and the inquiry "What happens next" steps | client/src/lib/i18n/site.ts | Not reviewed | | | | Owner plans paid consultations; wording depends on who charges |
+| C20 | Step 1 market snapshot: third-party asking rates and context, refreshed every six months | client/src/lib/market-snapshot.ts | Not reviewed | | | | Checked 2026-11-07 |
 | H01 | Hindi wording of the home page, four steps, forms and notices | client/src/lib/i18n/site.ts | Not reviewed | | | | Drafted by AI; needs a Hindi-speaking reviewer and the advocate |
 | M01 | Marathi wording of the home page, four steps, forms and notices | client/src/lib/i18n/site.ts | Not reviewed | | | | Drafted by AI; needs a Marathi-speaking reviewer and the advocate |
 | L01 | Hindi and Marathi Privacy, Terms and guides | client/src/components/layout/PublicLayout.tsx | Not reviewed | | | | English only for now; translate after the advocate approves the English |

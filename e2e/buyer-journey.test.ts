@@ -33,20 +33,13 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       });
     });
 
-    const fillStep1 = async () => {
-      await page.goto(`${base}${STEP_LINKS[0]}`);
-      await page.getByTestId("topic-card-real-cost").locator("button").first().click();
-      await page.fill("#calc-locality", "Besa");
-      await page.fill("#calc-price", "2000000");
-      await page.fill("#calc-area", "1000");
-      await page.fill("#calc-other", "500000");
-      await page.fill("#calc-similar", "1800");
+    const fillAnswers = async () => {
+      await page.goto(`${base}${STEP_LINKS[1]}`);
+      await page.getByTestId("screening-access").getByText("No", { exact: true }).click();
     };
 
     it("carries answers from Steps 1 to 3 into the summary, without sending them", async () => {
-      await fillStep1();
-      assert.match(await page.getByTestId("calculator-comparison").innerText(), /₹200 above/);
-
+      await page.goto(`${base}${STEP_LINKS[0]}`);
       await page.getByTestId("button-next-step").click();
       await page.waitForURL(`**${STEP_LINKS[1]}`);
       await page.getByTestId("screening-identify").getByText("Yes", { exact: true }).click();
@@ -61,11 +54,6 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       await page.getByTestId("button-next-step").click();
       await page.waitForURL(`**${STEP_LINKS[3]}`);
 
-      const location = await page.getByTestId("section-location-price").innerText();
-      assert.match(location, /Besa/);
-      assert.match(location, /₹20,00,000/);
-      assert.match(location, /₹2,000/);
-      assert.match(location, /₹2,500/);
       assert.match(await page.getByTestId("summary-identify").innerText(), /Yes/);
       assert.match(await page.getByTestId("summary-access").innerText(), /No/);
       assert.match(await page.getByTestId("summary-records").innerText(), /Not answered/);
@@ -74,7 +62,7 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       assert.match(await page.getByTestId("list-done").innerText(), /ownership name/);
       assert.match(await page.getByTestId("section-advocate-questions").innerText(), /How is the plot reached/);
 
-      assert.equal(requestBodies.some((body) => /Besa|2000000/.test(body)), false, "answers were sent");
+      assert.equal(requestBodies.some((body) => /screening|"access"|not_sure/.test(body)), false, "answers were sent");
     });
 
     it("restores answers after a reload", async () => {
@@ -87,7 +75,7 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
 
     it("shows missing information plainly on an empty summary", async () => {
       await page.goto(`${base}${STEP_LINKS[3]}`);
-      assert.match(await page.getByTestId("section-location-price").innerText(), /Not entered/);
+      assert.equal(await page.getByTestId("section-location-price").count(), 0);
       assert.match(await page.getByTestId("section-prescreen").innerText(), /5 not answered/);
       assert.match(await page.getByTestId("section-summary").innerText(), /0 of 12/);
       assert.match(await page.getByTestId("self-reported-notice").innerText(), /self-reported/);
@@ -108,11 +96,11 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       const summary = await page.locator("main").innerText();
       assert.doesNotMatch(summary, /\b(passed|verified plot|plot is safe\.|safe to buy|clear title confirmed)\b/i);
       assert.match(summary, /doesn't establish clear title/);
-      assert.match(summary, /an advocate should still review/i);
+      assert.match(summary, /a legal expert should still review/i);
     });
 
     it("deletes answers and starts a new plot", async () => {
-      await fillStep1();
+      await fillAnswers();
       await page.goto(`${base}${STEP_LINKS[3]}`);
       page.once("dialog", (dialog) => dialog.accept());
       await page.getByTestId("button-reset-draft").click();
@@ -120,15 +108,15 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       const stored = await page.evaluate(() => Object.keys(localStorage));
       assert.deepEqual(stored, []);
       await page.goto(`${base}${STEP_LINKS[3]}`);
-      assert.match(await page.getByTestId("section-location-price").innerText(), /Not entered/);
+      assert.match(await page.getByTestId("section-prescreen").innerText(), /5 not answered/);
     });
 
     it("keeps answers when the buyer cancels the delete", async () => {
-      await fillStep1();
+      await fillAnswers();
       await page.goto(`${base}${STEP_LINKS[3]}`);
       page.once("dialog", (dialog) => dialog.dismiss());
       await page.getByTestId("button-reset-draft").click();
-      assert.match(await page.getByTestId("section-location-price").innerText(), /Besa/);
+      assert.match(await page.getByTestId("summary-access").innerText(), /No/);
     });
 
     it("sends the homepage cards to the matching steps", async () => {
@@ -162,14 +150,14 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
 
       await page.getByTestId("lang-hi").click();
       assert.equal(await page.locator("html").getAttribute("lang"), "hi");
-      assert.match(await page.getByTestId("step-title").innerText(), /शुरुआती जाँच/);
+      assert.match(await page.getByTestId("step-title").innerText(), /जोखिम वाली ज़मीन छाँटें/);
       assert.match(await page.getByTestId("screening-identify").innerText(), /मौजा, खसरा/);
       await page.reload();
-      assert.match(await page.getByTestId("step-title").innerText(), /शुरुआती जाँच/);
+      assert.match(await page.getByTestId("step-title").innerText(), /जोखिम वाली ज़मीन छाँटें/);
 
       await page.getByTestId("lang-mr").click();
       assert.equal(await page.locator("html").getAttribute("lang"), "mr");
-      assert.match(await page.getByTestId("step-title").innerText(), /प्राथमिक तपासणी/);
+      assert.match(await page.getByTestId("step-title").innerText(), /धोकादायक जमीन बाजूला करा/);
       assert.match(await page.getByTestId("screening-count").innerText(), /5 पैकी 1/);
 
       await page.goto(`${base}${STEP_LINKS[3]}`);
@@ -182,6 +170,8 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       assert.equal(await page.getByTestId("english-only-notice").count(), 0);
       await page.getByTestId("lang-mr").click();
       assert.match(await page.getByTestId("english-only-notice").innerText(), /फक्त इंग्रजीत/);
+      await page.goto(`${base}/locality/mihan`);
+      assert.equal(await page.getByTestId("english-only-notice").count(), 1);
       await page.goto(`${base}/`);
       assert.equal(await page.getByTestId("english-only-notice").count(), 0);
     });
@@ -195,11 +185,120 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       assert.match(await page.getByTestId("document-notice").innerText(), /अपलोड करू नका/);
     });
 
+    it("opens Learn with all 12 guides and links them from the checklist too", async () => {
+      await page.goto(`${base}/learn`);
+      assert.equal(await page.locator('[data-testid^="learn-guide-"]').count(), 12);
+      assert.match(await page.getByTestId("learn-trust").innerText(), /don't take commission/);
+      await page.getByTestId("learn-guide-7").click();
+      await page.waitForURL("**/guide/title-verification");
+      await page.getByTestId("site-footer").getByTestId("footer-learn").click();
+      await page.waitForURL("**/learn");
+      await page.goto(`${base}/invest-safely`);
+      await page.waitForURL("**/learn");
+      await page.goto(`${base}/step-3-safety-check`);
+      await page.getByTestId("expand-8").click();
+      assert.equal(await page.getByTestId("read-guide-8").getAttribute("href"), "/guide/litigation-search");
+    });
+
+    it("shows the old Step 2 sections around the five questions", async () => {
+      await page.goto(`${base}/step-2-filter-risky`);
+      for (const id of ["section-why-filtering", "section-filtering-criteria", "section-screening", "section-checklist"]) {
+        assert.equal(await page.getByTestId(id).count(), 1, id);
+      }
+      assert.equal(await page.locator('[data-testid^="criteria-card-"]').count(), 5);
+      assert.equal(await page.locator('[data-testid^="checklist-item-"]').count(), 8);
+      await page.getByTestId("checklist-item-1").click();
+      assert.match(await page.getByTestId("tick-count").innerText(), /^1 of 8/);
+      assert.doesNotMatch(await page.locator("main").innerText(), /\d+%|\d+x higher|success rate/i);
+      await page.getByTestId("button-jump-report").click();
+      await page.waitForURL("**/step-4-decision-report");
+    });
+
+    it("opens every restored older page and links them from the home page", async () => {
+      await page.goto(`${base}/`);
+      assert.equal(await page.getByTestId("home-explore-1").getAttribute("href"), "/localities");
+      assert.equal(await page.getByTestId("home-checks").locator("li").count(), 12);
+      assert.match(await page.getByTestId("home-checks").innerText(), /Road access and no TP scheme restriction/);
+      assert.equal(await page.getByTestId("link-hero-checklist").innerText(), "Skip to the 12-point checklist");
+      const paths = [
+        "/localities", "/public/localities", "/locality/mihan", "/locality/besa", "/public/blog", "/blog", "/public/intel",
+        "/public/search", "/search", "/pre-purchase-wizard", "/premium-verification", "/step-complete", "/my-watchlist",
+        "/area-guide/dharampeth", "/awareness", "/find-properties",
+      ];
+      for (const path of paths) {
+        await page.goto(`${base}${path}`);
+        assert.equal(await page.getByText("Page Not Found", { exact: false }).count(), 0, `${path} is missing`);
+        assert.ok((await page.locator("main").innerText()).length > 50, `${path} is empty`);
+      }
+    });
+
+    it("shows only sourced figures on the area pages and opens the right area", async () => {
+      await page.goto(`${base}/localities`);
+      assert.equal(await page.locator('[data-testid^="area-card-"]').count(), 6);
+      for (const id of ["mihan", "besa", "hingna"]) {
+        assert.match((await page.getByTestId(`area-source-${id}`).getAttribute("href")) ?? "", /^https:\/\/www\.squareyards\.com\//, id);
+      }
+      for (const id of ["wardha-road", "civil-lines", "manish-nagar"]) {
+        assert.match(await page.getByTestId(`area-rate-${id}`).innerText(), /No rate we can source yet/, id);
+      }
+      const text = await page.locator("main").innerText();
+      assert.doesNotMatch(text, /active listings|Rental Yield|Legal Risk|Proprietary|Verified Projects|Legal Transparency|Appreciation|Confidence Score|Unable to load/i);
+      for (const [id, name] of [["hingna", "Hingna"], ["wardha-road", "Wardha Road"], ["besa", "Besa"]]) {
+        await page.goto(`${base}/locality/${id}`);
+        assert.equal(await page.getByTestId("area-title").innerText(), name);
+        assert.equal(await page.locator('[data-testid^="area-check-"]').count(), 4);
+      }
+      await page.goto(`${base}/locality/not-an-area`);
+      await page.waitForURL(/\/localities$/);
+    });
+
+    it("shows the dated, sourced market snapshot on Step 1", async () => {
+      await page.goto(`${base}${STEP_LINKS[0]}`);
+      assert.equal(await page.locator('[data-testid^="learn-card-"]').count(), 5);
+      assert.equal(await page.getByTestId("plot-cost-calculator").count(), 0);
+      assert.equal(await page.locator('[data-testid^="learn-how-"]').count(), 0);
+      assert.match(await page.getByTestId("learn-card-4").innerText(), /Divide the asking price by the plot size/);
+      assert.equal(await page.getByTestId("link-learn-igr").getAttribute("href"), "https://igrmaharashtra.gov.in");
+      assert.equal(await page.getByTestId("link-learn-igr").getAttribute("rel"), "noopener noreferrer");
+      assert.equal(await page.getByTestId("link-learn-snapshot").getAttribute("href"), "#market-snapshot");
+      assert.equal(await page.locator("#market-snapshot").count(), 1);
+      assert.match(await page.getByTestId("learn-card-1").innerText(), /Price Trends Analysis/);
+      assert.equal(await page.locator('[data-testid^="snapshot-row-"]').count(), 5);
+      for (const id of ["mihan", "besa", "hingna"]) {
+        assert.match((await page.getByTestId(`snapshot-source-${id}`).getAttribute("href")) ?? "", /^https:\/\/www\.squareyards\.com\//, id);
+      }
+      assert.match(await page.getByTestId("snapshot-row-civil-lines").innerText(), /No source we can name/);
+      assert.match(await page.getByTestId("figures-note").innerText(), /not NagpurLand's own data/);
+      assert.equal(await page.getByTestId("snapshot-context").locator("a").count(), 2);
+      assert.match(await page.getByTestId("snapshot-checked").innerText(), /Checked on/);
+    });
+
+    it("lets a buyer call, WhatsApp or book a consultation", async () => {
+      await page.goto(`${base}/contact`);
+      assert.match((await page.getByTestId("contact-call").getAttribute("href")) ?? "", /^tel:\+91\d{10}$/);
+      assert.match((await page.getByTestId("contact-whatsapp").getAttribute("href")) ?? "", /^https:\/\/wa\.me\/91\d{10}/);
+      assert.match(await page.getByTestId("booking-fee-note").innerText(), /fee before you confirm/);
+      await page.getByTestId("booking-day-2").click();
+      await page.getByTestId("booking-time-evening").click();
+      assert.equal(await page.getByTestId("booking-time-evening").getAttribute("aria-pressed"), "true");
+      await page.fill("#lead-name", "Booking Test");
+      await page.fill("#lead-phone", "+91 98230 12345");
+      await page.getByTestId("checkbox-consent").click();
+      const [request] = await Promise.all([
+        page.waitForRequest("**/api/public/leads"),
+        page.getByTestId("button-submit-lead").click(),
+      ]);
+      const sent = request.postDataJSON();
+      assert.equal(sent.kind, "consultation");
+      assert.match(sent.message, /^Consultation preferred: .*Evening$/);
+      assert.match(await page.getByTestId("form-success").innerText(), /isn't confirmed yet/);
+    });
+
     it("has no sideways scrolling in Hindi or Marathi", async () => {
       for (const code of ["hi", "mr"]) {
         await page.goto(`${base}/`);
         await page.getByTestId(`lang-${code}`).click();
-        for (const path of ["/", "/4-step-system", ...STEP_LINKS, "/plot-checkup", "/contact", "/localities", "/for-agents"]) {
+        for (const path of ["/", "/4-step-system", ...STEP_LINKS, "/plot-checkup", "/contact", "/learn", "/localities", "/for-agents"]) {
           await page.goto(`${base}${path}`);
           const size = await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }));
           assert.ok(size.scroll <= size.width, `${code} ${path} scrolls sideways: ${size.scroll} > ${size.width}`);
@@ -209,7 +308,7 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
 
     it("shows the main action on the first screen of the home page", async () => {
       await page.goto(`${base}/`);
-      const button = await page.getByTestId("button-hero-check-property").boundingBox();
+      const button = await page.getByTestId("button-hero-guide").boundingBox();
       assert.ok(button && button.y + button.height <= viewport.height, "main button is below the first screen");
     });
 
@@ -224,11 +323,15 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       await page.setViewportSize({ width: 375, height: 812 });
       await page.getByTestId("lang-en").click();
       const height = await page.evaluate(() => document.documentElement.scrollHeight);
-      assert.ok(height <= 3200, `home page is ${height}px tall on a phone`);
+      assert.ok(height <= 5000, `home page is ${height}px tall on a phone`);
     });
 
-    it("explains each land topic only when it is clicked", async () => {
+    it("shows the light hero with its trust line and opens each land topic from the picture", async () => {
       await page.goto(`${base}/`);
+      assert.match(await page.getByTestId("hero-kicker").innerText(), /For plot buyers in Nagpur/);
+      assert.equal(await page.getByTestId("hero-trust").locator("li").count(), 4);
+      assert.match(await page.getByTestId("section-hero").innerText(), /legal expert \(advocate\)/);
+      assert.equal(await page.getByTestId("section-points").locator("h3").count(), 3);
       assert.equal(await page.getByTestId("callout-detail").count(), 0);
       await page.getByTestId("callout-ownership").click();
       assert.match(await page.getByTestId("callout-detail").innerText(), /7\/12/);
@@ -238,13 +341,20 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
       await page.waitForURL("**/guide/boundary-verification");
     });
 
+    it("says what is free and what is paid, and links to booking", async () => {
+      await page.goto(`${base}/`);
+      assert.match(await page.getByTestId("home-fee-note").innerText(), /Guides are free\. Consultations .* are paid/);
+      await page.getByTestId("button-book-consultation").click();
+      await page.waitForURL("**/contact");
+      assert.equal(await page.getByTestId("consultation-booking").count(), 1);
+    });
+
     it("marks nothing as verified on the home page", async () => {
       await page.goto(`${base}/`);
-      assert.match(await page.getByTestId("hero-inquiry-note").innerText(), /not a legal audit/);
-      assert.match(await page.getByTestId("checklist-note").innerText(), /not a legal opinion or verification/);
+      assert.match(await page.getByTestId("home-tools-note").innerText(), /not legal advice/);
       const text = await page.locator("main").innerText();
       assert.doesNotMatch(text, /verified|guarantee|100%|safe to buy/i);
-      await page.getByTestId("button-start-guide").click();
+      await page.getByTestId("button-hero-guide").click();
       await page.waitForURL(`**${STEP_LINKS[0]}`);
     });
 
@@ -315,18 +425,16 @@ for (const [label, viewport] of [["desktop", { width: 1280, height: 800 }], ["ph
   });
 }
 
-describe("phone actions on the home page", () => {
-  it("shows the action bar on a phone only, without the round WhatsApp button", async () => {
+describe("WhatsApp button", () => {
+  it("shows the round button on a phone, except on the inquiry page", async () => {
     const browser = await chromium.launch({ channel: "chrome", headless: true });
     const phone = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await phone.goto(`${base}/`);
-    assert.equal(await phone.getByTestId("phone-action-bar").isVisible(), true);
-    assert.equal(await phone.getByRole("button", { name: "Message us on WhatsApp" }).isVisible(), false);
+    assert.equal(await phone.getByRole("button", { name: "Message us on WhatsApp" }).isVisible(), true);
     await phone.goto(`${base}/plot-checkup`);
     assert.equal(await phone.getByRole("button", { name: "Message us on WhatsApp" }).isVisible(), false);
     const wide = await browser.newPage({ viewport: { width: 1024, height: 800 } });
     await wide.goto(`${base}/`);
-    assert.equal(await wide.getByTestId("phone-action-bar").isVisible(), false);
     assert.equal(await wide.getByRole("button", { name: "Message us on WhatsApp" }).isVisible(), true);
     await browser.close();
   });
@@ -342,7 +450,7 @@ describe("phone actions on the home page", () => {
         );
         return {
           smallest: Math.min(...texts.map((e) => parseFloat(getComputedStyle(e).fontSize))),
-          button: Math.min(...[...document.querySelectorAll(".hd-btn")].map((e) => e.getBoundingClientRect().height)),
+          button: Math.min(...[...document.querySelectorAll('.old-home a[data-testid^="button-hero"], .old-home a[data-testid^="home-step-"]')].map((e) => e.getBoundingClientRect().height)),
           scroll: document.documentElement.scrollWidth,
         };
       });

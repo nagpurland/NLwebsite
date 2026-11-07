@@ -15,7 +15,6 @@ import {
 } from "../client/src/lib/buyer-draft";
 import { STEPS } from "../client/src/lib/step-navigation";
 import { LANGUAGES, SITE_TEXT, fill } from "../client/src/lib/i18n/site";
-import { compareWithSimilar } from "../client/src/lib/plot-price";
 
 function memoryStorage(initial: Record<string, string> = {}) {
   const items = new Map(Object.entries(initial));
@@ -30,7 +29,7 @@ function memoryStorage(initial: Record<string, string> = {}) {
 describe("buyer draft", () => {
   it("saves and restores what the buyer entered", () => {
     const storage = memoryStorage();
-    const draft = { ...emptyDraft(), locality: "Besa", askingPrice: "2000000", screening: { access: "no" as const }, checks: [1, 5] };
+    const draft = { ...emptyDraft(), screening: { access: "no" as const }, checks: [1, 5] };
     saveDraft(storage, draft);
     assert.deepEqual(loadDraft(storage), draft);
   });
@@ -53,6 +52,12 @@ describe("buyer draft", () => {
     assert.equal("secret" in (cleaned as object), false);
   });
 
+  it("drops the area and price fields that older saved answers may hold", () => {
+    const old = parseDraft('{"version":1,"locality":"Besa","askingPrice":"2000000","area":"1000","screening":{"access":"no"},"checks":[2]}');
+    assert.deepEqual(old, { ...emptyDraft(), screening: { access: "no" }, checks: [2] });
+    for (const key of ["locality", "askingPrice", "area"]) assert.equal(key in (old as object), false, key);
+  });
+
   it("still works when the browser blocks storage", () => {
     const blocked = {
       getItem: () => { throw new Error("blocked"); },
@@ -73,12 +78,12 @@ describe("buyer draft", () => {
   it("knows when a buyer has started and where to resume", () => {
     assert.equal(hasAnswers(emptyDraft()), false);
     assert.equal(nextOpenStep(emptyDraft()), 1);
-    const step1 = { ...emptyDraft(), locality: "Besa" };
-    assert.equal(hasAnswers(step1), true);
-    assert.equal(nextOpenStep(step1), 2);
+    const started = { ...emptyDraft(), screening: { access: "no" as const } };
+    assert.equal(hasAnswers(started), true);
+    assert.equal(nextOpenStep(started), 2);
     const screening = Object.fromEntries(SCREENING_IDS.map((id) => [id, "not_sure"]));
-    assert.equal(nextOpenStep({ ...step1, screening }), 3);
-    assert.equal(nextOpenStep({ ...step1, screening, checks: Array.from({ length: 12 }, (_, i) => i + 1) }), 4);
+    assert.equal(nextOpenStep({ ...emptyDraft(), screening }), 3);
+    assert.equal(nextOpenStep({ ...emptyDraft(), screening, checks: Array.from({ length: 12 }, (_, i) => i + 1) }), 4);
   });
 
   it("raises a question for every answer except Yes, with no score", () => {
@@ -89,23 +94,13 @@ describe("buyer draft", () => {
   });
 });
 
-describe("price comparison", () => {
-  it("states the difference without judging it", () => {
-    assert.deepEqual(compareWithSimilar(2500, 2000), { direction: "above", difference: 500 });
-    assert.deepEqual(compareWithSimilar(1500, 2000), { direction: "below", difference: 500 });
-    assert.deepEqual(compareWithSimilar(2000, 2000), { direction: "equal", difference: 0 });
-    assert.equal(compareWithSimilar(2000, 0), null);
-    assert.equal(compareWithSimilar(2000, NaN), null);
-  });
-});
-
 describe("four-step journey", () => {
   it("uses the same step names in every language file", () => {
     assert.deepEqual(SITE_TEXT.en.steps.map((step) => step.title), [
       "Check the Area & Rate",
-      "First Plot Check",
+      "Filter Risky Land",
       "12-Point Paper & Site Check",
-      "Your Plot Summary",
+      "Decision Report",
     ]);
     assert.deepEqual(STEPS.map((step) => step.title), SITE_TEXT.en.steps.map((step) => step.title));
   });
@@ -115,8 +110,8 @@ describe("four-step journey", () => {
   const siteText = fs.readFileSync("client/src/lib/i18n/site.ts", "utf8");
 
   it("doesn't use retired names or misleading results", () => {
-    const retired = /Pre-Screen|Pre-screen|Filter Risky|Safety Check\b|Safety Checklist|Compare Prices|checks complete|has passed|verified by lawyer|Save Progress/;
-    for (const page of [...pages, "four-step-system", "invest-safely", "public-home"]) {
+    const retired = /Pre-Screen|Pre-screen|First Plot Check|Your Plot Summary|Safety Check\b|Safety Checklist|Compare Prices|checks complete|has passed|verified by lawyer|Save Progress/;
+    for (const page of [...pages, "four-step-system", "public-home"]) {
       assert.doesNotMatch(read(page), retired, page);
     }
     assert.doesNotMatch(siteText, retired);
@@ -175,12 +170,16 @@ describe("site languages", () => {
   });
 });
 
+const OLDER_LOOK = ["public-home", "property-detail", "pre-purchase-wizard", "my-watchlist", "premium-verification", "step-complete", "public-intel", "public", "search", "guides/dharampeth", "awareness-dashboard", "blog-list", "blog-detail", "find-properties"];
+
 describe("site look", () => {
   const routed = fs.readFileSync("client/src/App.tsx", "utf8").matchAll(/from "@\/pages\/([\w/-]+)"/g);
   const old = /(?<![:\w-])(?:bg|text|border)-(?:indigo|blue|violet|purple|sky|cyan|teal|pink|rose|orange)-\d+|font-black|#2180a8/;
 
   it("keeps every routed page on the navy and gold palette", () => {
     for (const [, page] of routed) {
+      // The home page and the restored older pages keep their own look, chosen by the owner.
+      if (OLDER_LOOK.includes(page)) continue;
       assert.doesNotMatch(fs.readFileSync(`client/src/pages/${page}.tsx`, "utf8"), old, page);
     }
   });
@@ -192,5 +191,35 @@ describe("home page wording", () => {
       const home = JSON.stringify(SITE_TEXT[code].home);
       assert.doesNotMatch(home, /guarantee|100%|verified|safe to buy|safer|trusted|connect you|गारंटी/i, code);
     }
+  });
+});
+
+describe("legal expert wording", () => {
+  // Every wording value, without the key names.
+  const values = (node: unknown): string[] =>
+    typeof node === "string" ? [node] : node && typeof node === "object" ? Object.values(node).flatMap(values) : [];
+  const named = {
+    en: /legal expert \(advocate\)/,
+    hi: /कानूनी विशेषज्ञ \(वकील\)/,
+    mr: /कायदेशीर तज्ज्ञ\S* \(वकील\)/,
+  } as const;
+
+  it("names the advocate where a consultation, fee or legal opinion is mentioned", () => {
+    for (const code of ["en", "hi", "mr"] as const) {
+      const t = SITE_TEXT[code];
+      for (const text of [t.contact.intro, t.home.feeNote, t.learn.helpBody, t.step3.advocateBody, t.fourStep.intro]) {
+        assert.match(text, named[code], `${code}: ${text}`);
+      }
+    }
+  });
+
+  it("never uses 'advocate' without 'legal expert', or calls the legal role a real estate expert", () => {
+    for (const code of ["en", "hi", "mr"] as const) {
+      const all = values(SITE_TEXT[code]).join("\n");
+      assert.doesNotMatch(all, /real estate expert|property expert|रियल एस्टेट विशेषज्ञ|मालमत्ता तज्ज्ञ|प्रॉपर्टी विशेषज्ञ/i, code);
+    }
+    assert.doesNotMatch(values(SITE_TEXT.en).join("\n").replace(/legal expert \(advocate\)/g, ""), /advocate/i);
+    assert.doesNotMatch(values(SITE_TEXT.hi).join("\n").replace(/\(वकील\)/g, ""), /वकील/);
+    assert.doesNotMatch(values(SITE_TEXT.mr).join("\n").replace(/\(वकील\)/g, ""), /वकि|वकी/);
   });
 });

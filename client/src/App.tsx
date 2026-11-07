@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,9 +14,23 @@ import Analytics from "@/pages/analytics";
 import AdminScraping from "@/pages/admin-scraping";
 import WebIntelligence from "@/pages/web-intelligence";
 import PublicHome from "@/pages/public-home";
-import InvestSafely from "@/pages/invest-safely";
+import Learn from "@/pages/learn";
 import PlotCheckup from "@/pages/plot-checkup";
-import LocalityGuides from "@/pages/locality-guides";
+import LocalityGuides from "@/pages/localities";
+import PropertyDetail from "@/pages/property-detail";
+import PrePurchaseWizard from "@/pages/pre-purchase-wizard";
+import LocalityOS from "@/pages/locality-os";
+import MyWatchlist from "@/pages/my-watchlist";
+import PremiumVerification from "@/pages/premium-verification";
+import StepComplete from "@/pages/step-complete";
+import PublicIntel from "@/pages/public-intel";
+import { PublicPropertySearch, PublicBlog } from "@/pages/public";
+import SearchResults from "@/pages/search";
+import FindProperties from "@/pages/find-properties";
+import DharampethGuide from "@/pages/guides/dharampeth";
+import AwarenessDashboard from "@/pages/awareness-dashboard";
+import BlogList from "@/pages/blog-list";
+import BlogDetail from "@/pages/blog-detail";
 import ForAgents from "@/pages/for-agents";
 import DataRefresh from "@/pages/data-refresh";
 import Step1MarketIntel from "@/pages/step-1-market-intel";
@@ -47,9 +61,9 @@ import NotFound from "@/pages/not-found";
 import { AdminGate } from "@/components/layout/AdminGate";
 import { track, TRACKED_EVENTS, type TrackedEvent } from "@/lib/track";
 
-// Not public at launch, because their data is sample or unverified: property pages,
-// search, the old localities page, intel, watchlist, premium service, blog and the Dharampeth guide.
-// Add a route back only once what the page shows is real and sourced.
+// The older area, price, blog, property and verification pages are routed again at the owner's
+// request. Their figures are sample data with no source. Keep them off the live site until
+// condition 16 in docs/legal/READINESS-GATE.md is cleared.
 function Router() {
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -66,9 +80,27 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
-      <Route path="/invest-safely" component={InvestSafely} />
+      <Route path="/learn" component={Learn} />
+      <Route path="/invest-safely"><Redirect to="/learn" /></Route>
       <Route path="/plot-checkup" component={PlotCheckup} />
       <Route path="/localities" component={LocalityGuides} />
+      <Route path="/public/localities" component={LocalityGuides} />
+      <Route path="/locality/:id" component={LocalityOS} />
+      <Route path="/property/:id" component={PropertyDetail} />
+      <Route path="/find-properties" component={FindProperties} />
+      <Route path="/search" component={SearchResults} />
+      <Route path="/public/search" component={PublicPropertySearch} />
+      <Route path="/public/intel" component={PublicIntel} />
+      <Route path="/pre-purchase-wizard" component={PrePurchaseWizard} />
+      <Route path="/premium-verification" component={PremiumVerification} />
+      <Route path="/step-complete" component={StepComplete} />
+      <Route path="/my-watchlist" component={MyWatchlist} />
+      <Route path="/area-guide/dharampeth" component={DharampethGuide} />
+      <Route path="/awareness" component={AwarenessDashboard} />
+      <Route path="/public/blog" component={PublicBlog} />
+      <Route path="/public/blog/:id" component={BlogDetail} />
+      <Route path="/blog" component={BlogList} />
+      <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/for-agents" component={ForAgents} />
       <Route path="/step-1-market-intel" component={Step1MarketIntel} />
       <Route path="/step-2-filter-risky" component={Step2FilterRisky} />

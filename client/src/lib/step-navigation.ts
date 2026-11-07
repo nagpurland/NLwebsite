@@ -16,8 +16,8 @@ export const STEPS: StepData[] = [
   },
   {
     number: 2,
-    title: "First Plot Check",
-    shortTitle: "First Check",
+    title: "Filter Risky Land",
+    shortTitle: "Filter Risky",
     description: "Answer five short questions to find missing information and early concerns.",
     link: "/step-2-filter-risky"
   },
@@ -30,9 +30,9 @@ export const STEPS: StepData[] = [
   },
   {
     number: 4,
-    title: "Your Plot Summary",
-    shortTitle: "Summary",
-    description: "See your answers, open checks and questions to discuss with an advocate.",
+    title: "Decision Report",
+    shortTitle: "Decision Report",
+    description: "See your answers, open checks and questions to discuss with a legal expert.",
     link: "/step-4-decision-report"
   }
 ];

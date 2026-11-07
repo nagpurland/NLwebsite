@@ -39,13 +39,8 @@ export default function TPSchemeCheckGuide() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Why This Matters</h2>
             <p className="text-slate-600 dark:text-slate-400">
-              Town Planning (TP) schemes in Nagpur regularly mark land for road widening, public amenities, or green zones. If your plot falls under TP reservation, you may lose a significant portion without any compensation choice. Worse, building permission will be denied for reserved portions.
+              Town Planning (TP) schemes in Nagpur regularly mark land for road widening, public amenities, or green zones. If your plot falls under TP reservation, part of it may be reserved, and building permission can be refused on the reserved portion. Ask the planning authority what applies to your plot, and show the answer to your legal expert.
             </p>
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mt-4">
-              <p className="text-sm text-red-700 dark:text-red-400">
-                <strong>Real Example:</strong> A buyer purchased a corner plot in Manish Nagar for ₹45 lakh, only to discover 40% was reserved for road widening in the approved TP scheme. He lost ₹18 lakh worth of land.
-              </p>
-            </div>
           </section>
 
           <section className="mb-12">

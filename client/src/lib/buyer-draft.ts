@@ -17,11 +17,6 @@ export type ScreeningId = (typeof SCREENING_IDS)[number];
 
 export interface BuyerDraft {
   version: typeof DRAFT_VERSION;
-  locality: string;
-  askingPrice: string;
-  area: string;
-  otherCharges: string;
-  similarPricePerSqFt: string;
   screening: Partial<Record<ScreeningId, ScreeningAnswer>>;
   checks: number[];
 }
@@ -29,11 +24,6 @@ export interface BuyerDraft {
 export function emptyDraft(): BuyerDraft {
   return {
     version: DRAFT_VERSION,
-    locality: "",
-    askingPrice: "",
-    area: "",
-    otherCharges: "",
-    similarPricePerSqFt: "",
     screening: {},
     checks: [],
   };
@@ -45,8 +35,6 @@ const validChecks = (value: unknown): number[] =>
   Array.isArray(value)
     ? Array.from(new Set(value.filter((id) => Number.isInteger(id) && id >= 1 && id <= CHECK_COUNT)))
     : [];
-
-const text = (value: unknown, max: number) => (typeof value === "string" ? value.slice(0, max) : "");
 
 // Saved data can be old or edited by hand, so only known fields and values are kept.
 export function parseDraft(raw: string | null): BuyerDraft | null {
@@ -61,11 +49,6 @@ export function parseDraft(raw: string | null): BuyerDraft | null {
     }
     return {
       version: DRAFT_VERSION,
-      locality: text(saved.locality, 60),
-      askingPrice: text(saved.askingPrice, 15),
-      area: text(saved.area, 15),
-      otherCharges: text(saved.otherCharges, 15),
-      similarPricePerSqFt: text(saved.similarPricePerSqFt, 15),
       screening,
       checks: validChecks(saved.checks),
     };
@@ -104,14 +87,13 @@ export function clearDraft(storage: DraftStorage) {
 }
 
 export function hasAnswers(draft: BuyerDraft): boolean {
-  return Boolean(
-    draft.locality || draft.askingPrice || draft.area || draft.otherCharges || draft.similarPricePerSqFt ||
-      Object.keys(draft.screening).length || draft.checks.length,
-  );
+  return Boolean(Object.keys(draft.screening).length || draft.checks.length);
 }
 
+// Step 1 only explains, so there is nothing to answer there. A new buyer starts at Step 1,
+// and someone who has begun resumes at the first step with open answers.
 export function nextOpenStep(draft: BuyerDraft): number {
-  if (!draft.locality && !draft.askingPrice && !draft.area) return 1;
+  if (!hasAnswers(draft)) return 1;
   if (Object.keys(draft.screening).length < SCREENING_IDS.length) return 2;
   if (draft.checks.length < CHECK_COUNT) return 3;
   return 4;

@@ -1,6 +1,7 @@
 // One place for public contact details. Set VITE_CONTACT_* at build time to change them.
 export const CONTACT = {
   whatsapp: import.meta.env.VITE_CONTACT_WHATSAPP || "918857801966",
+  phone: (import.meta.env.VITE_CONTACT_PHONE as string | undefined) || import.meta.env.VITE_CONTACT_WHATSAPP || "918857801966",
   email: (import.meta.env.VITE_CONTACT_EMAIL as string | undefined) || "",
 };
 
@@ -14,6 +15,12 @@ export const SOCIAL_LINKS = {
 export function whatsappUrl(message?: string): string {
   const text = message ? `?text=${encodeURIComponent(message)}` : "";
   return `https://wa.me/${CONTACT.whatsapp}${text}`;
+}
+
+// +91 88578 01966
+export function phoneDisplay(): string {
+  const match = CONTACT.phone.match(/^91(\d{5})(\d{5})$/);
+  return match ? `+91 ${match[1]} ${match[2]}` : `+${CONTACT.phone}`;
 }
 
 export const BRAND = {

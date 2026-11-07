@@ -45,6 +45,8 @@ describe("public lead form rules", () => {
   const base = { kind: "contact", name: "A", phone: "+91 98230 12345", message: "Hi", consent: true };
 
   it("needs consent", () => {
+    assert.equal(publicLeadSchema.safeParse({ ...base, kind: "consultation" }).success, true);
+    assert.equal(publicLeadSchema.safeParse({ ...base, kind: "consultation", phone: undefined }).success, false);
     assert.equal(publicLeadSchema.safeParse({ ...base, consent: false }).success, false);
   });
 

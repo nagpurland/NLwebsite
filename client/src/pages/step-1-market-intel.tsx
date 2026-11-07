@@ -4,28 +4,33 @@ import { SimpleBreadcrumb } from "@/components/ui/simple-breadcrumb";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { StepHeader } from "@/components/ui/step-header";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { PlotCostCalculator } from "@/components/tools/PlotCostCalculator";
-import { useTranslation } from "@/lib/i18n/context";
+import { useI18n } from "@/lib/i18n/context";
 import { fill } from "@/lib/i18n/site";
+import { AREA_RATES, CONTEXT, SNAPSHOT_CHECKED_ON } from "@/lib/market-snapshot";
 import { STEPS } from "@/lib/step-navigation";
 import {
-  TrendingUp, MapPin, IndianRupee, Building2, Search,
-  ArrowRight, Check
+  TrendingUp, MapPin, BarChart3, IndianRupee, Building2,
+  ArrowRight
 } from "lucide-react";
 
-const PRICE_CHECKS = [
-  { id: "similar", testId: "similar", icon: TrendingUp },
-  { id: "realCost", testId: "real-cost", icon: IndianRupee },
-  { id: "location", testId: "location", icon: MapPin },
-  { id: "claims", testId: "claims", icon: Search },
-  { id: "development", testId: "development", icon: Building2 },
-] as const;
+const LEARN_ICONS = [TrendingUp, MapPin, BarChart3, IndianRupee, Building2];
+
+// One optional link per card, in the same order as the wording in site.ts.
+const LEARN_LINKS: ({ href: string; kind: "anchor" | "page" | "external"; testId: string } | null)[] = [
+  { href: "#market-snapshot", kind: "anchor", testId: "link-learn-snapshot" },
+  { href: "/localities", kind: "page", testId: "link-explore-locality" },
+  null,
+  { href: "https://igrmaharashtra.gov.in", kind: "external", testId: "link-learn-igr" },
+  null,
+];
 
 export default function Step1MarketIntel() {
   const [, navigate] = useLocation();
-  const t = useTranslation();
+  const { language, t } = useI18n();
   const s = t.step1;
+  const locale = `${language}-IN`;
+  const formatDay = (iso: string) => new Date(iso).toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" });
+  const formatMonth = (month: string) => new Date(`${month}-01`).toLocaleDateString(locale, { month: "short", year: "numeric" });
 
   return (
     <PublicLayout>
@@ -52,7 +57,7 @@ export default function Step1MarketIntel() {
               <p>{s.why1}</p>
               <p>{s.why1b}</p>
             </div>
-            <p className="mt-5 max-w-2xl rounded-lg border-l-4 border-accent bg-background dark:bg-slate-800/50 p-4 leading-relaxed text-slate-700 dark:text-slate-300" role="note" data-testid="no-figures-note">
+            <p className="mt-5 max-w-2xl rounded-lg border-l-4 border-accent bg-background dark:bg-slate-800/50 p-4 leading-relaxed text-slate-700 dark:text-slate-300" role="note" data-testid="figures-note">
               {s.why2}
             </p>
           </section>
@@ -60,53 +65,100 @@ export default function Step1MarketIntel() {
           <section data-testid="section-topics">
             <h2 className="text-2xl text-primary dark:text-white mb-2">{s.thingsTitle}</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-6">{s.thingsIntro}</p>
-            <Accordion type="multiple" className="space-y-4">
-              {PRICE_CHECKS.map((check) => {
-                const topic = s.topics[check.id];
+            <div className="space-y-4">
+              {s.learn.map((item, index) => {
+                const Icon = LEARN_ICONS[index];
+                const link = LEARN_LINKS[index];
                 return (
-                  <AccordionItem
-                    key={check.id}
-                    value={check.id}
-                    className="border rounded-xl border-slate-200 dark:border-slate-700 px-5"
-                    data-testid={`topic-card-${check.testId}`}
-                  >
-                    <AccordionTrigger className="hover:no-underline text-left py-5">
-                      <span className="flex gap-4">
-                        <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/5 dark:bg-blue-500/20 flex items-center justify-center">
-                          <check.icon className="w-5 h-5 text-accent-strong dark:text-blue-400" />
-                        </span>
-                        <span>
-                          <span className="block font-semibold text-slate-900 dark:text-white mb-1">{topic.title}</span>
-                          <span className="block text-sm font-normal text-slate-600 dark:text-slate-400">{topic.question}</span>
-                        </span>
-                      </span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                        {topic.points.map((point) => <li key={point}>{point}</li>)}
-                      </ul>
-                      {check.id === "realCost" && <PlotCostCalculator />}
-                      {check.id === "location" && (
-                        <Link href="/localities" className="inline-block mt-4 text-sm font-semibold text-primary hover:underline" data-testid="link-explore-locality">
-                          {s.explore}
-                        </Link>
+                  <div key={item.title} className="flex gap-4 rounded-xl border border-slate-200 dark:border-slate-700 p-5" data-testid={`learn-card-${index + 1}`}>
+                    <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/5 dark:bg-blue-500/20 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-accent-strong dark:text-blue-400" />
+                    </span>
+                    <div>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{item.title}</h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">{item.body}</p>
+                      {link && item.linkLabel && (
+                        link.kind === "page" ? (
+                          <Link href={link.href} className="inline-block mt-3 text-sm font-semibold text-primary hover:underline" data-testid={link.testId}>
+                            {item.linkLabel}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className="inline-block mt-3 text-sm font-semibold text-primary hover:underline"
+                            data-testid={link.testId}
+                            {...(link.kind === "external" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                          >
+                            {item.linkLabel}
+                          </a>
+                        )
                       )}
-                    </AccordionContent>
-                  </AccordionItem>
+                    </div>
+                  </div>
                 );
               })}
-            </Accordion>
+            </div>
           </section>
 
-          <section data-testid="section-comparison-guide">
-            <h2 className="text-2xl text-primary dark:text-white mb-6">{s.guideTitle}</h2>
-            <div className="rounded-xl border border-slate-200 dark:border-slate-700 divide-y divide-slate-200 dark:divide-slate-700">
-              {s.guide.map((row) => (
-                <div key={row.compare} className="grid sm:grid-cols-[220px_1fr] gap-1 sm:gap-4 p-4 text-sm">
-                  <div className="font-semibold text-slate-900 dark:text-white">{row.compare}</div>
-                  <div className="text-slate-600 dark:text-slate-400">{row.examine}</div>
-                </div>
-              ))}
+          <section id="market-snapshot" className="scroll-mt-24" data-testid="section-market-snapshot">
+            <h2 className="text-2xl text-primary dark:text-white mb-2">{s.snapshotTitle}</h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">{s.snapshotIntro}</p>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+              <table className="w-full text-sm text-left">
+                <thead className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                  <tr>
+                    <th scope="col" className="p-2 sm:p-3 font-semibold">{s.colArea}</th>
+                    <th scope="col" className="p-2 sm:p-3 font-semibold">{s.colRate}</th>
+                    <th scope="col" className="p-2 sm:p-3 font-semibold">{s.colChange}</th>
+                    <th scope="col" className="hidden sm:table-cell p-3 font-semibold">{s.colAsOf}</th>
+                    <th scope="col" className="p-2 sm:p-3 font-semibold">{s.colSource}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                  {AREA_RATES.map((row) => (
+                    <tr key={row.id} data-testid={`snapshot-row-${row.id}`}>
+                      <th scope="row" className="p-2 sm:p-3 font-semibold text-slate-900 dark:text-white">{row.area[language]}</th>
+                      {row.rate && row.asOf && row.url ? (
+                        <>
+                          <td className="p-2 sm:p-3 text-slate-700 dark:text-slate-300">
+                            ₹{row.rate.toLocaleString("en-IN")}
+                            <span className="block text-xs text-slate-500 dark:text-slate-400 sm:hidden">{formatMonth(row.asOf)}</span>
+                          </td>
+                          <td className="p-2 sm:p-3 text-slate-700 dark:text-slate-300">
+                            {row.change}
+                            {row.changeNote && <span className="block text-xs text-slate-500 dark:text-slate-400">{row.changeNote[language]}</span>}
+                          </td>
+                          <td className="hidden sm:table-cell p-3 whitespace-nowrap text-slate-700 dark:text-slate-300">{formatMonth(row.asOf)}</td>
+                          <td className="p-2 sm:p-3">
+                            <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-primary underline" data-testid={`snapshot-source-${row.id}`}>
+                              {row.source}
+                            </a>
+                          </td>
+                        </>
+                      ) : (
+                        <td colSpan={4} className="p-2 sm:p-3 text-slate-500 dark:text-slate-400">{s.noFigure}</td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-6" data-testid="snapshot-context">
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-3">{s.contextTitle}</h3>
+              <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+                {CONTEXT.map((fact) => (
+                  <li key={fact.id}>
+                    {fact.text[language]}{" "}
+                    <span className="text-slate-500 dark:text-slate-400">
+                      (<a href={fact.url} target="_blank" rel="noopener noreferrer" className="text-primary underline">{fact.source}</a>, {formatDay(fact.date)})
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs text-slate-500 dark:text-slate-400" data-testid="snapshot-checked">
+                {fill(s.checkedOn, { date: formatDay(SNAPSHOT_CHECKED_ON) })}
+              </p>
             </div>
           </section>
 
@@ -114,15 +166,8 @@ export default function Step1MarketIntel() {
             className="bg-background dark:bg-slate-800/50 border border-border rounded-xl p-6 sm:p-8"
             data-testid="section-cta"
           >
-            <h2 className="text-xl sm:text-2xl text-primary dark:text-white mb-4">{s.remindersTitle}</h2>
-            <ul className="space-y-3 mb-6">
-              {s.reminders.map((reminder) => (
-                <li key={reminder} className="flex gap-3 text-slate-700 dark:text-slate-300">
-                  <Check className="w-5 h-5 mt-0.5 shrink-0 text-accent-strong" />
-                  {reminder}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-xl sm:text-2xl text-primary dark:text-white mb-2">{s.ctaTitle}</h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">{s.ctaBody}</p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Button
@@ -133,6 +178,9 @@ export default function Step1MarketIntel() {
               >
                 {fill(t.common.continueTo, { step: 2 })}
                 <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Button variant="outline" className="w-full sm:w-auto" onClick={() => navigate(STEPS[2].link)} data-testid="button-jump-safety">
+                {s.jumpCheck}
               </Button>
               <Link href="/contact" className="text-sm font-medium text-slate-600 dark:text-slate-400 underline" data-testid="link-get-help">
                 {t.common.getHelp}

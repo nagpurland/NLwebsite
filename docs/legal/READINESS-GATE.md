@@ -29,6 +29,7 @@ Drafted by the project team for the advocate's review. This is not legal advice.
 | 13 | Production security gate passed, including the independent audit | Owner | Pending | |
 | 14 | Written answer on the paid model: who gives consultations and handles disputes, who quotes and collects the fee, what NagpurLand itself may charge for, and how this may be advertised | Advocate and owner | Pending | |
 | 15 | Fee terms: quotes given by the advocate after a conflict check, in writing, with no fee tied to winning or to a share of the claim | Advocate | Pending | |
+| 16 | The older area, price, blog, property and verification pages stay off the live site until every figure, example and claim on them is sourced and dated, or removed | Owner | Pending | |
 
 ## Service boundaries (draft for the advocate)
 

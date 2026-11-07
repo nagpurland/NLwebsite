@@ -60,11 +60,17 @@ export function PublicLeadForm({
   documentNotice,
   short,
   successActions,
+  messagePrefix,
+  beforeFields,
+  afterFields,
 }: {
   documentNotice?: boolean;
   short?: boolean;
   successActions?: ReactNode;
-  kind: "contact" | "plot_question";
+  messagePrefix?: string;
+  beforeFields?: ReactNode;
+  afterFields?: ReactNode;
+  kind: "contact" | "plot_question" | "consultation";
   submitLabel: string;
   messageLabel?: string;
   showLocality?: boolean;
@@ -98,7 +104,7 @@ export function PublicLeadForm({
         phone: values.phone,
         email: values.email || undefined,
         locality: values.locality || undefined,
-        message: values.message || undefined,
+        message: [messagePrefix, values.message].filter(Boolean).join("\n").slice(0, 2000) || undefined,
         website: values.website || undefined,
       });
       setSent(true);
@@ -132,6 +138,7 @@ export function PublicLeadForm({
         }
       }}
     >
+      {beforeFields}
       <div className="grid md:grid-cols-2 gap-5">
         <div className="space-y-2">
           <Label htmlFor="lead-name">{t.forms.name}</Label>
@@ -167,6 +174,7 @@ export function PublicLeadForm({
           {t.forms.documentNotice}
         </p>
       )}
+      {afterFields}
       <ConsentCheckbox checked={consent} onChange={setConsent} />
       {error && <p className="text-sm font-medium text-red-600" role="alert">{error}</p>}
       <Button type="submit" disabled={sending} className="w-full h-14 font-bold text-base" data-testid="button-submit-lead">
