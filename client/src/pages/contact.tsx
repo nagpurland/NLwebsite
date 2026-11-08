@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PublicLeadForm } from "@/components/forms/PublicLeadForm";
+import { FORMS_ON } from "@/lib/features";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -70,7 +71,7 @@ export default function Contact() {
           <Card className="mb-6" data-testid="consultation-booking">
             <CardContent className="p-6 md:p-8">
               <h2 className="text-2xl text-primary mb-2">{s.bookTitle}</h2>
-              <p className="text-slate-600 mb-6">{s.bookBody}</p>
+              <p className="text-slate-600 mb-6">{FORMS_ON ? s.bookBody : s.bookBodyPaused}</p>
               <PublicLeadForm
                 kind="consultation"
                 short

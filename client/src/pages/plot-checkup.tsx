@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PublicLeadForm } from "@/components/forms/PublicLeadForm";
+import { FORMS_ON } from "@/lib/features";
 import { whatsappUrl } from "@/lib/brand";
 import { useTranslation } from "@/lib/i18n/context";
 import { STEPS } from "@/lib/step-navigation";
@@ -15,7 +16,7 @@ export default function PlotCheckupTool() {
       <div className="py-6 md:py-14 min-h-screen">
         <div className="container mx-auto px-4 max-w-2xl">
           <h1 className="text-3xl md:text-5xl text-primary mb-2 md:mb-3">{s.title}</h1>
-          <p className="text-slate-600 md:text-lg mb-4 md:mb-6" data-testid="inquiry-promise">{s.intro}</p>
+          <p className="text-slate-600 md:text-lg mb-4 md:mb-6" data-testid="inquiry-promise">{FORMS_ON ? s.intro : s.introPaused}</p>
           <Card className="mb-5">
             <CardContent className="p-4 md:p-6">
               <PublicLeadForm

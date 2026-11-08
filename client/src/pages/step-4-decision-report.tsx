@@ -1,3 +1,4 @@
+import { FORMS_ON } from "@/lib/features";
 import { Link, useLocation } from "wouter";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { SimpleBreadcrumb } from "@/components/ui/simple-breadcrumb";
@@ -131,7 +132,7 @@ export default function Step4DecisionReport() {
               <p className="text-sm text-slate-700">{s.nextBody}</p>
               <p className="text-sm text-slate-700 mt-2 print:hidden" data-testid="inquiry-option">
                 {s.inquiryLead}{" "}
-                <Link href="/plot-checkup" className="font-semibold underline text-primary" data-testid="link-inquiry">{s.inquiryLink}</Link>.{" "}
+                <Link href={FORMS_ON ? "/plot-checkup" : "/contact"} className="font-semibold underline text-primary" data-testid="link-inquiry">{FORMS_ON ? s.inquiryLink : s.inquiryLinkPaused}</Link>.{" "}
                 {s.inquiryNote}
               </p>
             </div>
